@@ -19,5 +19,7 @@ guardião perfeito para suas finanças.
 - [Tailwind CSS](https://tailwindcss.com/) - Um framework CSS para criar interfaces de usuário
 - [Firebase](https://firebase.google.com/) - Conjuto de serviços de computação em nuvem da Google
 - [Vercel](https://vercel.com/) - Plataforma de hospedagem de aplicações web
+- [Jest](https://jestjs.io/) - Um framework de testes para JavaScript
+- [Cypress](https://www.cypress.io/) - Um framework de testes end-to-end
 
 #### 🖊️ Autor - [@raniellimontagna](https://www.github.com/raniellimontagna)
