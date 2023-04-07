@@ -1,9 +1,9 @@
+'use client'
+
 import Dashboard from '@/containers/dashboard/dashboard'
 
-export const metadata = {
-  title: 'Dashboard',
-}
-
-export default function DashboardPage() {
+const DashboardPage = () => {
   return <Dashboard />
 }
+
+export default DashboardPage
