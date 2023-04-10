@@ -1,11 +1,16 @@
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+} from 'firebase/auth'
 import { create } from 'zustand'
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
 
-import type { AuthState, AuthStore } from './auth.types'
+import { AuthState, AuthStore } from './types'
 
-import { app } from '@/libs/firebase'
-import { deleteCookie, getCookie, setCookie } from '@/helpers/cookies'
-import { useAppStore } from '@/store/app/app'
+import { deleteCookie, getCookie, setCookie } from 'helpers/cookies'
+import app from 'libs/firebase'
+import { useAppStore } from 'store/app/app'
 
 const tokenCookieName = 'token'
 const auth = getAuth(app)
@@ -55,9 +60,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
       await signOut(auth)
 
       deleteCookie(tokenCookieName)
-
-      get().clearStore()
-      useAppStore.getState().clearStore()
+      set({ token: null, user: null })
     } catch (err) {
       console.error(err)
     }
