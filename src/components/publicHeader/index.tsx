@@ -30,7 +30,7 @@ export function PublicHeader() {
           center: (
             <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
               <Link to="/" className={classes.link}>
-                Home
+                Login
               </Link>
               <Link to="/termos" className={classes.link}>
                 Termos de Serviço
@@ -51,7 +51,7 @@ export function PublicHeader() {
         itemsDrawer={
           menorQueMd && (
             <>
-              <LinkAppBar label="Home" onClick={() => {}} />
+              <LinkAppBar label="Login" onClick={() => {}} />
               <LinkAppBar label="Termos de Serviço" onClick={() => _navigate('/termos')} />
               <LinkAppBar
                 label="Política de Privacidade"
