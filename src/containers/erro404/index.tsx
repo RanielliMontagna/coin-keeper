@@ -17,14 +17,9 @@ export function Erro404() {
         <Illustration className={classes.image} />
         <div className={classes.content}>
           <Title className={classes.title}>Página não encontrada</Title>
-          <Text
-            color="dimmed"
-            size="lg"
-            align="center"
-            className={classes.description}
-          >
-            A página que você está procurando pode ter sido removida ou não está
-            mais disponível. Tente voltar para a página inicial.
+          <Text color="dimmed" size="lg" align="center" className={classes.description}>
+            A página que você está procurando pode ter sido removida ou não está mais disponível.
+            Tente voltar para a página inicial.
           </Text>
           <Group position="center">
             <Button size="md" onClick={handleVoltar}>
