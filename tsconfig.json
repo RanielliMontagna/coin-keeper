@@ -15,9 +15,9 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "./src",
+    "baseUrl": "./src"
   },
-  "include": ["src"],
+  "include": ["src", "src/utils/pwaOptions.ts"],
   "exclude": ["eslintrc.cjs"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
