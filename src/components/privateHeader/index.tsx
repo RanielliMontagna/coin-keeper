@@ -1,7 +1,16 @@
 import { useNavigate } from 'react-router-dom'
 
 import { AppBar, LinkAppBar, useAppBarStyles } from '@quantun/core'
-import { Button, UnstyledButton, Divider, Center, Box, Collapse, SimpleGrid } from '@mantine/core'
+import {
+  Button,
+  UnstyledButton,
+  Divider,
+  Center,
+  Box,
+  Collapse,
+  SimpleGrid,
+  Image,
+} from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { IconLogout, IconMoonStars, IconSun, IconChevronDown } from '@tabler/icons-react'
 
@@ -28,14 +37,14 @@ export function PrivateHeader() {
     <Box>
       <AppBar
         logo={
-          <img
+          <Image
             src={themeApp !== 'dark' ? SmallLogoDark : SmallLogo}
             alt="Logo do Coinkeeper"
             style={{ width: 35 }}
           />
         }
         logoDrawer={
-          <img
+          <Image
             src={themeApp !== 'dark' ? LogoDark : Logo}
             alt="Logo do Coinkeeper"
             style={{ width: 130 }}

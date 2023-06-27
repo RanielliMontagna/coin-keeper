@@ -1,4 +1,5 @@
 import { useAuthStore } from 'store/auth/auth'
+import { UserType } from 'store/auth/types'
 
 describe('@store/auth', () => {
   it('should be able to get the state', () => {
@@ -7,7 +8,10 @@ describe('@store/auth', () => {
   })
 
   it('should be able to login', () => {
-    useAuthStore.getState().login()
+    useAuthStore.getState().login({
+      email: 'email',
+      password: 'password',
+    })
     const state = useAuthStore.getState()
     expect(state.user).toBeDefined()
   })
@@ -27,10 +31,8 @@ describe('@store/auth', () => {
 
   it('should be able to set the user', () => {
     useAuthStore.getState().setUser({
-      displayName: 'displayName',
-      email: 'email',
-      photoURL: 'photoURL',
-      uid: 'uid',
+      sub: 'sub',
+      type: UserType.ADMIN,
     })
     const state = useAuthStore.getState()
     expect(state.user).toBeDefined()

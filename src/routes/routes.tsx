@@ -1,10 +1,11 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 
 import { Login } from 'containers/login'
+import { Register } from 'containers/register/register'
 import { Home } from 'containers/home'
 import { Erro404 } from 'containers/erro404'
-import { Termos } from 'containers/termos'
-import { Privacidade } from 'containers/privacidade'
+import { Terms } from 'containers/terms'
+import { Privacy } from 'containers/privacy'
 
 import { PrivateLayout } from 'layouts/privateLayout'
 import { PublicLayout } from 'layouts/publicLayout'
@@ -18,8 +19,9 @@ export function Router() {
       <Routes>
         <Route path="/" element={<PublicLayout />}>
           <Route path="/login" element={<Login />} />
-          <Route path="/termos" element={<Termos />} />
-          <Route path="/privacidade" element={<Privacidade />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
 
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="*" element={<Navigate to="/login" />} />
@@ -32,8 +34,8 @@ export function Router() {
     <Routes>
       <Route path="/" element={<PrivateLayout />}>
         <Route path="/" element={<Home />} />
-        <Route path="/termos" element={<Termos />} />
-        <Route path="/privacidade" element={<Privacidade />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/privacy" element={<Privacy />} />
 
         <Route path="/404" element={<Erro404 />} />
 

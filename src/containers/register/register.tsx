@@ -1,25 +1,34 @@
 import { useNavigate } from 'react-router-dom'
 
 import { Grid, Image, Text, Title } from '@mantine/core'
-import { LoginScreen, LoginTypeEnum } from '@quantun/login-screen'
-
-import { useAuthStore } from 'store/auth/auth'
+import { RegisterScreen } from '@quantun/register-screen'
 
 import Illustration from 'assets/login/illustration.svg'
 import Logo from 'assets/logo/logo.svg'
-import { getLocal } from 'helpers/localStorage'
+import { useAuthStore } from 'store/auth/auth'
+import { RegisterPayload } from 'api/auth/auth.types'
 
-export function Login() {
-  const { login } = useAuthStore()
+export function Register() {
+  const { register } = useAuthStore()
   const _navigate = useNavigate()
 
+  async function _handleRegister(data: RegisterPayload) {
+    try {
+      await register(data)
+    } catch (error) {
+      console.log(error)
+    } finally {
+      _navigate('/login')
+    }
+  }
+
   return (
-    <LoginScreen
-      initialValues={{ email: getLocal('email') || '' }}
-      loginType={LoginTypeEnum.EMAIL}
+    <RegisterScreen
+      onRegister={_handleRegister}
+      onLogin={() => _navigate('/login')}
       welcomeContent={
         <>
-          <Image src={Logo} alt="Coinkeeper's Logo" style={{ width: 300 }} />
+          <Image src={Logo} alt="Logo do Coinkeeper" style={{ width: 300 }} />
           <Grid>
             <Image
               src={Illustration}
@@ -37,18 +46,14 @@ export function Login() {
           </Grid>
         </>
       }
-      beforeLoginContent={
+      beforeRegisterContent={
         <>
-          <Title order={3}>Welcome to Coinkeeper!</Title>
+          <Title order={3}>Register now</Title>
           <Text size="sm" color="gray.6">
-            You are one step away from starting to organize your personal finances.
+            Start organizing your personal finances with Coinkeeper today!
           </Text>
         </>
       }
-      onLogin={login}
-      onRegister={() => {
-        _navigate('/register')
-      }}
     />
   )
 }
