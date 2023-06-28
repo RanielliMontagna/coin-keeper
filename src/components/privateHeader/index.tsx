@@ -12,7 +12,13 @@ import {
   Image,
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { IconLogout, IconMoonStars, IconSun, IconChevronDown } from '@tabler/icons-react'
+import {
+  IconLogout,
+  IconMoonStars,
+  IconSun,
+  IconChevronDown,
+  IconDashboard,
+} from '@tabler/icons-react'
 
 import { rotas } from 'components/sidebar/static'
 import { useAppStore } from 'store/app/app'
@@ -39,25 +45,25 @@ export function PrivateHeader() {
         logo={
           <Image
             src={themeApp !== 'dark' ? SmallLogoDark : SmallLogo}
-            alt="Logo do Coinkeeper"
+            alt="Coinkeeper's Logo"
             style={{ width: 35 }}
           />
         }
         logoDrawer={
           <Image
             src={themeApp !== 'dark' ? LogoDark : Logo}
-            alt="Logo do Coinkeeper"
+            alt="Coinkeeper's Logo"
             style={{ width: 130 }}
           />
         }
         itemsDrawer={
           <>
-            <LinkAppBar label="Home" onClick={() => navigate('/')} />
+            <LinkAppBar icon={<IconDashboard />} label="Dashboard" onClick={() => navigate('/')} />
 
             <UnstyledButton className={classes.link} onClick={toggleLinks}>
               <Center inline>
                 <Box component="span" mr={5}>
-                  Funcionalidades
+                  Features
                 </Box>
                 <IconChevronDown size={16} color={theme.fn.primaryColor()} />
               </Center>
@@ -80,18 +86,14 @@ export function PrivateHeader() {
 
             <SimpleGrid>
               <Button
-                variant="gradient"
-                gradient={{
-                  from: 'green.6',
-                  to: 'green.9',
-                }}
+                variant="outline"
                 leftIcon={themeApp === 'dark' ? <IconSun size="18" /> : <IconMoonStars size="18" />}
                 onClick={() => setTheme(themeApp === 'dark' ? 'light' : 'dark')}
               >
-                Tema {theme.colorScheme === 'dark' ? 'Claro' : 'Escuro'}
+                {theme.colorScheme === 'dark' ? 'Light' : 'Dark'} Mode
               </Button>
               <Button color="red" leftIcon={<IconLogout size="18" />} onClick={logout}>
-                Sair
+                Logout
               </Button>
             </SimpleGrid>
           </>

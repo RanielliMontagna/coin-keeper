@@ -23,14 +23,8 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
     try {
       const { data } = await login({ email, password })
 
-      const decodedToken = jwtDecode(data.token) as UserTokenDecoded
-
       setLocal('email', email)
       get().setToken(data.token)
-      get().setUser({
-        sub: decodedToken.sub,
-        type: decodedToken.type,
-      })
     } catch (err) {
       useAppStore.getState().handleErrors(err)
     } finally {
@@ -46,14 +40,37 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
     }
   },
   setToken: (token) => {
+    const decodedToken = jwtDecode(token) as UserTokenDecoded
+
     setCookie({ name: tokenCookieName, value: token })
+
+    console.log(decodedToken)
+
+    get().setUser({
+      sub: decodedToken.sub,
+      type: decodedToken.type,
+    })
+
     set({ token })
   },
   setUser: (user) => set({ user }),
-  clearStore: () => set(initialState),
+  clearStore: () => {
+    set(initialState)
+    deleteCookie(tokenCookieName)
+  },
   refreshToken: async () => {
-    const { data } = await refreshToken()
-    get().setToken(data.token)
+    try {
+      const { data } = await refreshToken()
+      get().setToken(data.token)
+    } catch (err) {
+      console.log(err)
+      useAppStore().addNotification({
+        color: 'yellow',
+        title: 'Session expired',
+        message: 'Please login again',
+      })
+      get().clearStore()
+    }
   },
   register: async ({ name, email, password, confirmPassword }) => {
     useAppStore.getState().setLoading(true)

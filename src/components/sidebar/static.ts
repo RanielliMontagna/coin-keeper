@@ -1,10 +1,10 @@
-import { IconHome2 } from '@tabler/icons-react'
+import { IconDashboard } from '@tabler/icons-react'
 
 export const rotas = [
   {
-    icon: IconHome2,
-    label: 'Home',
-    description: 'Página inicial do sistema',
+    icon: IconDashboard,
+    label: 'Dashboard',
+    description: 'Home page of the application',
     path: '/',
   },
 ]

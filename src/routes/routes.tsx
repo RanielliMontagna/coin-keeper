@@ -2,7 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 
 import { Login } from 'containers/login'
 import { Register } from 'containers/register/register'
-import { Home } from 'containers/home'
+import { Dashboard } from 'containers/dashboard'
 import { Erro404 } from 'containers/erro404'
 import { Terms } from 'containers/terms'
 import { Privacy } from 'containers/privacy'
@@ -33,7 +33,7 @@ export function Router() {
   return (
     <Routes>
       <Route path="/" element={<PrivateLayout />}>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Dashboard />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
 
