@@ -6,7 +6,6 @@ import { AuthState, AuthStore, UserTokenDecoded } from './types'
 import { deleteCookie, getCookie, setCookie } from 'helpers/cookies'
 import { useAppStore } from 'store/app/app'
 import { login, refreshToken, register } from 'api/auth/auth'
-import { axiosInstanceWithAuth } from 'libs/axios'
 import { setLocal } from 'helpers/localStorage'
 
 const tokenCookieName = 'token'
@@ -48,7 +47,6 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
   },
   setToken: (token) => {
     setCookie({ name: tokenCookieName, value: token })
-    axiosInstanceWithAuth.defaults.headers.Authorization = `Bearer ${token}`
     set({ token })
   },
   setUser: (user) => set({ user }),

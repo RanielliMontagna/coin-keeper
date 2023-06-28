@@ -27,8 +27,8 @@ export function PrivateLayout() {
   const matches = useMediaQuery('(min-width: 768px')
   const { loading } = useAppStore()
 
-  //TODO: validar se o usuário está logado
   useEffect(() => {
+    // Refresh token once the app is loaded
     refreshToken()
   }, [])
 

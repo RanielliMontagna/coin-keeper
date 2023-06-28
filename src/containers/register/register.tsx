@@ -7,16 +7,18 @@ import Illustration from 'assets/login/illustration.svg'
 import Logo from 'assets/logo/logo.svg'
 import { useAuthStore } from 'store/auth/auth'
 import { RegisterPayload } from 'api/auth/auth.types'
+import { useAppStore } from 'store/app/app'
 
 export function Register() {
   const { register } = useAuthStore()
+  const { handleErrors } = useAppStore()
   const _navigate = useNavigate()
 
   async function _handleRegister(data: RegisterPayload) {
     try {
       await register(data)
-    } catch (error) {
-      console.log(error)
+    } catch (err) {
+      handleErrors(err)
     } finally {
       _navigate('/login')
     }
