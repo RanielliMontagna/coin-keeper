@@ -11,11 +11,14 @@ import { Quotes } from './quotes/quotes'
 export default function Dashboard() {
   return (
     <PrivateContainer>
-      <Header title="Dashboard" subtitle="Control your money, see your balance and summary" />
-      <Grid gutter={32}>
+      <Header>
+        <Header.Title>Dashboard</Header.Title>
+        <Header.Subtitle>Control your money, see your balance and summary</Header.Subtitle>
+      </Header>
+      <Grid>
         <Grid.Col
           xs={12}
-          sm={6}
+          sm={12}
           md={8}
           lg={8}
           xl={8}
@@ -27,7 +30,7 @@ export default function Dashboard() {
         </Grid.Col>
         <Grid.Col
           xs={12}
-          sm={6}
+          sm={12}
           md={4}
           lg={4}
           xl={4}

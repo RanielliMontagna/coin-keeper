@@ -1,22 +1,21 @@
 import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 
-import { useMediaQuery } from '@mantine/hooks'
-
 import { OutletContainer, PrivateLayoutContainer } from './styles'
 
 import { useAppStore } from 'store/app/app'
+import { useAuthStore } from 'store/auth/auth'
 import { SideBar } from 'components/sidebar'
 import { Loading } from 'components/loading'
 import { PrivateHeader } from 'components/privateHeader'
-import { useAuthStore } from 'store/auth/auth'
 import { useNotification } from 'hooks/useNotification'
+import { useIsMobile } from 'hooks/useIsMobile'
 
 export function PrivateLayout() {
   const { refreshToken } = useAuthStore()
   const { loading } = useAppStore()
   const { pathname } = useLocation()
-  const matches = useMediaQuery('(min-width: 768px')
+  const { isMobile } = useIsMobile()
 
   // Hooks to show notifications
   useNotification()
@@ -32,13 +31,13 @@ export function PrivateLayout() {
     return <Outlet />
   }
 
-  if (matches === undefined) {
+  if (isMobile === undefined) {
     return <Loading />
   }
 
   return (
-    <PrivateLayoutContainer mobile={!matches}>
-      {!matches ? <PrivateHeader /> : <SideBar />}
+    <PrivateLayoutContainer mobile={!isMobile}>
+      {!isMobile ? <PrivateHeader /> : <SideBar />}
       {loading && <Loading />}
       <OutletContainer>
         <Outlet />

@@ -1,16 +1,16 @@
 import dayjs from 'dayjs'
 import { Flex, SegmentedControl, Text, Title, useMantineTheme } from '@mantine/core'
-import { useMediaQuery } from '@mantine/hooks'
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 
 import { currencyFormat } from 'utils/currencyFormat'
+import { useIsMobile } from 'hooks/useIsMobile'
 
 import { dataExample } from './graph.static'
 import SectionPaper from '../sectionPaper/sectionPaper'
 
 export function Graph() {
   const { colorScheme, colors } = useMantineTheme()
-  const isMobile = useMediaQuery('(max-width: 768px)')
+  const { isMobile } = useIsMobile()
 
   return (
     <SectionPaper>

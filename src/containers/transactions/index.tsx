@@ -4,7 +4,10 @@ import { Header } from 'components/header'
 export default function Transactions() {
   return (
     <PrivateContainer>
-      <Header title="Transactions" subtitle="Pay your bills, transfer money and more" />
+      <Header>
+        <Header.Title>Transactions</Header.Title>
+        <Header.Subtitle>Pay your bills, transfer money and more</Header.Subtitle>
+      </Header>
     </PrivateContainer>
   )
 }

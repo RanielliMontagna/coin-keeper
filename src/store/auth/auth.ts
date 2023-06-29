@@ -53,15 +53,18 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
   },
   setUser: (user) => set({ user }),
   clearStore: () => {
+    useAppStore.getState().clearStore()
     set(initialState)
     deleteCookie(tokenCookieName)
+
+    window.location.href = '/'
   },
   refreshToken: async () => {
     try {
       const { data } = await refreshToken()
       get().setToken(data.token)
     } catch (err) {
-      useAppStore().addNotification({
+      useAppStore.getState().addNotification({
         color: 'yellow',
         title: 'Session expired',
         message: 'Please login again',
