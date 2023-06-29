@@ -1,6 +1,6 @@
 import { TermsContainer, TermsContent } from './styles'
 
-export function Terms() {
+export default function Terms() {
   return (
     <TermsContainer>
       <TermsContent>{/* TODO: Add terms content */}</TermsContent>

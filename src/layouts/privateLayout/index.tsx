@@ -14,27 +14,31 @@ import { useNotification } from 'hooks/useNotification'
 
 export function PrivateLayout() {
   const { refreshToken } = useAuthStore()
-
+  const { loading } = useAppStore()
   const { pathname } = useLocation()
+  const matches = useMediaQuery('(min-width: 768px')
 
   // Hooks to show notifications
   useNotification()
 
-  if (pathname === '/404' || pathname === '/terms' || pathname === '/privacy') {
-    return <Outlet />
-  }
-
-  const matches = useMediaQuery('(min-width: 768px')
-  const { loading } = useAppStore()
+  const pathnamesNotShowHeader = ['/404', '/500', '/terms', '/privacy']
 
   useEffect(() => {
     // Refresh token once the app is loaded
     refreshToken()
   }, [])
 
+  if (pathnamesNotShowHeader.some((path) => pathname.includes(path))) {
+    return <Outlet />
+  }
+
+  if (matches === undefined) {
+    return <Loading />
+  }
+
   return (
     <PrivateLayoutContainer mobile={!matches}>
-      {matches ? <SideBar /> : <PrivateHeader />}
+      {!matches ? <PrivateHeader /> : <SideBar />}
       {loading && <Loading />}
       <OutletContainer>
         <Outlet />

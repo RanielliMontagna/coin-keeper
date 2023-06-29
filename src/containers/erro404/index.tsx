@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom'
 import { Illustration } from './illustration'
 import { useStyles } from './styles'
 
-export function Erro404() {
+export default function Erro404() {
   const { classes } = useStyles()
   const navigate = useNavigate()
 
-  function handleVoltar() {
+  function handleBack() {
     navigate('/')
   }
 
@@ -16,14 +16,13 @@ export function Erro404() {
       <div className={classes.inner}>
         <Illustration className={classes.image} />
         <div className={classes.content}>
-          <Title className={classes.title}>Página não encontrada</Title>
+          <Title className={classes.title}>Page not found</Title>
           <Text color="dimmed" size="lg" align="center" className={classes.description}>
-            A página que você está procurando pode ter sido removida ou não está mais disponível.
-            Tente voltar para a página inicial.
+            The page you are looking for may have been removed or is no longer available.
           </Text>
           <Group position="center">
-            <Button size="md" onClick={handleVoltar}>
-              Voltar para a página inicial
+            <Button size="md" onClick={handleBack}>
+              Go back to home page
             </Button>
           </Group>
         </div>

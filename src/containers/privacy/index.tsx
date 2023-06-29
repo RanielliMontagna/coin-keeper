@@ -1,6 +1,6 @@
 import { PrivacyContainer, PrivacyContent } from './styles'
 
-export function Privacy() {
+export default function Privacy() {
   return (
     <PrivacyContainer>
       <PrivacyContent>{/* TODO: Add privacy content */}</PrivacyContent>
