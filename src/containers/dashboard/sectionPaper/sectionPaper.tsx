@@ -19,7 +19,7 @@ const SectionPaper = ({ children, flexProps, ...rest }: ISectionPaperProps) => {
         style={{
           borderRadius: 8,
           flex: 1,
-          transition: 'all 0.3s ease',
+          transition: 'all 0.3s ease-in-out',
           boxShadow: shadows.xs,
           ...flexProps?.style,
         }}

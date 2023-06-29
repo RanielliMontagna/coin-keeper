@@ -1,13 +1,16 @@
-import { Center, Flex, Text, Title, useMantineTheme } from '@mantine/core'
+import { useMemo } from 'react'
+
+import { Center, Flex, Skeleton, Text, Title, useMantineTheme } from '@mantine/core'
 import { rem } from '@quantun/utils'
 import {
   IconCurrencyBitcoin,
   IconCurrencyDollar,
   IconCurrencyEuro,
+  IconTrendingDown,
   IconTrendingUp,
 } from '@tabler/icons-react'
+
 import SectionPaper from 'containers/dashboard/sectionPaper/sectionPaper'
-import { useMemo } from 'react'
 import { capitalize } from 'utils/capitalize'
 import { currencyFormat } from 'utils/currencyFormat'
 
@@ -20,10 +23,16 @@ export enum QuotationType {
 
 interface IQuotationProps {
   type: QuotationType
-  amount: number
+  amount: number | string
+  variation: number | string
+  isLoading?: boolean
 }
 
-export function Quotation({ type, amount }: IQuotationProps) {
+export function Quotation({ type, amount, variation, isLoading }: IQuotationProps) {
+  if (isLoading) {
+    return <Skeleton style={{ flex: 1, height: 75 }} />
+  }
+
   const { colors } = useMantineTheme()
   const title = capitalize(QuotationType[type])
 
@@ -69,8 +78,23 @@ export function Quotation({ type, amount }: IQuotationProps) {
               whiteSpace: 'nowrap',
             }}
           >
-            {title === 'Ibovespa' ? `${currencyFormat(amount)} pts` : currencyFormat(amount)}
+            {title === 'Ibovespa'
+              ? `${currencyFormat(Number(amount)).replace('R$', '').replace(/\xA0/g, ' ')} pts`
+              : currencyFormat(Number(amount))}
           </Title>
+          <Text
+            size="xs"
+            color="gray.6"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: rem(4),
+            }}
+          >
+            {Number(variation) > 0 ? <IconTrendingUp size={16} /> : <IconTrendingDown size={16} />}
+            {Number(variation) > 0 ? '+' : ''}
+            {Number(variation).toFixed(4)}%
+          </Text>
         </Flex>
       </Flex>
     </SectionPaper>

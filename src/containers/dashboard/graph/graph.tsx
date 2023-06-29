@@ -27,7 +27,7 @@ export function Graph() {
         />
       </Flex>
 
-      <ResponsiveContainer width="100%" height={isMobile ? 200 : 328}>
+      <ResponsiveContainer width="100%" height={isMobile ? 200 : 310}>
         <AreaChart data={dataExample}>
           <XAxis
             dataKey="month"

@@ -44,8 +44,6 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
 
     setCookie({ name: tokenCookieName, value: token })
 
-    console.log(decodedToken)
-
     get().setUser({
       sub: decodedToken.sub,
       type: decodedToken.type,
@@ -63,7 +61,6 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
       const { data } = await refreshToken()
       get().setToken(data.token)
     } catch (err) {
-      console.log(err)
       useAppStore().addNotification({
         color: 'yellow',
         title: 'Session expired',

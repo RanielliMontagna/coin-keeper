@@ -8,7 +8,7 @@ import { Transactions } from './transactions/transactions'
 import { Graph } from './graph/graph'
 import { Quotes } from './quotes/quotes'
 
-export function Dashboard() {
+export default function Dashboard() {
   return (
     <PrivateContainer>
       <Header title="Dashboard" subtitle="Control your money, see your balance and summary" />
@@ -18,6 +18,7 @@ export function Dashboard() {
           sm={6}
           md={8}
           lg={8}
+          xl={8}
           style={{ display: 'flex', flexDirection: 'column', gap: 16 }}
         >
           <Cards />
@@ -29,6 +30,7 @@ export function Dashboard() {
           sm={6}
           md={4}
           lg={4}
+          xl={4}
           style={{ display: 'flex', flexDirection: 'column', gap: 16 }}
         >
           <Accounts />
