@@ -16,6 +16,9 @@ dependencies:
   '@mantine/hooks':
     specifier: ^6.0.7
     version: 6.0.7(react@18.2.0)
+  '@mantine/modals':
+    specifier: ^6.0.15
+    version: 6.0.15(@mantine/core@6.0.7)(@mantine/hooks@6.0.7)(react-dom@18.2.0)(react@18.2.0)
   '@mantine/notifications':
     specifier: ^6.0.7
     version: 6.0.7(@mantine/core@6.0.7)(@mantine/hooks@6.0.7)(react-dom@18.2.0)(react@18.2.0)
@@ -49,6 +52,9 @@ dependencies:
   jwt-decode:
     specifier: ^3.1.2
     version: 3.1.2
+  mantine-datatable:
+    specifier: ^2.7.1
+    version: 2.7.1(@mantine/core@6.0.7)(@mantine/hooks@6.0.7)(react@18.2.0)
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -70,6 +76,9 @@ dependencies:
   vite-tsconfig-paths:
     specifier: ^4.0.7
     version: 4.0.7(typescript@4.9.5)(vite@4.3.1)
+  zod:
+    specifier: ^3.21.4
+    version: 3.21.4
   zustand:
     specifier: ^4.3.6
     version: 4.3.6(react@18.2.0)
@@ -1829,6 +1838,21 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@mantine/modals@6.0.15(@mantine/core@6.0.7)(@mantine/hooks@6.0.7)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-1uGeE/IBA5EZRTzovUaAwv0gwVjDy4CGp8XO05HKuyj2jyzUIqRVpPNXD1VuMwLnzKyxabN8Al408fRgsxXGoQ==}
+    peerDependencies:
+      '@mantine/core': 6.0.15
+      '@mantine/hooks': 6.0.15
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      '@mantine/core': 6.0.7(@emotion/react@11.10.6)(@mantine/hooks@6.0.7)(@types/react@18.0.28)(react-dom@18.2.0)(react@18.2.0)
+      '@mantine/hooks': 6.0.7(react@18.2.0)
+      '@mantine/utils': 6.0.15(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
   /@mantine/notifications@6.0.7(@mantine/core@6.0.7)(@mantine/hooks@6.0.7)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-ZTWQG5P7paUrLng4H32vSSXl3EAE2mXZ3DavTgFD59ByIxCa1LoxxV7UhigNAb1E7Ve64euxljFYAe3VR86mkg==}
     peerDependencies:
@@ -1857,6 +1881,14 @@ packages:
       csstype: 3.0.9
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /@mantine/utils@6.0.15(react@18.2.0):
+    resolution: {integrity: sha512-iVaobFQTCQWG6SRi3im0/nONKCtGRPobG7bXn9GiIT96E4t7uTPglQpo/ZktDrF1XCL8CO/HoQmks4A2iXuMFw==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /@mantine/utils@6.0.7(react@18.2.0):
@@ -4599,6 +4631,18 @@ packages:
     dependencies:
       semver: 6.3.0
     dev: true
+
+  /mantine-datatable@2.7.1(@mantine/core@6.0.7)(@mantine/hooks@6.0.7)(react@18.2.0):
+    resolution: {integrity: sha512-GovffrUTkdrRPL27q3kwjUFfypyH9Dum7sVzSWswCT5VHdQH9hkh52QEpC1BqTnF55KRErhdWKM4sxOAhuH5Sw==}
+    peerDependencies:
+      '@mantine/core': '>=6'
+      '@mantine/hooks': '>=6'
+      react: '>=18'
+    dependencies:
+      '@mantine/core': 6.0.7(@emotion/react@11.10.6)(@mantine/hooks@6.0.7)(@types/react@18.0.28)(react-dom@18.2.0)(react@18.2.0)
+      '@mantine/hooks': 6.0.7(react@18.2.0)
+      react: 18.2.0
+    dev: false
 
   /match-sorter@6.3.1:
     resolution: {integrity: sha512-mxybbo3pPNuA+ZuCUhm5bwNkXrJTbsk5VWbR5wiwz/GC6LIiegBGn2w3O08UG/jdbYLinw51fSQ5xNU1U3MgBw==}

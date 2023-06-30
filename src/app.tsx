@@ -2,6 +2,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { QueryClientProvider } from 'react-query'
 
 import { QuantunProvider } from '@quantun/core'
+import { ModalsProvider } from '@mantine/modals'
 
 import { Router } from 'routes/routes'
 import { theme } from 'styles/theme'
@@ -14,9 +15,11 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <QuantunProvider theme={{ ...theme, colorScheme }}>
-        <BrowserRouter>
-          <Router />
-        </BrowserRouter>
+        <ModalsProvider>
+          <BrowserRouter>
+            <Router />
+          </BrowserRouter>
+        </ModalsProvider>
       </QuantunProvider>
     </QueryClientProvider>
   )

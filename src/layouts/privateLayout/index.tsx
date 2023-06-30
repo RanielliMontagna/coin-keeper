@@ -36,8 +36,8 @@ export function PrivateLayout() {
   }
 
   return (
-    <PrivateLayoutContainer mobile={!isMobile}>
-      {!isMobile ? <PrivateHeader /> : <SideBar />}
+    <PrivateLayoutContainer mobile={isMobile}>
+      {isMobile ? <PrivateHeader /> : <SideBar />}
       {loading && <Loading />}
       <OutletContainer>
         <Outlet />

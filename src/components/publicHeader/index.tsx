@@ -1,18 +1,18 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import { Group, Button, Divider, Box } from '@mantine/core'
-import { useMediaQuery } from '@mantine/hooks'
 import { AppBar, useAppBarStyles, LinkAppBar } from '@quantun/core'
 import { IconLogout } from '@tabler/icons-react'
 
 import Logo from 'assets/logo/logo.svg'
 import LogoDark from 'assets/logo/logo-dark.svg'
+import { useIsMobile } from 'hooks/useIsMobile'
 
 export function PublicHeader() {
   const _navigate = useNavigate()
   const { classes, theme } = useAppBarStyles()
   const { pathname } = useLocation()
-  const menorQueMd = useMediaQuery('(max-width: 768px)')
+  const { isMobile } = useIsMobile()
 
   const _login = () => _navigate('/login')
 
@@ -60,7 +60,7 @@ export function PublicHeader() {
           ),
         }}
         itemsDrawer={
-          menorQueMd && (
+          isMobile && (
             <>
               <LinkAppBar label="Terms of Service" onClick={() => _navigate('/terms')} />
               <LinkAppBar label="Privacy Policy" onClick={() => _navigate('/privacy')} />

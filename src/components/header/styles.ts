@@ -1,34 +1,15 @@
 import styled from '@emotion/styled'
-import { Button, ButtonProps, rem } from '@mantine/core'
+import { rem } from '@quantun/utils'
+import { MOBILE_BREAKPOINT } from 'shared/constants'
 
 export const SHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  .webButton {
-    display: block;
+  @media (max-width: ${MOBILE_BREAKPOINT}px) {
+    text-align: center;
+    flex-direction: column;
+    gap: ${rem(16)};
   }
-
-  .mobileButton {
-    display: none;
-  }
-
-  @media (max-width: ${rem(768)}) {
-    .mobileButton {
-      display: block;
-    }
-
-    .webButton {
-      display: none;
-    }
-  }
-`
-
-export const Fab = styled(Button)<ButtonProps>`
-  position: fixed;
-  bottom: ${rem(32)};
-  right: ${rem(32)};
-
-  border-radius: 32px;
 `

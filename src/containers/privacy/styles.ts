@@ -1,6 +1,8 @@
 import styled from '@emotion/styled'
 import { rem } from '@mantine/core'
 
+import { MOBILE_BREAKPOINT } from 'shared/constants'
+
 export const PrivacyContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -20,7 +22,7 @@ export const PrivacyContent = styled.div`
     gap: ${rem(4)};
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${MOBILE_BREAKPOINT}px) {
     padding: ${rem(32)};
   }
 `

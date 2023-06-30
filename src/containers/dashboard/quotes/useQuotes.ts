@@ -1,8 +1,8 @@
-import { useQuery } from 'react-query'
+import { useEffect } from 'react'
 
 import { quotes } from 'api/services/services'
-import { useEffect } from 'react'
 import { useAppStore } from 'store/app/app'
+import { useQuery } from 'hooks/useQuery'
 
 interface Quote {
   price: string
