@@ -1,20 +1,20 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import { Group, Button, Divider, Box } from '@mantine/core'
-import { useMediaQuery } from '@mantine/hooks'
 import { AppBar, useAppBarStyles, LinkAppBar } from '@quantun/core'
-import { IconBrandGoogle } from '@tabler/icons-react'
-
-import { useAuthStore } from 'store/auth/auth'
+import { IconLogout } from '@tabler/icons-react'
 
 import Logo from 'assets/logo/logo.svg'
 import LogoDark from 'assets/logo/logo-dark.svg'
+import { useIsMobile } from 'hooks/useIsMobile'
 
 export function PublicHeader() {
   const _navigate = useNavigate()
   const { classes, theme } = useAppBarStyles()
-  const { login } = useAuthStore()
-  const menorQueMd = useMediaQuery('(max-width: 768px)')
+  const { pathname } = useLocation()
+  const { isMobile } = useIsMobile()
+
+  const _login = () => _navigate('/login')
 
   return (
     <Box>
@@ -22,45 +22,52 @@ export function PublicHeader() {
         logo={
           <img
             src={theme.colorScheme !== 'dark' ? LogoDark : Logo}
-            alt="Logo do Coinkeeper"
+            alt="Coinkeeper's Logo"
             style={{ width: 135 }}
           />
         }
         customSpace={{
           center: (
             <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
-              <Link to="/" className={classes.link}>
-                Login
+              <Link
+                to="/terms"
+                className={classes.link}
+                style={{
+                  backgroundColor: pathname === '/terms' ? theme.colors.green[9] : 'transparent',
+                  transition: 'all 0.3s ease-in-out',
+                }}
+              >
+                Terms of Service
               </Link>
-              <Link to="/termos" className={classes.link}>
-                Termos de Serviço
-              </Link>
-              <Link to="/privacidade" className={classes.link}>
-                Política de Privacidade
+              <Link
+                to="/privacy"
+                className={classes.link}
+                style={{
+                  backgroundColor: pathname === '/privacy' ? theme.colors.green[9] : 'transparent',
+                  transition: 'all 0.3s ease-in-out',
+                }}
+              >
+                Privacy Policy
               </Link>
             </Group>
           ),
           right: (
             <Group className={classes.hiddenMobile}>
-              <Button color="green" leftIcon={<IconBrandGoogle size={18} />} onClick={login}>
-                Entrar com o Google
+              <Button color="green" leftIcon={<IconLogout size={18} />} onClick={_login}>
+                Login
               </Button>
             </Group>
           ),
         }}
         itemsDrawer={
-          menorQueMd && (
+          isMobile && (
             <>
-              <LinkAppBar label="Login" onClick={() => {}} />
-              <LinkAppBar label="Termos de Serviço" onClick={() => _navigate('/termos')} />
-              <LinkAppBar
-                label="Política de Privacidade"
-                onClick={() => _navigate('/privacidade')}
-              />
+              <LinkAppBar label="Terms of Service" onClick={() => _navigate('/terms')} />
+              <LinkAppBar label="Privacy Policy" onClick={() => _navigate('/privacy')} />
               <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
               <Group position="center" grow pb="xl" px="md">
-                <Button color="green" leftIcon={<IconBrandGoogle size={18} />} onClick={login}>
-                  Entrar com o Google
+                <Button color="green" leftIcon={<IconLogout size={18} />} onClick={_login}>
+                  Login
                 </Button>
               </Group>
             </>

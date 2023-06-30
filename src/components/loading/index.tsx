@@ -4,6 +4,8 @@ export function Loading() {
   return (
     <Overlay
       style={{
+        position: 'fixed',
+        inset: 0,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

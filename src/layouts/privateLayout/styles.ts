@@ -23,6 +23,8 @@ export const PrivateLayoutContainer = styled.div<IPrivateLayoutProps>`
     }
   }};
 
+  transition: background-color 0.3s ease-in-out;
+
   ${({ mobile }) => mobile && mobileCss}
 `
 

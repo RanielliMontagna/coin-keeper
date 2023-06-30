@@ -17,7 +17,6 @@ guardião perfeito para suas finanças.
 - [Vite](https://vitejs.dev/) - Um construtor de aplicativos da web moderno e rápido que substitui o webpack
 - [React](https://reactjs.org/) - Uma biblioteca JavaScript para criar interfaces de usuário
 - [TypeScript](https://www.typescriptlang.org/) - Um superconjunto de JavaScript que adiciona tipagem estática
-- [Firebase](https://firebase.google.com/) - Conjuto de serviços de computação em nuvem da Google
 - [Vercel](https://vercel.com/) - Plataforma de hospedagem de aplicações web
 - [Jest](https://jestjs.io/) - Um framework de testes para JavaScript
 

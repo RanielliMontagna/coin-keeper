@@ -31,26 +31,3 @@ vi.mock('react-router-dom', () => ({
   ...vi.importActual('react-router-dom'),
   useNavigate: () => mockedNavigate,
 }))
-
-//Mock do firebase/auth
-vi.mock('firebase/auth', () => ({
-  ...vi.importActual('firebase/auth'),
-  GoogleAuthProvider: class {
-    constructor() {}
-    static credentialFromResult = vi.fn(() => ({
-      accessToken: 'accessToken',
-    }))
-  },
-  signInWithPopup: vi.fn(() =>
-    Promise.resolve({
-      user: {
-        displayName: 'displayName',
-        email: 'email',
-        photoURL: 'photoURL',
-        uid: 'uid',
-      },
-    }),
-  ),
-  signOut: vi.fn(),
-  getAuth: vi.fn(),
-}))

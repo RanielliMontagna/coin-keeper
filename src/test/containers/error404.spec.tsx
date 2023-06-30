@@ -1,7 +1,7 @@
 import { QuantunProvider } from '@quantun/core'
 import { fireEvent, render } from '@testing-library/react'
 
-import { Erro404 } from 'containers/erro404'
+import Erro404 from 'containers/erro404'
 
 describe('@containers/erro404', () => {
   it('should render without crashing', () => {

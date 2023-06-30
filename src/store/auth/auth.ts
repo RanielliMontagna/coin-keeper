@@ -1,14 +1,14 @@
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
 import { create } from 'zustand'
+import jwtDecode from 'jwt-decode'
 
-import { AuthState, AuthStore } from './types'
+import { AuthState, AuthStore, UserTokenDecoded } from './types'
 
 import { deleteCookie, getCookie, setCookie } from 'helpers/cookies'
-import app from 'libs/firebase'
 import { useAppStore } from 'store/app/app'
+import { login, refreshToken, register } from 'api/auth/auth'
+import { setLocal } from 'helpers/localStorage'
 
 const tokenCookieName = 'token'
-const auth = getAuth(app)
 
 const initialState: AuthState = {
   token: getCookie(tokenCookieName) || null,
@@ -18,55 +18,81 @@ const initialState: AuthState = {
 export const useAuthStore = create<AuthStore>((set, get) => ({
   ...initialState,
 
-  login: async () => {
+  login: async ({ email, password }) => {
     useAppStore.getState().setLoading(true)
     try {
-      const provider = new GoogleAuthProvider()
-      const result = await signInWithPopup(auth, provider)
+      const { data } = await login({ email, password })
 
-      const credential = GoogleAuthProvider.credentialFromResult(result)
-
-      const token = credential?.accessToken
-      const user = result?.user
-
-      /* c8 ignore next 3 - coverage false positive */
-      if (!token || !user) {
-        throw new Error('Não foi possível fazer login')
-      }
-
-      window.location.href = '/'
-
-      get().setToken(token)
-      get().setUser({
-        displayName: user.displayName,
-        email: user.email,
-        photoURL: user.photoURL,
-        uid: user.uid,
-      })
-
-      return { token, user }
-      /* c8 ignore next 3 - coverage false positive */
+      setLocal('email', email)
+      get().setToken(data.token)
     } catch (err) {
-      console.error(err)
+      useAppStore.getState().handleErrors(err)
     } finally {
       useAppStore.getState().setLoading(false)
     }
   },
   logout: async () => {
     try {
-      await signOut(auth)
-
       deleteCookie(tokenCookieName)
       set({ token: null, user: null })
-      /* c8 ignore next 3 - coverage false positive */
     } catch (err) {
       console.error(err)
     }
   },
   setToken: (token) => {
+    const decodedToken = jwtDecode(token) as UserTokenDecoded
+
     setCookie({ name: tokenCookieName, value: token })
+
+    get().setUser({
+      sub: decodedToken.sub,
+      type: decodedToken.type,
+    })
+
     set({ token })
   },
   setUser: (user) => set({ user }),
-  clearStore: () => set(initialState),
+  clearStore: () => {
+    useAppStore.getState().clearStore()
+    set(initialState)
+    deleteCookie(tokenCookieName)
+
+    window.location.href = '/'
+  },
+  refreshToken: async () => {
+    try {
+      const { data } = await refreshToken()
+      get().setToken(data.token)
+    } catch (err) {
+      useAppStore.getState().addNotification({
+        color: 'yellow',
+        title: 'Session expired',
+        message: 'Please login again',
+      })
+      get().clearStore()
+    }
+  },
+  register: async ({ name, email, password, confirmPassword }) => {
+    useAppStore.getState().setLoading(true)
+
+    try {
+      await register({
+        name,
+        email,
+        password,
+        confirmPassword,
+      })
+
+      useAppStore.getState().addNotification({
+        title: 'Registration successful',
+        message: 'You can now login',
+      })
+
+      setLocal('email', email)
+    } catch (err) {
+      useAppStore.getState().handleErrors(err)
+    } finally {
+      useAppStore.getState().setLoading(false)
+    }
+  },
 }))

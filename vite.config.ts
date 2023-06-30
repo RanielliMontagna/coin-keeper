@@ -1,7 +1,4 @@
-/// <reference types="vitest" />
-/// <reference types="vite/client" />
-
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 
 import react from '@vitejs/plugin-react'
 import { VitePWA, VitePWAOptions } from 'vite-plugin-pwa'
@@ -35,6 +32,9 @@ export default defineConfig({
     watch: {
       usePolling: true,
     },
+  },
+  define: {
+    __APP_ENV__: JSON.stringify(process.env.VITE_VERCEL_ENV),
   },
   test: {
     globals: true,
