@@ -1,5 +1,6 @@
 import { ResponseAccount } from 'api/accounts/accounts.types'
-import { useDeleteModal } from 'hooks/useDeleteModal'
+
+import { useDeleteModal } from '@quantun/hooks'
 
 export function useDeleteAccountModal() {
   function openDeleteModal(account: ResponseAccount) {
@@ -11,7 +12,8 @@ export function useDeleteAccountModal() {
         </>
       ),
       labels: { confirm: 'Delete account' },
-    })()
+      onConfirm: () => {},
+    }).openDeleteModal()
   }
 
   return {

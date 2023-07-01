@@ -13,7 +13,7 @@
     "coverage": "vitest run --coverage",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "clean": "rm -rf dist && rm -rf coverage && rm -rf node_modules && rm -rf pnpm-lock.yaml"
+    "clean": "rm -rf dist && rm -rf coverage && rm -rf node_modules && rm -rf yarn.lock"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -23,9 +23,10 @@
     "@mantine/hooks": "^6.0.7",
     "@mantine/modals": "^6.0.15",
     "@mantine/notifications": "^6.0.7",
-    "@quantun/core": "^1.1.11",
-    "@quantun/login-screen": "^2.0.2",
-    "@quantun/register-screen": "^2.0.1",
+    "@quantun/core": "^1.3.2",
+    "@quantun/hooks": "^1.1.1",
+    "@quantun/login-screen": "^2.1.0",
+    "@quantun/register-screen": "^2.1.0",
     "@quantun/utils": "^1.0.0",
     "@tabler/icons-react": "^2.15.0",
     "axios": "^1.4.0",

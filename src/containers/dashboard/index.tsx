@@ -1,5 +1,5 @@
 import { Grid } from '@mantine/core'
-import { Header } from 'components/header'
+import { Header } from '@quantun/core'
 
 import { PrivateContainer } from 'components/privateContainer'
 import { Cards } from './cards/cards'

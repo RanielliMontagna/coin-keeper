@@ -1,7 +1,7 @@
 import { useAppStore } from 'store/app/app'
-import { Sidebar, ItemSidebar } from '@quantun/core'
+import { Sidebar } from '@quantun/core'
 
-import { Image, Navbar, Stack } from '@mantine/core'
+import { Image, useMantineTheme } from '@mantine/core'
 import { IconLogout, IconMoonStars, IconSun } from '@tabler/icons-react'
 
 import { rotas } from './static'
@@ -9,55 +9,48 @@ import { rotas } from './static'
 import { useAuthStore } from 'store/auth/auth'
 import { useNavigate } from 'react-router-dom'
 
-import Logo from 'assets/logo/small-logo.svg'
+import SmallLogoWhite from 'assets/logo/small-logo.svg'
+import SmallLogoBlack from 'assets/logo/small-logo-dark.svg'
+import LogoWhite from 'assets/logo/logo.svg'
+import LogoBlack from 'assets/logo/logo-dark.svg'
 
 export function SideBar() {
+  const { colors } = useMantineTheme()
   const { logout } = useAuthStore()
   const { theme, setTheme } = useAppStore()
 
   const navigate = useNavigate()
 
   return (
-    <Sidebar
-      logo={<Image src={Logo} alt="Logo do Coinkeeper" style={{ width: 40 }} />}
-      items={rotas.map((rota) => ({
-        icon: <rota.icon size="1.2rem" stroke={1.5} />,
-        label: rota.label,
-        onClick: () => navigate(rota.path),
-        path: rota.path,
-      }))}
-      footer={
-        <>
-          <Navbar.Section mt={8}>
-            <Stack justify="center">
-              <ItemSidebar
-                icon={
-                  theme === 'dark' ? (
-                    <IconSun size="1.2rem" stroke={1.5} />
-                  ) : (
-                    <IconMoonStars size="1.2rem" stroke={1.5} />
-                  )
-                }
-                label={theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
-                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                path="/"
-                active={false}
-              />
-            </Stack>
-          </Navbar.Section>
-          <Navbar.Section>
-            <Stack justify="center">
-              <ItemSidebar
-                icon={<IconLogout size="1.2rem" stroke={1.5} />}
-                label="Logout"
-                onClick={logout}
-                path="/"
-                active={false}
-              />
-            </Stack>
-          </Navbar.Section>
-        </>
-      }
-    />
+    <Sidebar.Root>
+      <Sidebar.Header>
+        <Image
+          src={theme === 'dark' ? SmallLogoWhite : SmallLogoBlack}
+          alt="Logo do Coinkeeper"
+          style={{ width: 40 }}
+        />
+        <Image
+          src={theme === 'dark' ? LogoWhite : LogoBlack}
+          alt="Logo do Coinkeeper"
+          style={{ width: 120 }}
+        />
+      </Sidebar.Header>
+      {rotas.map((rota) => (
+        <Sidebar.Item
+          key={rota.path}
+          icon={rota.icon}
+          label={rota.label}
+          onClick={() => navigate(rota.path)}
+          path={rota.path}
+          activecolor={theme === 'dark' ? colors.green[5] : colors.green[6]}
+        />
+      ))}
+      <Sidebar.FooterItem
+        icon={theme === 'dark' ? IconSun : IconMoonStars}
+        label={theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+        onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      />
+      <Sidebar.FooterItem icon={IconLogout} label="Logout" onClick={logout} />
+    </Sidebar.Root>
   )
 }

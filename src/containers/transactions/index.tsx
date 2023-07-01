@@ -1,5 +1,6 @@
+import { Header } from '@quantun/core'
+
 import { PrivateContainer } from 'components/privateContainer'
-import { Header } from 'components/header'
 
 export default function Transactions() {
   return (

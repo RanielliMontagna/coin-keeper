@@ -1,10 +1,9 @@
+import { Header, EmptyState } from '@quantun/core'
 import { Button, Input } from '@mantine/core'
 import { IconEdit, IconPlus, IconSearch, IconTrash } from '@tabler/icons-react'
 
 import { PrivateContainer } from 'components/privateContainer'
-import { Header } from 'components/header'
 import { Datatable } from 'components/datatable'
-import { EmptyState } from 'components/emptyState/emptyState'
 
 import { useAccounts } from './useAccounts'
 
