@@ -21,7 +21,7 @@ export function useAccounts() {
       const res = await fetchAccounts(search ? { search } : undefined)
       return res.data
     },
-    refetchInterval: 1000 * 60 * 5, // 5 minutos
+    staleTime: 1000 * 60 * 5, // 5 minutos
   })
 
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -37,7 +37,7 @@ export function useAccounts() {
   }
 
   return {
-    records: (data as any)?.data?.accounts,
+    records: data?.data?.accounts,
     isLoading,
     search,
     addEditModal,

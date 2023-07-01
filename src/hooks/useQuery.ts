@@ -4,8 +4,9 @@ interface IUseQueryOptions extends UseQueryOptions {}
 
 export function useQuery(options: IUseQueryOptions) {
   const values = useReactQuery({
-    retry: 0,
+    retry: 1,
     refetchOnWindowFocus: false,
+    refetchInterval: 1000 * 60 * 5, // 5 minute,
     ...options,
   })
 

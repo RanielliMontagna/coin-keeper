@@ -29,9 +29,7 @@ export function useQuotes() {
       const res = await quotes()
       return res.data
     },
-    refetchInterval: 1000 * 60 * 5, // 5 minute,
-    retry: 1,
-    refetchOnWindowFocus: false,
+    staleTime: 1000 * 60 * 5, // 5 minutos
   })
 
   useEffect(() => {

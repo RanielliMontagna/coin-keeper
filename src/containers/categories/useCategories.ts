@@ -21,7 +21,7 @@ export function useCategories() {
       const res = await fetchCategories(search ? { search } : undefined)
       return res.data
     },
-    refetchInterval: 1000 * 60 * 5, // 5 minutos
+    staleTime: 1000 * 60 * 5, // 5 minutos
   })
 
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -37,7 +37,7 @@ export function useCategories() {
   }
 
   return {
-    records: (data as any)?.data?.categories,
+    records: data?.data?.categories,
     isLoading,
     search,
     addEditModal,

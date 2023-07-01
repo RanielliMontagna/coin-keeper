@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { AxiosError } from 'axios'
 import { uuid } from 'short-uuid'
 
-import type { AppState, AppStore } from './types'
+import type { AppState, AppStore, ErrorBackendResponse } from './types'
 
 const initialState: AppState = {
   loading: false,
@@ -18,7 +18,7 @@ export const useAppStore = create<AppStore>((set, get) => ({
     set({ theme })
   },
   clearStore: () => set(initialState),
-  handleErrors: (err) => {
+  handleErrors: (err: any) => {
     set({ loading: false })
 
     if (err?.name === 'AxiosError') {
@@ -38,7 +38,7 @@ export const useAppStore = create<AppStore>((set, get) => ({
           message: firstIssue?._errors[0],
         })
       } else {
-        const data = axiosError?.response?.data as any
+        const data = axiosError?.response?.data as ErrorBackendResponse
 
         if (data.message && data.title) {
           get().addNotification({
