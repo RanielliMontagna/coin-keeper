@@ -1,33 +1,34 @@
-import { z } from 'zod'
-
-import type { ResponseAccount } from 'api/accounts/accounts.types'
-
 import { useForm, zodResolver } from '@mantine/form'
+import { Button, Group, Stack, TextInput } from '@mantine/core'
 
 import { Modal } from 'components/modal'
-import { Button, Group, Stack, TextInput } from '@mantine/core'
 import { CurrencyInput } from 'components/currencyInput/currencyInput'
+import type { ResponseAccount } from 'api/accounts/accounts.types'
 
-interface IAddEditAccountDialogProps extends Partial<ResponseAccount> {
+import { addEditAccountSchema } from './addEditAccountDialog.schema'
+import { useAddEditAccountDialog } from './useAddEditAccountDialog'
+
+export interface IAddEditAccountDialogProps extends Partial<ResponseAccount> {
   onClose: () => void
 }
 
-const newAccountSchema = z.object({
-  name: z.string().nonempty({ message: 'Name is required' }),
-  balance: z.number().positive({ message: 'Balance must be positive' }),
-})
+export function AddEditAccountDialog(props: IAddEditAccountDialogProps) {
+  const { handleSubmit } = useAddEditAccountDialog(props)
 
-export function AddEditAccountDialog({ onClose, id, name, balance }: IAddEditAccountDialogProps) {
   const form = useForm({
-    initialValues: { name: name || '', balance: balance || 0 },
-    validate: zodResolver(newAccountSchema),
+    initialValues: { name: props.name || '', balance: props.balance || 0 },
+    validate: zodResolver(addEditAccountSchema),
   })
 
   return (
-    <Modal title={id ? `Edit account ${name}` : 'Add new account'} onClose={onClose}>
-      <form onSubmit={form.onSubmit((values) => console.log(values))}>
+    <Modal
+      title={props.id ? `Edit account ${props.name}` : 'Add new account'}
+      onClose={props.onClose}
+    >
+      <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack spacing="md">
           <TextInput
+            data-autofocus
             label="Name"
             placeholder="Enter your name"
             withAsterisk
@@ -40,10 +41,10 @@ export function AddEditAccountDialog({ onClose, id, name, balance }: IAddEditAcc
             {...form.getInputProps('balance')}
           />
           <Group position="right">
-            <Button type="button" variant="default" color="gray" onClick={onClose}>
+            <Button type="button" variant="default" color="gray" onClick={props.onClose}>
               Cancel
             </Button>
-            <Button type="submit">{id ? 'Edit' : 'Add'} account</Button>
+            <Button type="submit">{props.id ? 'Edit' : 'Add'} account</Button>
           </Group>
         </Stack>
       </form>

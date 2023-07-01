@@ -21,7 +21,7 @@ export function useAccounts() {
       const res = await fetchAccounts(search ? { search } : undefined)
       return res.data
     },
-    refetchInterval: 5000,
+    refetchInterval: 1000 * 60 * 5, // 5 minutos
   })
 
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {

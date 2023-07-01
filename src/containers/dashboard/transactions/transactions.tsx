@@ -1,9 +1,14 @@
+import { useNavigate } from 'react-router-dom'
+
 import { Button, Stack, Title, rem } from '@mantine/core'
-import SectionPaper from '../sectionPaper/sectionPaper'
-import { Transaction } from './transaction/transaction'
+
 import { TransactionType } from 'api/transactions/transactions.types'
+import { Transaction } from './transaction/transaction'
+import SectionPaper from '../sectionPaper/sectionPaper'
 
 export function Transactions() {
+  const _navigate = useNavigate()
+
   return (
     <SectionPaper
       flexProps={{
@@ -49,7 +54,9 @@ export function Transactions() {
         />
       </Stack>
 
-      <Button variant="gradient">All transactions</Button>
+      <Button variant="gradient" onClick={() => _navigate('/transactions')}>
+        All transactions
+      </Button>
     </SectionPaper>
   )
 }
