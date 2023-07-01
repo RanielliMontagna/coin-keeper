@@ -30,13 +30,13 @@ export function AddEditAccountDialog(props: IAddEditAccountDialogProps) {
           <TextInput
             data-autofocus
             label="Name"
-            placeholder="Enter your name"
+            placeholder="Enter account name"
             withAsterisk
             {...form.getInputProps('name')}
           />
           <CurrencyInput
             label="Balance"
-            placeholder="Enter your balance"
+            placeholder="Enter account balance"
             withAsterisk
             {...form.getInputProps('balance')}
           />

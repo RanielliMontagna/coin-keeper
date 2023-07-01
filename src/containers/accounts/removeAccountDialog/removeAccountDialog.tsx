@@ -37,7 +37,5 @@ export function useDeleteAccountModal() {
     }).openDeleteModal()
   }
 
-  return {
-    openDeleteModal,
-  }
+  return { openDeleteModal }
 }
