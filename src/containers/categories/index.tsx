@@ -86,6 +86,7 @@ export default function Categories() {
         fetching={isLoading}
         emptyState={
           <EmptyState>
+            {/* TODO: implementar images empty */}
             {/* <EmptyState.Image src={search ? EmptySearch : EmptyImage} /> */}
             <EmptyState.Title>
               {search ? 'No results found' : 'You have no categories yet'}

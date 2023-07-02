@@ -34,58 +34,60 @@ export function AddEditCategoryDialog(props: IAddEditCategoryDialogProps) {
     >
       <form onSubmit={form.onSubmit(handleSubmit as () => void)}>
         <Stack spacing="md">
-          <TextInput
-            data-autofocus
-            label="Name"
-            placeholder="Enter category name"
-            withAsterisk
-            {...form.getInputProps('name')}
-          />
-          <TextInput
-            label="Description"
-            placeholder="Enter category description"
-            {...form.getInputProps('description')}
-          />
-          <Select
-            label="Color"
-            placeholder="Select category color"
-            styles={{ itemsWrapper: { height: '150px' } }}
-            itemComponent={forwardRef(function SelectItem(
-              { value, label, ...rest }: SelectItemProps,
-              ref: React.Ref<HTMLDivElement>,
-            ) {
-              const color = Number(value || 0) as CategoryColorsEnum
+          <Stack spacing={8}>
+            <TextInput
+              data-autofocus
+              label="Name"
+              placeholder="Enter category name"
+              withAsterisk
+              {...form.getInputProps('name')}
+            />
+            <TextInput
+              label="Description"
+              placeholder="Enter category description"
+              {...form.getInputProps('description')}
+            />
+            <Select
+              label="Color"
+              placeholder="Select category color"
+              styles={{ itemsWrapper: { height: '150px' } }}
+              itemComponent={forwardRef(function SelectItem(
+                { value, label, ...rest }: SelectItemProps,
+                ref: React.Ref<HTMLDivElement>,
+              ) {
+                const color = Number(value || 0) as CategoryColorsEnum
 
-              return (
-                <Flex
-                  ref={ref}
-                  gap={8}
-                  {...rest}
-                  sx={{
-                    '&[data-selected]': {
-                      backgroundColor: categoryColors[color],
-                      color: 'white',
-                    },
-                    '&[data-hovered]': {
-                      backgroundColor: categoryColors[color],
-                      color: 'white',
-                    },
-                    color: categoryColors[color],
-                  }}
-                >
-                  <Flex>
-                    <IconInnerShadowLeftFilled />
+                return (
+                  <Flex
+                    ref={ref}
+                    gap={8}
+                    {...rest}
+                    sx={{
+                      '&[data-selected]': {
+                        backgroundColor: categoryColors[color],
+                        color: 'white',
+                      },
+                      '&[data-hovered]': {
+                        backgroundColor: categoryColors[color],
+                        color: 'white',
+                      },
+                      color: categoryColors[color],
+                    }}
+                  >
+                    <Flex>
+                      <IconInnerShadowLeftFilled />
+                    </Flex>
+                    {label}
                   </Flex>
-                  {label}
-                </Flex>
-              )
-            })}
-            data={new Array(10).fill(0).map((_, index) => ({
-              value: String(index),
-              label: capitalize(CategoryColorsEnum[index]),
-            }))}
-            {...form.getInputProps('color')}
-          />
+                )
+              })}
+              data={new Array(10).fill(0).map((_, index) => ({
+                value: String(index),
+                label: capitalize(CategoryColorsEnum[index]),
+              }))}
+              {...form.getInputProps('color')}
+            />
+          </Stack>
           <Group position="right">
             <Button type="button" variant="default" color="gray" onClick={props.onClose}>
               Cancel

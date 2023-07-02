@@ -12,7 +12,6 @@ interface AddEditModal {
 
 export function useCategories() {
   const [search, setSearch] = useDebouncedState('', 500)
-
   const [addEditModal, setAddEdit] = useState<AddEditModal>({ opened: false })
 
   const { data, isLoading } = useQuery({

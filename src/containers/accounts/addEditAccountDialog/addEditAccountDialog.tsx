@@ -27,19 +27,22 @@ export function AddEditAccountDialog(props: IAddEditAccountDialogProps) {
     >
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack spacing="md">
-          <TextInput
-            data-autofocus
-            label="Name"
-            placeholder="Enter account name"
-            withAsterisk
-            {...form.getInputProps('name')}
-          />
-          <CurrencyInput
-            label="Balance"
-            placeholder="Enter account balance"
-            withAsterisk
-            {...form.getInputProps('balance')}
-          />
+          <Stack spacing={8}>
+            <TextInput
+              data-autofocus
+              label="Name"
+              placeholder="Enter account name"
+              withAsterisk
+              {...form.getInputProps('name')}
+            />
+            <CurrencyInput
+              label="Balance"
+              placeholder="Enter account balance"
+              withAsterisk
+              zeroIsAllowed
+              {...form.getInputProps('balance')}
+            />
+          </Stack>
           <Group position="right">
             <Button type="button" variant="default" color="gray" onClick={props.onClose}>
               Cancel

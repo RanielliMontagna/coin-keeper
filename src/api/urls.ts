@@ -4,5 +4,6 @@ export const urls = {
   refreshToken: '/token/refresh',
   accounts: '/accounts',
   categories: '/categories',
+  transactions: '/transactions',
   quotes: '/services/quotes',
 }

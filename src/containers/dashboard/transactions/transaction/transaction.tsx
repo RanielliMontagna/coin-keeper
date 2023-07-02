@@ -1,14 +1,14 @@
 import dayjs from 'dayjs'
 
 import { Flex, Text, Title, useMantineTheme } from '@mantine/core'
-import { TransactionType } from 'api/transactions/transactions.types'
+import { TransactionTypeEnum } from 'api/transactions/transactions.types'
 import { currencyFormat } from 'utils/currencyFormat'
 
 interface ITransactionProps {
   title: string
   category: string
   amount: number
-  type: TransactionType
+  type: TransactionTypeEnum
   date: string
 }
 
@@ -27,10 +27,10 @@ export function Transaction({ title, category, amount, date, type }: ITransactio
         <Title
           order={5}
           style={{
-            color: type === TransactionType.INCOME ? colors.green[7] : undefined,
+            color: type === TransactionTypeEnum.INCOME ? colors.green[7] : undefined,
           }}
         >
-          {type === TransactionType.INCOME ? '+' : '-'}
+          {type === TransactionTypeEnum.INCOME ? '+' : '-'}
           {currencyFormat(amount)}
         </Title>
         <Text color="gray.6" size="xs">
