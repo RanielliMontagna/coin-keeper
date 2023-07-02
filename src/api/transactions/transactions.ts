@@ -1,4 +1,4 @@
-import type { CreateTransactionPayload, ResponseTransactions } from './transactions.types'
+import type { CreateTransactionPayload, ResponseTransaction } from './transactions.types'
 
 import { urls } from 'api/urls'
 import { AxiosResponse } from 'axios'
@@ -7,7 +7,7 @@ import { Options } from 'shared/options'
 
 export async function fetchTransactions(
   options?: Options,
-): Promise<AxiosResponse<ResponseTransactions[]>> {
+): Promise<AxiosResponse<ResponseTransaction[]>> {
   return await axiosInstance.get(urls.transactions, { params: options })
 }
 

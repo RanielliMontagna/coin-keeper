@@ -1,3 +1,5 @@
+import { CategoryColorsEnum } from 'api/categories/categories.types'
+
 export enum TransactionTypeEnum {
   INCOME = 'INCOME',
   EXPENSE = 'EXPENSE',
@@ -12,6 +14,20 @@ export interface CreateTransactionPayload {
   accountId: string
   categoryId: string
 }
-
-//TODO: Create a type for this
-export interface ResponseTransactions {}
+export interface ResponseTransaction {
+  account: {
+    id: string
+    name: string
+  }
+  amount: number
+  category: {
+    id: string
+    name: string
+    color: CategoryColorsEnum
+  }
+  date: string
+  description: string
+  id: string
+  title: string
+  type: TransactionTypeEnum
+}

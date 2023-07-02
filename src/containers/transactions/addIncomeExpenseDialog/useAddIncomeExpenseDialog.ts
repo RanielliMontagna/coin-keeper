@@ -61,15 +61,16 @@ export function useAddIncomeExpenseDialog({ type, onClose }: IAddIncomeExpenseDi
   }
 
   return {
-    categories: dataCategories?.data?.categories?.map((category: ResponseCategory) => ({
-      value: category.id,
-      label: category.name,
-    })),
-
-    accounts: dataAccounts?.data?.accounts?.map((account: ResponseAccount) => ({
-      value: account.id,
-      label: account.name,
-    })),
+    categories:
+      dataCategories?.data?.categories?.map((category: ResponseCategory) => ({
+        value: category.id,
+        label: category.name,
+      })) ?? [],
+    accounts:
+      dataAccounts?.data?.accounts?.map((account: ResponseAccount) => ({
+        value: account.id,
+        label: account.name,
+      })) ?? [],
     handleSubmit,
   }
 }
