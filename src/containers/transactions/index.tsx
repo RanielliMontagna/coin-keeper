@@ -13,6 +13,7 @@ import { capitalize } from 'utils/capitalize'
 import { useTransactions } from './useTransactions'
 import { AddIncomeExpenseDialog } from './addIncomeExpenseDialog/addIncomeExpenseDialog'
 import { ResponseTransaction, TransactionTypeEnum } from 'api/transactions/transactions.types'
+import { useDeleteIncomeExpenseModal } from './deleteIncomeExpenseDialog/deleteIncomExpenseDialog'
 
 export default function Transactions() {
   const {
@@ -23,6 +24,7 @@ export default function Transactions() {
     handleAddIncome,
     handleCloseAddIncomeExpense,
   } = useTransactions()
+  const { openDeleteModal } = useDeleteIncomeExpenseModal()
 
   return (
     <PrivateContainer>
@@ -109,8 +111,7 @@ export default function Transactions() {
           {
             icon: <IconTrash size={16} />,
             label: 'Delete',
-            onClick: () => {},
-            // onClick: openDeleteModal,
+            onClick: openDeleteModal,
           },
         ]}
         records={transactions}

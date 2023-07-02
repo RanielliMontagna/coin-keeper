@@ -16,7 +16,7 @@ import { CategoryColorsEnum } from 'api/categories/categories.types'
 import { categoryColors } from './categories.static'
 
 import { AddEditCategoryDialog } from './addEditCategoryDialog/addEditCategoryDialog'
-import { useDeleteCategoryModal } from './removeCategoryDialog/removeCategoryDialog'
+import { useDeleteCategoryModal } from './deleteCategoryDialog/deleteCategoryDialog'
 
 export default function Categories() {
   const {

@@ -10,7 +10,7 @@ import { useAccounts } from './useAccounts'
 import EmptyImage from 'assets/accounts/empty-image.svg'
 import EmptySearch from 'assets/accounts/empty-search.svg'
 import { AddEditAccountDialog } from './addEditAccountDialog/addEditAccountDialog'
-import { useDeleteAccountModal } from './removeAccountDialog/removeAccountDialog'
+import { useDeleteAccountModal } from './deleteAccountDialog/deleteAccountDialog'
 import { currencyFormat } from 'utils/currencyFormat'
 
 export default function Accounts() {
