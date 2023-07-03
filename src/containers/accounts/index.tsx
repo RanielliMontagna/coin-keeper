@@ -4,14 +4,14 @@ import { IconEdit, IconPlus, IconSearch, IconTrash } from '@tabler/icons-react'
 
 import { PrivateContainer } from 'components/privateContainer'
 import { Datatable } from 'components/datatable'
+import { currencyFormat } from 'utils/currencyFormat'
 
 import { useAccounts } from './useAccounts'
+import { AddEditAccountDialog } from './addEditAccountDialog/addEditAccountDialog'
+import { useDeleteAccountModal } from './deleteAccountDialog/deleteAccountDialog'
 
 import EmptyImage from 'assets/accounts/empty-image.svg'
 import EmptySearch from 'assets/accounts/empty-search.svg'
-import { AddEditAccountDialog } from './addEditAccountDialog/addEditAccountDialog'
-import { useDeleteAccountModal } from './deleteAccountDialog/deleteAccountDialog'
-import { currencyFormat } from 'utils/currencyFormat'
 
 export default function Accounts() {
   const {

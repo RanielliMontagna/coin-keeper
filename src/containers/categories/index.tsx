@@ -19,6 +19,9 @@ import { AddEditCategoryDialog } from './addEditCategoryDialog/addEditCategoryDi
 import { useDeleteCategoryModal } from './deleteCategoryDialog/deleteCategoryDialog'
 import { DescriptionRowRender } from 'components/descriptionRowRender/descriptionRowRender'
 
+import EmptyImage from 'assets/categories/empty-image.svg'
+import EmptySearch from 'assets/categories/empty-search.svg'
+
 export default function Categories() {
   const {
     records,
@@ -90,8 +93,7 @@ export default function Categories() {
         fetching={isLoading}
         emptyState={
           <EmptyState>
-            {/* TODO: implementar images empty */}
-            {/* <EmptyState.Image src={search ? EmptySearch : EmptyImage} /> */}
+            <EmptyState.Image src={search ? EmptySearch : EmptyImage} />
             <EmptyState.Title>
               {search ? 'No results found' : 'You have no categories yet'}
             </EmptyState.Title>

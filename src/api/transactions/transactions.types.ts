@@ -31,3 +31,9 @@ export interface ResponseTransaction {
   title: string
   type: TransactionTypeEnum
 }
+
+export interface ResponseBalance {
+  balance: number
+  incomes: number
+  expenses: number
+}

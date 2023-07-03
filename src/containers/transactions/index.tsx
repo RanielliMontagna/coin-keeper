@@ -16,6 +16,8 @@ import { ResponseTransaction, TransactionTypeEnum } from 'api/transactions/trans
 import { useDeleteIncomeExpenseModal } from './deleteIncomeExpenseDialog/deleteIncomExpenseDialog'
 import { DescriptionRowRender } from 'components/descriptionRowRender/descriptionRowRender'
 
+import EmptyImage from 'assets/transactions/empty-image.svg'
+
 export default function Transactions() {
   const {
     transactions,
@@ -120,7 +122,7 @@ export default function Transactions() {
         fetching={isLoading}
         emptyState={
           <EmptyState>
-            {/* TODO: implementar images empty */}
+            <EmptyState.Image src={EmptyImage} />
             <EmptyState.Title>No transactions found</EmptyState.Title>
             <EmptyState.Text>Create your first transaction to get started</EmptyState.Text>
           </EmptyState>

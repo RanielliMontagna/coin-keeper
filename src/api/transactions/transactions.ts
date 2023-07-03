@@ -1,4 +1,8 @@
-import type { CreateTransactionPayload, ResponseTransaction } from './transactions.types'
+import type {
+  CreateTransactionPayload,
+  ResponseBalance,
+  ResponseTransaction,
+} from './transactions.types'
 
 import { urls } from 'api/urls'
 import { AxiosResponse } from 'axios'
@@ -13,6 +17,10 @@ export async function fetchTransactions(
 
 export async function latestTransactions(): Promise<AxiosResponse<ResponseTransaction[]>> {
   return await axiosInstance.get(`${urls.transactions}/latest`)
+}
+
+export async function getTransactionsBalance(): Promise<AxiosResponse<ResponseBalance>> {
+  return await axiosInstance.get(`${urls.transactions}/balance`)
 }
 
 export async function createTransaction(payload: CreateTransactionPayload) {
