@@ -7,19 +7,18 @@ interface ISectionPaperProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const SectionPaper = ({ children, flexProps, ...rest }: ISectionPaperProps) => {
-  const { colorScheme, shadows } = useMantineTheme()
+  const { colorScheme, white, shadows } = useMantineTheme()
 
   return (
     <section {...rest}>
       <Flex
         direction="column"
-        bg={colorScheme === 'dark' ? 'gray.9' : 'gray.0'}
+        bg={colorScheme === 'dark' ? 'dark.8' : white}
         p={16}
         {...flexProps}
         style={{
           borderRadius: 8,
           flex: 1,
-          transition: 'all 0.3s ease-in-out',
           boxShadow: shadows.xs,
           ...flexProps?.style,
         }}

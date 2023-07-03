@@ -4,8 +4,9 @@ import { IActionProps } from './actions/actions'
 
 import { IconDotsVertical } from '@tabler/icons-react'
 
-type IDataTableProps<T> = DataTableProps<T> & {
+type IDataTableProps<T = any> = Omit<DataTableProps<T>, 'columns'> & {
   actions?: IActionProps[]
+  columns?: DataTableColumn<any>[]
 }
 
 const useStyles = createStyles((theme) => ({

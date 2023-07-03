@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react'
+import { Suspense } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 
 import { PrivateLayout } from 'layouts/privateLayout'
@@ -7,18 +7,18 @@ import { PublicLayout } from 'layouts/publicLayout'
 import { useAuthStore } from 'store/auth/auth'
 import { Loading } from 'components/loading'
 
-export function Router() {
-  const Login = lazy(() => import('containers/login'))
-  const Register = lazy(() => import('containers/register'))
-  const Dashboard = lazy(() => import('containers/dashboard'))
-  const Accounts = lazy(() => import('containers/accounts'))
-  const Transactions = lazy(() => import('containers/transactions'))
-  const Categories = lazy(() => import('containers/categories'))
-  const Terms = lazy(() => import('containers/terms'))
-  const Privacy = lazy(() => import('containers/privacy'))
-  const Erro404 = lazy(() => import('containers/erro404'))
-  const Erro500 = lazy(() => import('containers/erro500'))
+import Login from 'containers/login'
+import Register from 'containers/register'
+import Terms from 'containers/terms'
+import Privacy from 'containers/privacy'
+import Erro500 from 'containers/erro500'
+import Dashboard from 'containers/dashboard'
+import Accounts from 'containers/accounts'
+import Transactions from 'containers/transactions'
+import Categories from 'containers/categories'
+import Erro404 from 'containers/erro404'
 
+export function Router() {
   const { token } = useAuthStore()
 
   return (

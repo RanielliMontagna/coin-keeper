@@ -1,3 +1,11 @@
 {
-  "conventionalCommits.scopes": ["lint", "tests", "sidebar", "appbar"]
+  "conventionalCommits.scopes": [
+    "lint",
+    "tests",
+    "sidebar",
+    "appbar",
+    "accounts",
+    "transactions",
+    "dashboard"
+  ]
 }

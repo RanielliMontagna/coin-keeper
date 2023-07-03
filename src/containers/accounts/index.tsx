@@ -1,17 +1,17 @@
+import { Header, EmptyState } from '@quantun/core'
 import { Button, Input } from '@mantine/core'
 import { IconEdit, IconPlus, IconSearch, IconTrash } from '@tabler/icons-react'
 
 import { PrivateContainer } from 'components/privateContainer'
-import { Header } from 'components/header'
 import { Datatable } from 'components/datatable'
-import { EmptyState } from 'components/emptyState/emptyState'
+import { currencyFormat } from 'utils/currencyFormat'
 
 import { useAccounts } from './useAccounts'
+import { AddEditAccountDialog } from './addEditAccountDialog/addEditAccountDialog'
+import { useDeleteAccountModal } from './deleteAccountDialog/deleteAccountDialog'
 
 import EmptyImage from 'assets/accounts/empty-image.svg'
 import EmptySearch from 'assets/accounts/empty-search.svg'
-import { AddEditAccountDialog } from './addEditAccountDialog/addEditAccountDialog'
-import { useDeleteAccountModal } from './removeAccountDialog/removeAccountDialog'
 
 export default function Accounts() {
   const {
@@ -51,6 +51,7 @@ export default function Accounts() {
           {
             accessor: 'balance',
             title: 'Balance',
+            render: ({ balance }: { balance: string }) => currencyFormat(balance),
           },
         ]}
         actions={[

@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 
-import { Flex, Text, Title, useMantineTheme } from '@mantine/core'
+import { Flex, Skeleton, Text, Title, useMantineTheme } from '@mantine/core'
 import { IconTrendingUp } from '@tabler/icons-react'
 
 import SectionPaper from 'containers/dashboard/sectionPaper/sectionPaper'
@@ -17,9 +17,11 @@ interface ICardProps {
   type: CardTypeEnum
   amount: number
   percentage: number
+
+  isLoading?: boolean
 }
 
-export function Card({ type, amount, percentage }: ICardProps) {
+export function Card({ type, amount, percentage, isLoading = false }: ICardProps) {
   const { colors } = useMantineTheme()
 
   const title = useMemo(() => {
@@ -50,19 +52,17 @@ export function Card({ type, amount, percentage }: ICardProps) {
           {title}
         </Text>
       </div>
-      <Flex align="center" gap="xs">
-        <Title order={3}>{currencyFormat(amount)}</Title>
-        <Flex
-          align="center"
-          style={{
-            color,
-            gap: 4,
-          }}
-        >
-          <IconTrendingUp size={16} />
-          <Text size="sm">{percentageFormat(percentage)}</Text>
+      {isLoading ? (
+        <Skeleton style={{ marginTop: 6, height: 25 }} />
+      ) : (
+        <Flex align="center" gap="xs">
+          <Title order={3}>{currencyFormat(amount || 0)}</Title>
+          <Flex align="center" style={{ color, gap: 4 }}>
+            <IconTrendingUp size={16} />
+            <Text size="sm">{percentageFormat(percentage)}</Text>
+          </Flex>
         </Flex>
-      </Flex>
+      )}
     </SectionPaper>
   )
 }

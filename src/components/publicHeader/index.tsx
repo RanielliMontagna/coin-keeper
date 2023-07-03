@@ -34,7 +34,6 @@ export function PublicHeader() {
                 className={classes.link}
                 style={{
                   backgroundColor: pathname === '/terms' ? theme.colors.green[9] : 'transparent',
-                  transition: 'all 0.3s ease-in-out',
                 }}
               >
                 Terms of Service
@@ -44,7 +43,6 @@ export function PublicHeader() {
                 className={classes.link}
                 style={{
                   backgroundColor: pathname === '/privacy' ? theme.colors.green[9] : 'transparent',
-                  transition: 'all 0.3s ease-in-out',
                 }}
               >
                 Privacy Policy
