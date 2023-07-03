@@ -17,6 +17,7 @@ import { categoryColors } from './categories.static'
 
 import { AddEditCategoryDialog } from './addEditCategoryDialog/addEditCategoryDialog'
 import { useDeleteCategoryModal } from './deleteCategoryDialog/deleteCategoryDialog'
+import { DescriptionRowRender } from 'components/descriptionRowRender/descriptionRowRender'
 
 export default function Categories() {
   const {
@@ -68,6 +69,9 @@ export default function Categories() {
           {
             accessor: 'description',
             title: 'Description',
+            render: ({ description }: { description: string }) => {
+              return <DescriptionRowRender description={description} />
+            },
           },
         ]}
         actions={[

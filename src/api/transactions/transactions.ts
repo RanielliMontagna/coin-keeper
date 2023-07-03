@@ -11,6 +11,10 @@ export async function fetchTransactions(
   return await axiosInstance.get(urls.transactions, { params: options })
 }
 
+export async function latestTransactions(): Promise<AxiosResponse<ResponseTransaction[]>> {
+  return await axiosInstance.get(`${urls.transactions}/latest`)
+}
+
 export async function createTransaction(payload: CreateTransactionPayload) {
   return await axiosInstance.post(urls.transactions, payload)
 }

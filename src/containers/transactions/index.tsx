@@ -14,6 +14,7 @@ import { useTransactions } from './useTransactions'
 import { AddIncomeExpenseDialog } from './addIncomeExpenseDialog/addIncomeExpenseDialog'
 import { ResponseTransaction, TransactionTypeEnum } from 'api/transactions/transactions.types'
 import { useDeleteIncomeExpenseModal } from './deleteIncomeExpenseDialog/deleteIncomExpenseDialog'
+import { DescriptionRowRender } from 'components/descriptionRowRender/descriptionRowRender'
 
 export default function Transactions() {
   const {
@@ -49,8 +50,9 @@ export default function Transactions() {
           {
             accessor: 'description',
             title: 'Description',
+            width: 350,
             render: ({ description }: ResponseTransaction) => {
-              return description || '-'
+              return <DescriptionRowRender description={description} />
             },
           },
           {

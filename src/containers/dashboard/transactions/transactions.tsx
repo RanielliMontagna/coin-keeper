@@ -1,57 +1,39 @@
 import { useNavigate } from 'react-router-dom'
 
-import { Button, Stack, Title, rem } from '@mantine/core'
+import { Button, Skeleton, Stack, Title, rem } from '@mantine/core'
 
-import { TransactionTypeEnum } from 'api/transactions/transactions.types'
+import { ResponseTransaction } from 'api/transactions/transactions.types'
 import { Transaction } from './transaction/transaction'
 import SectionPaper from '../sectionPaper/sectionPaper'
+import { useTransactions } from './useTransactions'
 
 export function Transactions() {
+  const { transactions, isLoading } = useTransactions()
+
   const _navigate = useNavigate()
 
   return (
-    <SectionPaper
-      flexProps={{
-        gap: rem(16),
-      }}
-    >
+    <SectionPaper flexProps={{ gap: rem(16) }}>
       <Title order={4}>Latest transactions</Title>
       <Stack>
-        <Transaction
-          title="Nike shoes"
-          category="Clothes"
-          amount={50}
-          date="2021-01-01"
-          type={TransactionTypeEnum.EXPENSE}
-        />
-        <Transaction
-          title="Fuel"
-          category="Car"
-          amount={100}
-          date="2021-01-01"
-          type={TransactionTypeEnum.EXPENSE}
-        />
-        <Transaction
-          title="Salary"
-          category="Work"
-          amount={4500}
-          date="2021-01-01"
-          type={TransactionTypeEnum.INCOME}
-        />
-        <Transaction
-          title="Freelance"
-          category="Work"
-          amount={2000}
-          date="2021-01-01"
-          type={TransactionTypeEnum.INCOME}
-        />
-        <Transaction
-          title="Macbook Pro"
-          category="Electronics"
-          amount={5000}
-          date="2021-01-01"
-          type={TransactionTypeEnum.EXPENSE}
-        />
+        {isLoading ? (
+          <>
+            {new Array(5).fill(0).map((_, index) => (
+              <Skeleton key={index} height={rem(45.8)} />
+            ))}
+          </>
+        ) : (
+          transactions?.map((transaction: ResponseTransaction) => (
+            <Transaction
+              key={transaction.id}
+              amount={transaction.amount}
+              category={transaction.category.name}
+              date={transaction.date}
+              title={transaction.title}
+              type={transaction.type}
+            />
+          ))
+        )}
       </Stack>
 
       <Button variant="gradient" onClick={() => _navigate('/transactions')}>
