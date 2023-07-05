@@ -1,5 +1,5 @@
 import dayjs from 'dayjs'
-import { Flex, SegmentedControl, Text, Title, useMantineTheme } from '@mantine/core'
+import { Flex, SegmentedControl, Stack, Text, Title, useMantineTheme } from '@mantine/core'
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 
 import { currencyFormat } from 'utils/currencyFormat'
@@ -7,11 +7,27 @@ import { useIsMobile } from 'hooks/useIsMobile'
 
 import SectionPaper from '../sectionPaper/sectionPaper'
 import { useGraph } from './useGraph'
+import { useCallback } from 'react'
 
 export function Graph() {
   const { period, treatedData, handlePeriodChange } = useGraph()
   const { colorScheme, colors } = useMantineTheme()
   const { isMobile } = useIsMobile()
+
+  const tooltipTitle = useCallback(
+    (day: number) => {
+      if (period === 'week') {
+        return dayjs().day(day).format('dddd')
+      } else if (period === 'month') {
+        return `Day ${(day + 1).toString().padStart(2, '0')}/${(dayjs().month() + 1)
+          .toString()
+          .padStart(2, '0')}`
+      } else {
+        return dayjs().month(day).format('MMMM')
+      }
+    },
+    [period],
+  )
 
   return (
     <SectionPaper>
@@ -57,17 +73,22 @@ export function Graph() {
                     borderRadius: 4,
                   }}
                 >
-                  <div>
+                  <Stack spacing={4}>
                     <Text size="sm" color="gray.6">
-                      Month:{' '}
-                      {dayjs()
-                        .month(Number(label) - 1)
-                        .format('MMMM')}
+                      {tooltipTitle(Number(label))}
                     </Text>
-                    <Text size="sm" color={colorScheme === 'dark' ? 'gray.3' : 'gray.9'}>
-                      Amount: {currencyFormat(Number(payload?.[0]?.value))}
-                    </Text>
-                  </div>
+                    <Stack spacing={0}>
+                      <Text size="sm" color={colorScheme === 'dark' ? 'gray.3' : 'gray.9'}>
+                        <b>Total:</b> {currencyFormat(Number(payload?.[0]?.payload?.balance))}
+                      </Text>
+                      <Text size="sm" color={colorScheme === 'dark' ? 'gray.3' : 'gray.9'}>
+                        <b>Income:</b> {currencyFormat(Number(payload?.[0]?.payload?.incomes))}
+                      </Text>{' '}
+                      <Text size="sm" color={colorScheme === 'dark' ? 'gray.3' : 'gray.9'}>
+                        <b>Expense:</b> {currencyFormat(Number(payload?.[0]?.payload?.expenses))}
+                      </Text>
+                    </Stack>
+                  </Stack>
                 </div>
               )
             }}
