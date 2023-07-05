@@ -5,10 +5,11 @@ import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'rec
 import { currencyFormat } from 'utils/currencyFormat'
 import { useIsMobile } from 'hooks/useIsMobile'
 
-import { dataExample } from './graph.static'
 import SectionPaper from '../sectionPaper/sectionPaper'
+import { useGraph } from './useGraph'
 
 export function Graph() {
+  const { period, treatedData, handlePeriodChange } = useGraph()
   const { colorScheme, colors } = useMantineTheme()
   const { isMobile } = useIsMobile()
 
@@ -23,20 +24,26 @@ export function Graph() {
             { label: 'Month', value: 'month' },
             { label: 'Year', value: 'year' },
           ]}
-          value="year"
+          value={period}
+          onChange={handlePeriodChange}
         />
       </Flex>
 
       <ResponsiveContainer width="100%" height={isMobile ? 200 : 310}>
-        <AreaChart data={dataExample}>
+        <AreaChart data={treatedData}>
           <XAxis
-            dataKey="month"
+            dataKey="index"
             fontSize={10}
             tickFormatter={(value: string) => {
-              const numberMonth = Number(value)
-              return dayjs()
-                .month(numberMonth - 1)
-                .format('MMM')
+              if (period === 'week') {
+                return dayjs().day(Number(value)).format('ddd')
+              } else if (period === 'month') {
+                return dayjs()
+                  .date(Number(value + 1))
+                  .format('DD')
+              } else {
+                return dayjs().month(Number(value)).format('MMM')
+              }
             }}
           />
           <YAxis tickFormatter={(value) => currencyFormat(value)} fontSize={10} />
@@ -67,9 +74,24 @@ export function Graph() {
           />
           <Area
             type="monotone"
-            dataKey="amount"
+            dataKey="balance"
+            stackId="1"
             stroke={colors.blue[5]}
             fill={colorScheme === 'dark' ? colors.blue[9] : colors.blue[0]}
+          />
+          <Area
+            type="monotone"
+            dataKey="incomes"
+            stackId="2"
+            stroke={colors.green[5]}
+            fill={colorScheme === 'dark' ? colors.green[9] : colors.green[0]}
+          />
+          <Area
+            type="monotone"
+            dataKey="expenses"
+            stackId="3"
+            stroke={colors.red[5]}
+            fill={colorScheme === 'dark' ? colors.red[9] : colors.red[0]}
           />
         </AreaChart>
       </ResponsiveContainer>

@@ -30,3 +30,15 @@ export async function createTransaction(payload: CreateTransactionPayload) {
 export async function deleteTransaction(id: string) {
   return await axiosInstance.delete(`${urls.transactions}/${id}`)
 }
+
+export async function getTransactionGraphicsWeek() {
+  return await axiosInstance.get(`${urls.transactions}/graphics/week`)
+}
+
+export async function getTransactionGraphicsMonth() {
+  return await axiosInstance.get(`${urls.transactions}/graphics/month`)
+}
+
+export async function getTransactionGraphicsYear() {
+  return await axiosInstance.get(`${urls.transactions}/graphics/year`)
+}
