@@ -15,7 +15,7 @@ export enum SelectPeriod {
 }
 
 export function useGraph() {
-  const [period, setPeriod] = useState<SelectPeriod>(SelectPeriod.WEEK)
+  const [period, setPeriod] = useState<SelectPeriod>(SelectPeriod.YEAR)
 
   const { data: periodData, isLoading } = useQuery({
     queryKey: [period],
