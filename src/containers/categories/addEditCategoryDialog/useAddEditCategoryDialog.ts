@@ -2,6 +2,8 @@ import type { IAddEditCategoryDialogProps } from './addEditCategoryDialog'
 import type { AddEditCategorySchema } from './addEditCategoryDialog.schema'
 
 import { createCategory, updateCategory } from 'api/categories/categories'
+import { CategoryColorsEnum } from 'api/categories/categories.types'
+
 import { useApiCall } from 'hooks/useApiCall'
 import { queryClient } from 'libs/react-query'
 import { useAppStore } from 'store/app/app'
@@ -17,10 +19,11 @@ export function useAddEditCategoryDialog({ id, onClose }: IAddEditCategoryDialog
           updateCategory(id, {
             name: values.name,
             description: values.description,
-            color: Number(values.color),
+            color: values.color as CategoryColorsEnum,
           }),
         () => {
           queryClient.invalidateQueries('categories')
+          queryClient.invalidateQueries('transactions')
           addNotification({
             title: 'Category updated',
             message: `Category ${values.name} updated successfully`,
@@ -34,7 +37,7 @@ export function useAddEditCategoryDialog({ id, onClose }: IAddEditCategoryDialog
           createCategory({
             name: values.name,
             description: values.description,
-            color: Number(values.color),
+            color: values.color as CategoryColorsEnum,
           }),
         () => {
           queryClient.invalidateQueries('categories')

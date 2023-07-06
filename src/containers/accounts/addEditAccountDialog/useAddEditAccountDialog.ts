@@ -30,8 +30,6 @@ export function useAddEditAccountDialog({ id, onClose }: IAddEditAccountDialogPr
         },
       )
     } else {
-      console.log(values.institution)
-
       call(
         () =>
           createAccount({

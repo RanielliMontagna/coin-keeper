@@ -2,14 +2,15 @@ import { forwardRef } from 'react'
 import { useForm, zodResolver } from '@mantine/form'
 import { Button, Group, Stack, TextInput, Select, Flex, SelectItemProps } from '@mantine/core'
 
+import { IconInnerShadowLeftFilled } from '@tabler/icons-react'
+
 import { Modal } from 'components/modal'
+import { capitalizeAllAndRemoveUnderscore } from 'utils/capitalize'
 import { CategoryColorsEnum, type ResponseCategory } from 'api/categories/categories.types'
 
 import { addEditCategorySchema } from './addEditCategoryDialog.schema'
 import { useAddEditCategoryDialog } from './useAddEditCategoryDialog'
 import { categoryColors } from '../categories.static'
-import { capitalize } from 'utils/capitalize'
-import { IconInnerShadowLeftFilled } from '@tabler/icons-react'
 
 export interface IAddEditCategoryDialogProps extends Partial<ResponseCategory> {
   onClose: () => void
@@ -22,7 +23,7 @@ export function AddEditCategoryDialog(props: IAddEditCategoryDialogProps) {
     initialValues: {
       name: props.name || '',
       description: props.description || '',
-      color: String(props.color),
+      color: props.color ? props.color : undefined,
     },
     validate: zodResolver(addEditCategorySchema),
   })
@@ -51,11 +52,22 @@ export function AddEditCategoryDialog(props: IAddEditCategoryDialogProps) {
               label="Color"
               placeholder="Select category color"
               styles={{ itemsWrapper: { height: '150px' } }}
+              icon={
+                form.values.color && (
+                  <IconInnerShadowLeftFilled
+                    style={{
+                      marginLeft: 4,
+                      color: categoryColors[form.values.color as CategoryColorsEnum],
+                    }}
+                  />
+                )
+              }
+              withAsterisk
               itemComponent={forwardRef(function SelectItem(
                 { value, label, ...rest }: SelectItemProps,
                 ref: React.Ref<HTMLDivElement>,
               ) {
-                const color = Number(value || 0) as CategoryColorsEnum
+                const color = value as CategoryColorsEnum
 
                 return (
                   <Flex
@@ -81,9 +93,9 @@ export function AddEditCategoryDialog(props: IAddEditCategoryDialogProps) {
                   </Flex>
                 )
               })}
-              data={new Array(10).fill(0).map((_, index) => ({
-                value: String(index),
-                label: capitalize(CategoryColorsEnum[index]),
+              data={Object.keys(CategoryColorsEnum).map((color) => ({
+                value: color,
+                label: capitalizeAllAndRemoveUnderscore(color),
               }))}
               {...form.getInputProps('color')}
             />
