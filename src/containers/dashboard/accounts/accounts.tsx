@@ -37,7 +37,7 @@ export function Accounts() {
   return (
     <SectionPaper flexProps={{ gap: 16 }}>
       <Group align="center" style={{ gap: 8 }}>
-        <Title order={4}>Accounts</Title>
+        <Title order={5}>Accounts</Title>
       </Group>
       <Stack style={{ gap: 4 }}>
         {isLoading ? (

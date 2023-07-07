@@ -11,6 +11,7 @@ export enum CardTypeEnum {
   BALANCE = 0,
   INCOMES = 1,
   EXPENSES = 2,
+  CREDIT = 3,
 }
 
 interface ICardProps {
@@ -33,11 +34,14 @@ export function Card({ type, amount, percentage, isLoading = false }: ICardProps
         return 'Incomes'
       case CardTypeEnum.EXPENSES:
         return 'Expenses'
+      case CardTypeEnum.CREDIT:
+        return 'Credit cards'
     }
   }, [])
 
   const color = useMemo(() => {
     switch (type) {
+      case CardTypeEnum.CREDIT:
       case CardTypeEnum.EXPENSES:
         return percentage > 0 ? colors.red[6] : colors.green[6]
       default:

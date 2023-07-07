@@ -26,6 +26,7 @@ export function Cards() {
         percentage={0.1}
         isLoading={isLoading}
       />
+      <Card type={CardTypeEnum.CREDIT} amount={0} percentage={0.1} isLoading={isLoading} />
     </Group>
   )
 }

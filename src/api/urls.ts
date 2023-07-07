@@ -5,5 +5,6 @@ export const urls = {
   accounts: '/accounts',
   categories: '/categories',
   transactions: '/transactions',
+  creditCards: '/credit-cards',
   quotes: '/services/quotes',
 }

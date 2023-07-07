@@ -1,4 +1,10 @@
-import { IconDashboard, IconCategory, IconTransferIn, IconBuildingBank } from '@tabler/icons-react'
+import {
+  IconDashboard,
+  IconCategory,
+  IconTransferIn,
+  IconBuildingBank,
+  IconCreditCard,
+} from '@tabler/icons-react'
 
 export const rotas = [
   {
@@ -24,5 +30,11 @@ export const rotas = [
     label: 'Categories',
     description: 'Organize your transactions by categories',
     path: '/categories',
+  },
+  {
+    icon: IconCreditCard,
+    label: 'Credit Cards',
+    description: 'Register your credit cards',
+    path: '/credit-cards',
   },
 ]
