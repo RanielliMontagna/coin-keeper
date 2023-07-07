@@ -3,23 +3,25 @@ import type {
   ResponseBalance,
   ResponseTransaction,
 } from './transactions.types'
+import type { BackendResponse } from 'shared/types'
 
 import { urls } from 'api/urls'
-import { AxiosResponse } from 'axios'
 import { axiosInstance } from 'libs/axios'
 import { Options } from 'shared/options'
 
 export async function fetchTransactions(
-  options?: Options,
-): Promise<AxiosResponse<ResponseTransaction[]>> {
+  options?: Pick<Options, 'page'>,
+): BackendResponse<{ transactions: ResponseTransaction[] }> {
   return await axiosInstance.get(urls.transactions, { params: options })
 }
 
-export async function latestTransactions(): Promise<AxiosResponse<ResponseTransaction[]>> {
+export async function latestTransactions(): BackendResponse<{
+  transactions: ResponseTransaction[]
+}> {
   return await axiosInstance.get(`${urls.transactions}/latest`)
 }
 
-export async function getTransactionsBalance(): Promise<AxiosResponse<ResponseBalance>> {
+export async function getTransactionsBalance(): BackendResponse<ResponseBalance> {
   return await axiosInstance.get(`${urls.transactions}/balance`)
 }
 

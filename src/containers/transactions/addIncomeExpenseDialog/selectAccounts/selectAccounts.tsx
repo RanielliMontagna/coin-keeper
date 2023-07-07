@@ -2,8 +2,11 @@ import { forwardRef } from 'react'
 
 import { Flex, Select, SelectItemProps, Image } from '@mantine/core'
 import { UseFormReturnType } from '@mantine/form'
-import { InstitutionTypeEnum } from 'api/accounts/accounts.types'
+
 import { institutionLogoMap } from 'containers/accounts/accounts.static'
+import { InstitutionTypeEnum } from 'api/accounts/accounts.types'
+
+import { AddIncomeExpenseSchema } from '../addIncomeExpenseDialog.schema'
 
 interface Account {
   value: string
@@ -12,7 +15,7 @@ interface Account {
 }
 
 interface ISelectAccountsProps {
-  form: UseFormReturnType<any>
+  form: UseFormReturnType<AddIncomeExpenseSchema>
   accounts: Account[]
 }
 

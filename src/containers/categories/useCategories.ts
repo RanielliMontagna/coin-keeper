@@ -36,7 +36,7 @@ export function useCategories() {
   }
 
   return {
-    records: data?.data?.categories,
+    records: data?.data?.categories || [],
     isLoading,
     search,
     addEditModal,

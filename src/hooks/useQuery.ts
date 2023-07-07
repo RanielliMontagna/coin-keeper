@@ -1,8 +1,8 @@
 import { useQuery as useReactQuery, UseQueryOptions } from 'react-query'
 
-interface IUseQueryOptions extends UseQueryOptions {}
+interface IUseQueryOptions<TData> extends UseQueryOptions<TData> {}
 
-export function useQuery(options: IUseQueryOptions) {
+export function useQuery<TData>(options: IUseQueryOptions<TData>) {
   const values = useReactQuery({
     retry: 1,
     refetchOnWindowFocus: false,
@@ -10,8 +10,5 @@ export function useQuery(options: IUseQueryOptions) {
     ...options,
   })
 
-  return {
-    ...values,
-    data: values?.data as any,
-  }
+  return { ...values, data: values?.data }
 }

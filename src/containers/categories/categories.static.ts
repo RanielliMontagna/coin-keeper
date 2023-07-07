@@ -13,7 +13,7 @@ export const categoryColors = {
   [CategoryColorsEnum.GREEN]: '#4caf50',
   [CategoryColorsEnum.LIGHT_GREEN]: '#8bc34a',
   [CategoryColorsEnum.LIME]: '#cddc39',
-  [CategoryColorsEnum.YELLOW]: '#ffeb3b',
+  [CategoryColorsEnum.YELLOW]: '#f5e10c',
   [CategoryColorsEnum.AMBER]: '#ffc107',
   [CategoryColorsEnum.ORANGE]: '#ff9800',
   [CategoryColorsEnum.DEEP_ORANGE]: '#ff5722',

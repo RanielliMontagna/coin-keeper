@@ -3,12 +3,14 @@ import { forwardRef } from 'react'
 import { Flex, Select, SelectItemProps } from '@mantine/core'
 import { UseFormReturnType } from '@mantine/form'
 import { IconInnerShadowLeftFilled } from '@tabler/icons-react'
-import { CategoryColorsEnum } from 'api/categories/categories.types'
+
 import { categoryColors } from 'containers/categories/categories.static'
+import { CategoryColorsEnum } from 'api/categories/categories.types'
+import { AddIncomeExpenseSchema } from '../addIncomeExpenseDialog.schema'
 
 interface ISelectCategoryProps {
-  form: UseFormReturnType<any>
-  categories: { value: string; label: string; color: CategoryColorsEnum }[]
+  form: UseFormReturnType<AddIncomeExpenseSchema>
+  categories: { value: string; label: string; color?: CategoryColorsEnum }[]
 }
 
 export function SelectCategory({ form, categories }: ISelectCategoryProps) {

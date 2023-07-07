@@ -5,7 +5,7 @@ import { Modal } from 'components/modal'
 import { CurrencyInput } from 'components/currencyInput/currencyInput'
 import { DateInput } from 'components/dateInput/dateInput'
 
-import { addIncomeExpenseSchema } from './addIncomeExpenseDialog.schema'
+import { AddIncomeExpenseSchema, addIncomeExpenseSchema } from './addIncomeExpenseDialog.schema'
 import { useAddIncomeExpenseDialog } from './useAddIncomeExpenseDialog'
 import { TransactionTypeEnum } from 'api/transactions/transactions.types'
 import { SelectCategory } from './selectCategory/selectCategory'
@@ -19,11 +19,11 @@ export interface IAddIncomeExpenseDialogProps {
 export function AddIncomeExpenseDialog(props: IAddIncomeExpenseDialogProps) {
   const { accounts, categories, handleSubmit } = useAddIncomeExpenseDialog(props)
 
-  const form = useForm({
+  const form = useForm<AddIncomeExpenseSchema>({
     initialValues: {
       title: '',
       description: '',
-      amount: '',
+      amount: 0,
       category: '',
       account: '',
       date: new Date(),
