@@ -5,7 +5,7 @@ import { Modal } from 'components/modal'
 import { CurrencyInput } from 'components/currencyInput/currencyInput'
 import { type ResponseAccount } from 'api/accounts/accounts.types'
 
-import { addEditAccountSchema } from './addEditAccountDialog.schema'
+import { AddEditAccountSchema, addEditAccountSchema } from './addEditAccountDialog.schema'
 import { useAddEditAccountDialog } from './useAddEditAccountDialog'
 
 import { SelectInstitution } from './selectInstitution/selectInstitution'
@@ -17,7 +17,7 @@ export interface IAddEditAccountDialogProps extends Partial<ResponseAccount> {
 export function AddEditAccountDialog(props: IAddEditAccountDialogProps) {
   const { handleSubmit } = useAddEditAccountDialog(props)
 
-  const form = useForm({
+  const form = useForm<AddEditAccountSchema>({
     initialValues: {
       name: props.name || '',
       institution: props.institution || undefined,
