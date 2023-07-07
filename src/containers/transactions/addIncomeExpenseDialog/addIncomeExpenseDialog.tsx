@@ -1,13 +1,15 @@
 import { useForm, zodResolver } from '@mantine/form'
-import { Button, Group, Select, Stack, TextInput } from '@mantine/core'
+import { Button, Group, Stack, TextInput } from '@mantine/core'
 
 import { Modal } from 'components/modal'
 import { CurrencyInput } from 'components/currencyInput/currencyInput'
 import { DateInput } from 'components/dateInput/dateInput'
 
-import { addIncomeExpenseSchema } from './addIncomeExpenseDialog.schema'
+import { AddIncomeExpenseSchema, addIncomeExpenseSchema } from './addIncomeExpenseDialog.schema'
 import { useAddIncomeExpenseDialog } from './useAddIncomeExpenseDialog'
 import { TransactionTypeEnum } from 'api/transactions/transactions.types'
+import { SelectCategory } from './selectCategory/selectCategory'
+import { SelectAccounts } from './selectAccounts/selectAccounts'
 
 export interface IAddIncomeExpenseDialogProps {
   type: TransactionTypeEnum
@@ -17,11 +19,11 @@ export interface IAddIncomeExpenseDialogProps {
 export function AddIncomeExpenseDialog(props: IAddIncomeExpenseDialogProps) {
   const { accounts, categories, handleSubmit } = useAddIncomeExpenseDialog(props)
 
-  const form = useForm({
+  const form = useForm<AddIncomeExpenseSchema>({
     initialValues: {
       title: '',
       description: '',
-      amount: '',
+      amount: 0,
       category: '',
       account: '',
       date: new Date(),
@@ -55,20 +57,8 @@ export function AddIncomeExpenseDialog(props: IAddIncomeExpenseDialogProps) {
               withAsterisk
               {...form.getInputProps('amount')}
             />
-            <Select
-              label="Category"
-              placeholder="Select category"
-              data={categories}
-              withAsterisk
-              {...form.getInputProps('category')}
-            />
-            <Select
-              label="Account"
-              placeholder="Select account"
-              data={accounts}
-              withAsterisk
-              {...form.getInputProps('account')}
-            />
+            <SelectCategory form={form} categories={categories} />
+            <SelectAccounts form={form} accounts={accounts} />
             <DateInput label="Date" placeholder="Select date" {...form.getInputProps('date')} />
           </Stack>
           <Group position="right">

@@ -23,6 +23,7 @@ export default function Transactions() {
     transactions,
     isLoading,
     addIncomeExpense,
+    handleFetchNextPage,
     handleAddExpense,
     handleAddIncome,
     handleCloseAddIncomeExpense,
@@ -127,6 +128,7 @@ export default function Transactions() {
             <EmptyState.Text>Create your first transaction to get started</EmptyState.Text>
           </EmptyState>
         }
+        onScrollToBottom={handleFetchNextPage}
       />
       {addIncomeExpense.opened && addIncomeExpense.type != null && (
         <AddIncomeExpenseDialog

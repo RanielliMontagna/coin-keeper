@@ -1,5 +1,5 @@
 import { Header, EmptyState } from '@quantun/core'
-import { Button, Input } from '@mantine/core'
+import { Button, Input, Flex, Image } from '@mantine/core'
 import { IconEdit, IconPlus, IconSearch, IconTrash } from '@tabler/icons-react'
 
 import { PrivateContainer } from 'components/privateContainer'
@@ -12,6 +12,9 @@ import { useDeleteAccountModal } from './deleteAccountDialog/deleteAccountDialog
 
 import EmptyImage from 'assets/accounts/empty-image.svg'
 import EmptySearch from 'assets/accounts/empty-search.svg'
+import { capitalize } from 'utils/capitalize'
+import { InstitutionTypeEnum } from 'api/accounts/accounts.types'
+import { institutionLogoMap } from './accounts.static'
 
 export default function Accounts() {
   const {
@@ -47,6 +50,16 @@ export default function Accounts() {
           {
             accessor: 'name',
             title: 'Name',
+          },
+          {
+            accessor: 'institution',
+            title: 'Institution',
+            render: ({ institution }: { institution: InstitutionTypeEnum }) => (
+              <Flex align="center" gap={8}>
+                <Image src={institutionLogoMap[institution]} width={28} height={28} />
+                {capitalize(institution)}
+              </Flex>
+            ),
           },
           {
             accessor: 'balance',

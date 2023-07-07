@@ -37,3 +37,15 @@ export interface ResponseBalance {
   incomes: number
   expenses: number
 }
+
+export interface ResponseTransactionGraphicsWeek {
+  week: ResponseBalance[]
+}
+
+export interface ResponseTransactionGraphicsMonth {
+  month: ResponseBalance[]
+}
+
+export interface ResponseTransactionGraphicsYear {
+  year: ResponseBalance[]
+}

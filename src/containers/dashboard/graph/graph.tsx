@@ -1,16 +1,33 @@
 import dayjs from 'dayjs'
-import { Flex, SegmentedControl, Text, Title, useMantineTheme } from '@mantine/core'
+import { Flex, SegmentedControl, Stack, Text, Title, useMantineTheme } from '@mantine/core'
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 
 import { currencyFormat } from 'utils/currencyFormat'
 import { useIsMobile } from 'hooks/useIsMobile'
 
-import { dataExample } from './graph.static'
 import SectionPaper from '../sectionPaper/sectionPaper'
+import { useGraph } from './useGraph'
+import { useCallback } from 'react'
 
 export function Graph() {
+  const { period, treatedData, handlePeriodChange } = useGraph()
   const { colorScheme, colors } = useMantineTheme()
   const { isMobile } = useIsMobile()
+
+  const tooltipTitle = useCallback(
+    (day: number) => {
+      if (period === 'week') {
+        return dayjs().day(day).format('dddd')
+      } else if (period === 'month') {
+        return `Day ${(day + 1).toString().padStart(2, '0')}/${(dayjs().month() + 1)
+          .toString()
+          .padStart(2, '0')}`
+      } else {
+        return dayjs().month(day).format('MMMM')
+      }
+    },
+    [period],
+  )
 
   return (
     <SectionPaper>
@@ -23,20 +40,26 @@ export function Graph() {
             { label: 'Month', value: 'month' },
             { label: 'Year', value: 'year' },
           ]}
-          value="year"
+          value={period}
+          onChange={handlePeriodChange}
         />
       </Flex>
 
       <ResponsiveContainer width="100%" height={isMobile ? 200 : 310}>
-        <AreaChart data={dataExample}>
+        <AreaChart data={treatedData}>
           <XAxis
-            dataKey="month"
+            dataKey="index"
             fontSize={10}
             tickFormatter={(value: string) => {
-              const numberMonth = Number(value)
-              return dayjs()
-                .month(numberMonth - 1)
-                .format('MMM')
+              if (period === 'week') {
+                return dayjs().day(Number(value)).format('ddd')
+              } else if (period === 'month') {
+                return dayjs()
+                  .date(Number(value + 1))
+                  .format('DD')
+              } else {
+                return dayjs().month(Number(value)).format('MMM')
+              }
             }}
           />
           <YAxis tickFormatter={(value) => currencyFormat(value)} fontSize={10} />
@@ -50,26 +73,46 @@ export function Graph() {
                     borderRadius: 4,
                   }}
                 >
-                  <div>
+                  <Stack spacing={4}>
                     <Text size="sm" color="gray.6">
-                      Month:{' '}
-                      {dayjs()
-                        .month(Number(label) - 1)
-                        .format('MMMM')}
+                      {tooltipTitle(Number(label))}
                     </Text>
-                    <Text size="sm" color={colorScheme === 'dark' ? 'gray.3' : 'gray.9'}>
-                      Amount: {currencyFormat(Number(payload?.[0]?.value))}
-                    </Text>
-                  </div>
+                    <Stack spacing={0}>
+                      <Text size="sm" color={colorScheme === 'dark' ? 'gray.3' : 'gray.9'}>
+                        <b>Total:</b> {currencyFormat(Number(payload?.[0]?.payload?.balance))}
+                      </Text>
+                      <Text size="sm" color={colorScheme === 'dark' ? 'gray.3' : 'gray.9'}>
+                        <b>Income:</b> {currencyFormat(Number(payload?.[0]?.payload?.incomes))}
+                      </Text>{' '}
+                      <Text size="sm" color={colorScheme === 'dark' ? 'gray.3' : 'gray.9'}>
+                        <b>Expense:</b> {currencyFormat(Number(payload?.[0]?.payload?.expenses))}
+                      </Text>
+                    </Stack>
+                  </Stack>
                 </div>
               )
             }}
           />
           <Area
             type="monotone"
-            dataKey="amount"
+            dataKey="balance"
+            stackId="1"
             stroke={colors.blue[5]}
             fill={colorScheme === 'dark' ? colors.blue[9] : colors.blue[0]}
+          />
+          <Area
+            type="monotone"
+            dataKey="incomes"
+            stackId="2"
+            stroke={colors.green[5]}
+            fill={colorScheme === 'dark' ? colors.green[9] : colors.green[0]}
+          />
+          <Area
+            type="monotone"
+            dataKey="expenses"
+            stackId="3"
+            stroke={colors.red[5]}
+            fill={colorScheme === 'dark' ? colors.red[9] : colors.red[0]}
           />
         </AreaChart>
       </ResponsiveContainer>

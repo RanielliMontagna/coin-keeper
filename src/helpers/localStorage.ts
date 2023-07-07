@@ -3,7 +3,7 @@ export function getLocal(key: string): string | null {
   return item ? JSON.parse(item) : null
 }
 
-export function setLocal(key: string, value: any): void {
+export function setLocal(key: string, value: string | number | boolean | object): void {
   const item = JSON.stringify(value)
   localStorage.setItem(key, item)
 }

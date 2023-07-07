@@ -4,7 +4,8 @@ import { IActionProps } from './actions/actions'
 
 import { IconDotsVertical } from '@tabler/icons-react'
 
-type IDataTableProps<T = any> = Omit<DataTableProps<T>, 'columns'> & {
+type IDataTableProps<T = any> = Omit<DataTableProps<T>, 'columns' | 'records'> & {
+  records: any[]
   actions?: IActionProps[]
   columns?: DataTableColumn<any>[]
 }

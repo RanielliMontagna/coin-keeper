@@ -8,9 +8,24 @@ export function Cards() {
 
   return (
     <Group>
-      <Card type={CardTypeEnum.BALANCE} amount={balance} percentage={0.1} isLoading={isLoading} />
-      <Card type={CardTypeEnum.INCOMES} amount={incomes} percentage={0.1} isLoading={isLoading} />
-      <Card type={CardTypeEnum.EXPENSES} amount={expenses} percentage={0.1} isLoading={isLoading} />
+      <Card
+        type={CardTypeEnum.BALANCE}
+        amount={balance || 0}
+        percentage={0.1}
+        isLoading={isLoading}
+      />
+      <Card
+        type={CardTypeEnum.INCOMES}
+        amount={incomes || 0}
+        percentage={0.1}
+        isLoading={isLoading}
+      />
+      <Card
+        type={CardTypeEnum.EXPENSES}
+        amount={expenses || 0}
+        percentage={0.1}
+        isLoading={isLoading}
+      />
     </Group>
   )
 }

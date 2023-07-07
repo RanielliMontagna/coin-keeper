@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
 import { fetchTransactions } from 'api/transactions/transactions'
-import { useQuery } from 'hooks/useQuery'
 import { TransactionTypeEnum } from 'api/transactions/transactions.types'
+import { useInfiniteQuery } from 'hooks/useInfiniteQuery'
 
 interface AddIncomeExpense {
   opened: boolean
@@ -15,13 +15,12 @@ export function useTransactions() {
     type: null,
   })
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, handleFetchNextPage } = useInfiniteQuery({
     queryKey: ['transactions'],
-    queryFn: async () => {
-      const res = await fetchTransactions()
+    queryFn: async ({ pageParam }) => {
+      const res = await fetchTransactions({ page: pageParam })
       return res.data
     },
-    staleTime: 1000 * 60 * 5, // 5 minutos
   })
 
   const handleAddIncome = () => {
@@ -37,9 +36,10 @@ export function useTransactions() {
   }
 
   return {
-    transactions: data?.data?.transactions,
+    transactions: data,
     isLoading,
     addIncomeExpense,
+    handleFetchNextPage,
     handleAddIncome,
     handleAddExpense,
     handleCloseAddIncomeExpense,

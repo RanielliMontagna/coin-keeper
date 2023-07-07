@@ -37,7 +37,7 @@ export function useAccounts() {
   }
 
   return {
-    records: data?.data?.accounts,
+    records: data?.data?.accounts || [],
     isLoading,
     search,
     addEditModal,

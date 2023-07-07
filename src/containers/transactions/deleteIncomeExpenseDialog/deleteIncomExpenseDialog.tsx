@@ -17,6 +17,10 @@ export function useDeleteIncomeExpenseModal() {
       () => deleteTransaction(transaction.id),
       () => {
         queryClient.invalidateQueries('transactions')
+        queryClient.invalidateQueries('accounts')
+        queryClient.invalidateQueries('week')
+        queryClient.invalidateQueries('month')
+        queryClient.invalidateQueries('year')
         addNotification({
           title: `${capitalize(transaction.type)} deleted`,
           message: `${capitalize(transaction.type)} ${transaction.title} was deleted successfully`,

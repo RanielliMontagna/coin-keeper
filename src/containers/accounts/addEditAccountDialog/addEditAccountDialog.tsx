@@ -3,10 +3,12 @@ import { Button, Group, Stack, TextInput } from '@mantine/core'
 
 import { Modal } from 'components/modal'
 import { CurrencyInput } from 'components/currencyInput/currencyInput'
-import type { ResponseAccount } from 'api/accounts/accounts.types'
+import { type ResponseAccount } from 'api/accounts/accounts.types'
 
-import { addEditAccountSchema } from './addEditAccountDialog.schema'
+import { AddEditAccountSchema, addEditAccountSchema } from './addEditAccountDialog.schema'
 import { useAddEditAccountDialog } from './useAddEditAccountDialog'
+
+import { SelectInstitution } from './selectInstitution/selectInstitution'
 
 export interface IAddEditAccountDialogProps extends Partial<ResponseAccount> {
   onClose: () => void
@@ -15,8 +17,12 @@ export interface IAddEditAccountDialogProps extends Partial<ResponseAccount> {
 export function AddEditAccountDialog(props: IAddEditAccountDialogProps) {
   const { handleSubmit } = useAddEditAccountDialog(props)
 
-  const form = useForm({
-    initialValues: { name: props.name || '', balance: props.balance || 0 },
+  const form = useForm<AddEditAccountSchema>({
+    initialValues: {
+      name: props.name || '',
+      institution: props.institution || undefined,
+      balance: props.balance || 0,
+    },
     validate: zodResolver(addEditAccountSchema),
   })
 
@@ -42,6 +48,7 @@ export function AddEditAccountDialog(props: IAddEditAccountDialogProps) {
               zeroIsAllowed
               {...form.getInputProps('balance')}
             />
+            <SelectInstitution form={form} />
           </Stack>
           <Group position="right">
             <Button type="button" variant="default" color="gray" onClick={props.onClose}>

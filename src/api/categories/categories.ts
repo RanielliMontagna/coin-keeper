@@ -1,13 +1,13 @@
 import type { CreateCategoryPayload, ResponseCategory } from './categories.types'
+import type { BackendResponse } from 'shared/types'
 
 import { urls } from 'api/urls'
-import { AxiosResponse } from 'axios'
 import { axiosInstance } from 'libs/axios'
 import { Options } from 'shared/options'
 
 export async function fetchCategories(
-  options?: Options,
-): Promise<AxiosResponse<ResponseCategory[]>> {
+  options?: Pick<Options, 'search'>,
+): BackendResponse<{ categories: ResponseCategory[] }> {
   return await axiosInstance.get(urls.categories, { params: options })
 }
 
