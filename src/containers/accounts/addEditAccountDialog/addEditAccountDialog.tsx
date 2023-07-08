@@ -20,8 +20,8 @@ export function AddEditAccountDialog(props: IAddEditAccountDialogProps) {
   const form = useForm<AddEditAccountSchema>({
     initialValues: {
       name: props.name || '',
-      institution: props.institution || undefined,
       balance: props.balance || 0,
+      institution: typeof props.institution === 'number' ? props.institution.toString() : '',
     },
     validate: zodResolver(addEditAccountSchema),
   })

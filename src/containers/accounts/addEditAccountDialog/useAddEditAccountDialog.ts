@@ -2,7 +2,6 @@ import type { IAddEditAccountDialogProps } from './addEditAccountDialog'
 import type { AddEditAccountSchema } from './addEditAccountDialog.schema'
 
 import { createAccount, updateAccount } from 'api/accounts/accounts'
-import { InstitutionTypeEnum } from 'api/accounts/accounts.types'
 import { useApiCall } from 'hooks/useApiCall'
 import { queryClient } from 'libs/react-query'
 import { useAppStore } from 'store/app/app'
@@ -18,7 +17,7 @@ export function useAddEditAccountDialog({ id, onClose }: IAddEditAccountDialogPr
           updateAccount(id, {
             name: values.name,
             balance: Number(values.balance),
-            institution: values.institution || InstitutionTypeEnum.OTHER,
+            institution: values.institution ? Number(values.institution) : undefined,
           }),
         () => {
           queryClient.invalidateQueries('accounts')
@@ -35,7 +34,7 @@ export function useAddEditAccountDialog({ id, onClose }: IAddEditAccountDialogPr
           createAccount({
             name: values.name,
             balance: Number(values.balance),
-            institution: values.institution || InstitutionTypeEnum.OTHER,
+            institution: Number(values.institution),
           }),
         () => {
           queryClient.invalidateQueries('accounts')

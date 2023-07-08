@@ -19,7 +19,7 @@ export async function createAccount(payload: CreateAccountPayload) {
   return await axiosInstance.post(urls.accounts, payload)
 }
 
-export async function updateAccount(id: string, payload: CreateAccountPayload) {
+export async function updateAccount(id: string, payload: Partial<CreateAccountPayload>) {
   return await axiosInstance.put(`${urls.accounts}/${id}`, payload)
 }
 

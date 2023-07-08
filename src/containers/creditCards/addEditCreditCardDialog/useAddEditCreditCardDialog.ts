@@ -7,7 +7,6 @@ import { useApiCall } from 'hooks/useApiCall'
 import { AddEditCreditCardSchema } from './addEditCreditCardDialog.schema'
 import { IAddEditCreditCardDialogProps } from './addEditCreditCardDialog'
 import { createCreditCard, updateCreditCard } from 'api/creditCards/creditCards'
-import { FlagEnum } from 'api/creditCards/creditCards.types'
 
 export function useAddEditCreditCardDialog({ id, onClose }: IAddEditCreditCardDialogProps) {
   const { addNotification } = useAppStore()
@@ -29,7 +28,7 @@ export function useAddEditCreditCardDialog({ id, onClose }: IAddEditCreditCardDi
           updateCreditCard(id, {
             name: values.name,
             limit: Number(values.limit),
-            flag: values.flag as FlagEnum,
+            flag: Number(values.flag),
             closingDay: Number(values.closingDay),
             dueDay: Number(values.dueDay),
             accountId: values.account,
@@ -49,7 +48,7 @@ export function useAddEditCreditCardDialog({ id, onClose }: IAddEditCreditCardDi
           createCreditCard({
             name: values.name,
             limit: Number(values.limit),
-            flag: values.flag as FlagEnum,
+            flag: Number(values.flag),
             closingDay: Number(values.closingDay),
             dueDay: Number(values.dueDay),
             accountId: values.account,

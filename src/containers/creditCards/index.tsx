@@ -12,6 +12,8 @@ import { useCreditCards } from './useCreditCards'
 import { flagLogoMap } from './creditCards.static'
 import { AddEditCreditCardDialog } from './addEditCreditCardDialog/addEditCreditCardDialog'
 import { useDeleteCreditCardModal } from './deleteCreditCardDialog/deleteCreditCardDialog'
+import { ResponseAccount } from 'api/accounts/accounts.types'
+import { institutionLogoMap } from 'containers/accounts/accounts.static'
 
 export default function CreditCards() {
   const { records, isLoading, addEditModal, handleCloseEditModal, handleOpenEditModal } =
@@ -44,10 +46,23 @@ export default function CreditCards() {
             },
           },
           { accessor: 'name', title: 'Name' },
-
           { accessor: 'limit', title: 'Limit' },
           { accessor: 'closingDay', title: 'Closing Day' },
           { accessor: 'dueDay', title: 'Due Day' },
+          {
+            accessor: 'account',
+            title: 'Account',
+            render: ({ account }: { account: ResponseAccount }) => (
+              <Flex gap={2}>
+                <Flex align="center" justify="center">
+                  <Image src={institutionLogoMap[account.institution]} width={24} height={24} />
+                </Flex>
+                <Flex ml={4} align="center" justify="center">
+                  {account.name}
+                </Flex>
+              </Flex>
+            ),
+          },
         ]}
         actions={[
           {

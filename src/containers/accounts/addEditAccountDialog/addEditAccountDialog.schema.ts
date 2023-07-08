@@ -3,7 +3,9 @@ import { z } from 'zod'
 
 export const addEditAccountSchema = z.object({
   name: z.string().nonempty({ message: 'Name is required' }),
-  institution: z.nativeEnum(InstitutionTypeEnum).optional(),
+  institution: z.coerce.string().refine((value) => {
+    return Object.keys(InstitutionTypeEnum).includes(value)
+  }),
   balance: z.coerce.number().min(0, { message: 'Balance must be zero or greater' }),
 })
 

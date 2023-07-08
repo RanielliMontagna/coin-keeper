@@ -1,9 +1,9 @@
 import { create } from 'zustand'
 import { AxiosError } from 'axios'
 import { uuid } from 'short-uuid'
-import { useNetwork } from '@mantine/hooks'
 
 import type { AppState, AppStore, ErrorBackendResponse } from './types'
+import { useAuthStore } from 'store/auth/auth'
 
 const initialState: AppState = {
   loading: false,
@@ -50,6 +50,10 @@ export const useAppStore = create<AppStore>((set, get) => ({
         })
       } else {
         const data = axiosError?.response?.data as ErrorBackendResponse
+
+        if (data?.message === 'User not found') {
+          useAuthStore.getState().logout()
+        }
 
         if (data?.message && data?.title) {
           get().addNotification({

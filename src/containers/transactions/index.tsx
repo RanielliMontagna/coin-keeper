@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 
-import { Badge, Button, Flex } from '@mantine/core'
+import { Badge, Button, Flex, Image } from '@mantine/core'
 import { EmptyState, Header } from '@quantun/core'
 import { IconInnerShadowLeftFilled, IconPlus, IconTrash } from '@tabler/icons-react'
 
@@ -8,15 +8,16 @@ import { Datatable } from 'components/datatable'
 import { PrivateContainer } from 'components/privateContainer'
 import { categoryColors } from 'containers/categories/categories.static'
 import { currencyFormat } from 'utils/currencyFormat'
-import { capitalize } from 'utils/capitalize'
+import { capitalizeAllAndRemoveUnderscore } from 'utils/capitalize'
 
 import { useTransactions } from './useTransactions'
 import { AddIncomeExpenseDialog } from './addIncomeExpenseDialog/addIncomeExpenseDialog'
 import { ResponseTransaction, TransactionTypeEnum } from 'api/transactions/transactions.types'
-import { useDeleteIncomeExpenseModal } from './deleteIncomeExpenseDialog/deleteIncomExpenseDialog'
+import { useDeleteIncomeExpenseModal } from './deleteIncomeExpenseDialog/deleteIncomeExpenseDialog'
 import { DescriptionRowRender } from 'components/descriptionRowRender/descriptionRowRender'
 
 import EmptyImage from 'assets/transactions/empty-image.svg'
+import { institutionLogoMap } from 'containers/accounts/accounts.static'
 
 export default function Transactions() {
   const {
@@ -73,7 +74,18 @@ export default function Transactions() {
           {
             accessor: 'account',
             title: 'Account',
-            render: ({ account }: ResponseTransaction) => account.name,
+            render: ({ account }: ResponseTransaction) => {
+              return (
+                <Flex gap={2}>
+                  <Flex align="center" justify="center">
+                    <Image src={institutionLogoMap[account.institution]} width={24} height={24} />
+                  </Flex>
+                  <Flex ml={4} align="center" justify="center">
+                    {account.name}
+                  </Flex>
+                </Flex>
+              )
+            },
           },
           {
             accessor: 'category',
@@ -106,7 +118,7 @@ export default function Transactions() {
                   style={{ textTransform: 'capitalize' }}
                   color={type === TransactionTypeEnum.INCOME ? 'green.6' : 'red.6'}
                 >
-                  {capitalize(type)}
+                  {capitalizeAllAndRemoveUnderscore(TransactionTypeEnum[type])}
                 </Badge>
               )
             },

@@ -21,7 +21,7 @@ export function AddEditCreditCardDialog(props: IAddEditCreditCardDialogProps) {
     initialValues: {
       name: props.name || '',
       limit: props.limit || 0,
-      flag: props.flag || '',
+      flag: typeof props.flag === 'number' ? props.flag.toString() : '',
       closingDay: String(props.closingDay || ''),
       dueDay: String(props.dueDay || ''),
       account: props.account?.id || '',

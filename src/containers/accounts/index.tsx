@@ -12,7 +12,7 @@ import { useDeleteAccountModal } from './deleteAccountDialog/deleteAccountDialog
 
 import EmptyImage from 'assets/accounts/empty-image.svg'
 import EmptySearch from 'assets/accounts/empty-search.svg'
-import { capitalize } from 'utils/capitalize'
+import { capitalizeAllAndRemoveUnderscore } from 'utils/capitalize'
 import { InstitutionTypeEnum } from 'api/accounts/accounts.types'
 import { institutionLogoMap } from './accounts.static'
 
@@ -57,7 +57,7 @@ export default function Accounts() {
             render: ({ institution }: { institution: InstitutionTypeEnum }) => (
               <Flex align="center" gap={8}>
                 <Image src={institutionLogoMap[institution]} width={28} height={28} />
-                {capitalize(institution)}
+                {capitalizeAllAndRemoveUnderscore(InstitutionTypeEnum[institution])}
               </Flex>
             ),
           },
