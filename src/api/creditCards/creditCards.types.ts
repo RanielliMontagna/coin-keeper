@@ -18,7 +18,6 @@ export interface CreateCreditCardPayload {
   closingDay: number
   dueDay: number
   accountId: string
-  userId: string
 }
 
 export interface ResponseCreditCard extends Omit<CreateCreditCardPayload, 'accountId' | 'userId'> {

@@ -9,7 +9,7 @@ import { AddIncomeExpenseSchema, addIncomeExpenseSchema } from './addIncomeExpen
 import { useAddIncomeExpenseDialog } from './useAddIncomeExpenseDialog'
 import { TransactionTypeEnum } from 'api/transactions/transactions.types'
 import { SelectCategory } from './selectCategory/selectCategory'
-import { SelectAccounts } from './selectAccounts/selectAccounts'
+import { SelectAccount } from './selectAccount/selectAccount'
 
 export interface IAddIncomeExpenseDialogProps {
   type: TransactionTypeEnum
@@ -58,7 +58,7 @@ export function AddIncomeExpenseDialog(props: IAddIncomeExpenseDialogProps) {
               {...form.getInputProps('amount')}
             />
             <SelectCategory form={form} categories={categories} />
-            <SelectAccounts form={form} accounts={accounts} />
+            <SelectAccount form={form} accounts={accounts} />
             <DateInput label="Date" placeholder="Select date" {...form.getInputProps('date')} />
           </Stack>
           <Group position="right">

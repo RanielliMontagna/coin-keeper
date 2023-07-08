@@ -16,7 +16,7 @@ export async function createCreditCard(payload: CreateCreditCardPayload) {
   return await axiosInstance.post(urls.creditCards, payload)
 }
 
-export async function updateCreditCard(id: string, payload: CreateCreditCardPayload) {
+export async function updateCreditCard(id: string, payload: Partial<CreateCreditCardPayload>) {
   return await axiosInstance.put(`${urls.creditCards}/${id}`, payload)
 }
 

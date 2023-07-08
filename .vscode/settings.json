@@ -6,6 +6,7 @@
     "appbar",
     "accounts",
     "transactions",
-    "dashboard"
+    "dashboard",
+    "credit-card"
   ]
 }

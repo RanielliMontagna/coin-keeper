@@ -14,12 +14,12 @@ interface Account {
   institution: InstitutionTypeEnum
 }
 
-interface ISelectAccountsProps {
+interface ISelectAccountProps {
   form: UseFormReturnType<AddIncomeExpenseSchema>
   accounts: Account[]
 }
 
-export function SelectAccounts({ form, accounts }: ISelectAccountsProps) {
+export function SelectAccount({ form, accounts }: ISelectAccountProps) {
   const selectedAccount = accounts.find((account) => account.value === form.values.account)
 
   return (

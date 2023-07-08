@@ -10,9 +10,13 @@ import { FlagEnum } from 'api/creditCards/creditCards.types'
 
 import { useCreditCards } from './useCreditCards'
 import { flagLogoMap } from './creditCards.static'
+import { AddEditCreditCardDialog } from './addEditCreditCardDialog/addEditCreditCardDialog'
+import { useDeleteCreditCardModal } from './deleteCreditCardDialog/deleteCreditCardDialog'
 
 export default function CreditCards() {
-  const { records, isLoading } = useCreditCards()
+  const { records, isLoading, addEditModal, handleCloseEditModal, handleOpenEditModal } =
+    useCreditCards()
+  const { openDeleteModal } = useDeleteCreditCardModal()
 
   return (
     <PrivateContainer>
@@ -20,7 +24,9 @@ export default function CreditCards() {
         <Header.Title>Credit cards</Header.Title>
         <Header.Subtitle>Buy now, pay later. Manage your credit cards easily</Header.Subtitle>
         <Header.RightSection>
-          <Button leftIcon={<IconPlus size={16} />}>Add Credit Card</Button>
+          <Button leftIcon={<IconPlus size={16} />} onClick={() => handleOpenEditModal()}>
+            Add Credit Card
+          </Button>
         </Header.RightSection>
       </Header>
       <Datatable
@@ -47,14 +53,12 @@ export default function CreditCards() {
           {
             icon: <IconEdit size={16} />,
             label: 'Edit',
-            onClick: () => {},
-            // onClick: (row) => handleOpenEditModal(row),
+            onClick: (row) => handleOpenEditModal(row),
           },
           {
             icon: <IconTrash size={16} />,
             label: 'Delete',
-            onClick: () => {},
-            // onClick: openDeleteModal,
+            onClick: openDeleteModal,
           },
         ]}
         records={records}
@@ -69,6 +73,9 @@ export default function CreditCards() {
           </EmptyState>
         }
       />
+      {addEditModal.opened && (
+        <AddEditCreditCardDialog {...addEditModal.row} onClose={handleCloseEditModal} />
+      )}
     </PrivateContainer>
   )
 }
