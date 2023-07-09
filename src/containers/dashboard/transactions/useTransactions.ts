@@ -10,8 +10,5 @@ export function useTransactions() {
     },
   })
 
-  return {
-    transactions: data?.data?.transactions,
-    isLoading,
-  }
+  return { transactions: data?.transactions, isLoading }
 }

@@ -1,3 +1,3 @@
 import { AxiosResponse } from 'axios'
 
-export type BackendResponse<T> = Promise<AxiosResponse<{ data: T }>>
+export type BackendResponse<T> = Promise<AxiosResponse<T>>

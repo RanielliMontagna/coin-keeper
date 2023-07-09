@@ -30,7 +30,7 @@ export function useCreditCards() {
   }
 
   return {
-    records: data?.data?.creditCards || [],
+    records: data?.creditCards || [],
     isLoading,
     addEditModal,
     handleOpenEditModal,

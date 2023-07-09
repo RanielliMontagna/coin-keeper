@@ -42,7 +42,7 @@ export function useGraph() {
 
   const treatedData = useMemo(
     () =>
-      periodData?.data?.[period]?.map((period: ResponseBalance, index: number) => ({
+      periodData?.[period]?.map((period: ResponseBalance, index: number) => ({
         ...period,
         index,
       })),

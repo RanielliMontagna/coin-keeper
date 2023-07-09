@@ -65,7 +65,7 @@ export function useAddEditCreditCardDialog({ id, onClose }: IAddEditCreditCardDi
     }
   }
 
-  const selectAccounts = data?.data?.accounts.map((account) => ({
+  const selectAccounts = data?.accounts.map((account) => ({
     value: account.id,
     label: account.name,
     institution: account.institution,

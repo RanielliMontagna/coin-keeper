@@ -64,13 +64,13 @@ export function useAddIncomeExpenseDialog({ type, onClose }: IAddIncomeExpenseDi
 
   return {
     categories:
-      dataCategories?.data?.categories?.map((category) => ({
+      dataCategories?.categories?.map((category) => ({
         value: category.id,
         label: category.name,
         color: category.color,
       })) ?? [],
     accounts:
-      dataAccounts?.data?.accounts?.map((account) => ({
+      dataAccounts?.accounts?.map((account) => ({
         value: account.id,
         label: account.name,
         institution: account.institution,
