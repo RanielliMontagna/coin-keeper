@@ -25,7 +25,11 @@ axiosInstance.interceptors.request.use(
 )
 
 axiosInstance.interceptors.response.use(
-  (response) => ({ ...response, data: response?.data?.data || response?.data }),
+  (response) => ({
+    ...response,
+    data: response?.data?.data || response?.data,
+    meta: response?.data?.meta,
+  }),
   (error) => Promise.reject(error),
 )
 

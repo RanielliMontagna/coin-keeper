@@ -17,10 +17,7 @@ export function useTransactions() {
 
   const { data, isLoading, handleFetchNextPage } = useInfiniteQuery({
     queryKey: ['transactions'],
-    queryFn: async ({ pageParam }) => {
-      const res = await fetchTransactions({ page: pageParam })
-      return res.data
-    },
+    queryFn: async ({ pageParam }) => await fetchTransactions({ page: pageParam }),
   })
 
   const handleAddIncome = () => {
