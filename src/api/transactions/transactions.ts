@@ -64,21 +64,21 @@ export async function deleteTransaction(id: string) {
 
 export async function getTransactionGraphicsWeek() {
   const response = await axiosInstance.get(`${urls.transactions}/graphics/week`)
-  const week = response.data.week.map(treatTransaction)
+  const week = response.data.week.map(treatTransaction) as ResponseBalance[]
 
   return { ...response, data: { week } }
 }
 
 export async function getTransactionGraphicsMonth() {
   const response = await axiosInstance.get(`${urls.transactions}/graphics/month`)
-  const month = response.data.month.map(treatTransaction)
+  const month = response.data.month.map(treatTransaction) as ResponseBalance[]
 
   return { ...response, data: { month } }
 }
 
 export async function getTransactionGraphicsYear() {
   const response = await axiosInstance.get(`${urls.transactions}/graphics/year`)
-  const year = response.data.year.map(treatTransaction)
+  const year = response.data.year.map(treatTransaction) as ResponseBalance[]
 
   return { ...response, data: { year } }
 }
