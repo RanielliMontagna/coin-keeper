@@ -1,6 +1,6 @@
 import { Header, EmptyState } from '@quantun/core'
-import { Button, Input, Flex, Image } from '@mantine/core'
-import { IconEdit, IconPlus, IconSearch, IconTrash } from '@tabler/icons-react'
+import { Input, Flex, Image } from '@mantine/core'
+import { IconEdit, IconSearch, IconTrash } from '@tabler/icons-react'
 
 import { PrivateContainer } from 'components/privateContainer'
 import { Datatable } from 'components/datatable'
@@ -15,6 +15,7 @@ import EmptySearch from 'assets/accounts/empty-search.svg'
 import { capitalizeAllAndRemoveUnderscore } from 'utils/capitalize'
 import { InstitutionTypeEnum } from 'api/accounts/accounts.types'
 import { institutionLogoMap } from './accounts.static'
+import { HeaderButtons } from 'components/headerButtons'
 
 export default function Accounts() {
   const {
@@ -40,9 +41,9 @@ export default function Accounts() {
             defaultValue={search}
             onChange={onChange}
           />
-          <Button leftIcon={<IconPlus size={16} />} onClick={() => handleOpenEditModal()}>
-            Add Account
-          </Button>
+          <HeaderButtons.Root>
+            <HeaderButtons.Button label="Add Account" onClick={handleOpenEditModal} />
+          </HeaderButtons.Root>
         </Header.RightSection>
       </Header>
       <Datatable

@@ -1,12 +1,6 @@
 import { Header, EmptyState } from '@quantun/core'
-import { Button, Flex, Input } from '@mantine/core'
-import {
-  IconEdit,
-  IconInnerShadowLeftFilled,
-  IconPlus,
-  IconSearch,
-  IconTrash,
-} from '@tabler/icons-react'
+import { Flex, Input } from '@mantine/core'
+import { IconEdit, IconInnerShadowLeftFilled, IconSearch, IconTrash } from '@tabler/icons-react'
 
 import { PrivateContainer } from 'components/privateContainer'
 import { Datatable } from 'components/datatable'
@@ -21,6 +15,7 @@ import { DescriptionRowRender } from 'components/descriptionRowRender/descriptio
 
 import EmptyImage from 'assets/categories/empty-image.svg'
 import EmptySearch from 'assets/categories/empty-search.svg'
+import { HeaderButtons } from 'components/headerButtons'
 
 export default function Categories() {
   const {
@@ -46,9 +41,9 @@ export default function Categories() {
             defaultValue={search}
             onChange={onChange}
           />
-          <Button leftIcon={<IconPlus size={16} />} onClick={() => handleOpenEditModal()}>
-            Add Category
-          </Button>
+          <HeaderButtons.Root>
+            <HeaderButtons.Button label="Add Category" onClick={handleOpenEditModal} />
+          </HeaderButtons.Root>
         </Header.RightSection>
       </Header>
       <Datatable

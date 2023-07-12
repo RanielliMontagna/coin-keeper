@@ -1457,10 +1457,10 @@
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-1.0.0-next.21.tgz#5de5a2385a35309427f6011992b544514d559aa1"
   integrity sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==
 
-"@quantun/core@^1.4.2":
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/@quantun/core/-/core-1.4.2.tgz#3789d2ab254837b0e7df7d6988ebcd6df0125ede"
-  integrity sha512-23drKDvM+yNKkmaksN1VgzADRpXwMUBUeXqQ5pFpuPb47+VPwPzJDvb2JsrzS6QjiN5yjICXAIxawaSn5T3KNA==
+"@quantun/core@^1.5.1":
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/@quantun/core/-/core-1.5.1.tgz#11a97cf51103508af4186f9fc27e5e0128f85a35"
+  integrity sha512-XIkEKF9PtSb169+ssE6C3xjaEFBuuTCOODqmWz3KdlZiel4Ydhicrw22vE1kl4JHlaYn8jJDlcPansmykGeM6A==
 
 "@quantun/eslint@^1.0.2":
   version "1.0.2"

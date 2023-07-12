@@ -40,7 +40,7 @@ export function Transactions() {
   }
 
   return (
-    <SectionPaper flexProps={{ gap: rem(16) }}>
+    <SectionPaper flexProps={{ gap: rem(16), mb: 20 }}>
       <Title order={5}>Latest transactions</Title>
       <Stack>
         {isLoading ? (

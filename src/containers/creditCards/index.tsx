@@ -1,6 +1,6 @@
 import { EmptyState, Header } from '@quantun/core'
-import { Image, Flex, Button } from '@mantine/core'
-import { IconEdit, IconPlus, IconTrash } from '@tabler/icons-react'
+import { Image, Flex } from '@mantine/core'
+import { IconEdit, IconTrash } from '@tabler/icons-react'
 
 import { PrivateContainer } from 'components/privateContainer'
 import { Datatable } from 'components/datatable'
@@ -14,6 +14,7 @@ import { AddEditCreditCardDialog } from './addEditCreditCardDialog/addEditCredit
 import { useDeleteCreditCardModal } from './deleteCreditCardDialog/deleteCreditCardDialog'
 import { ResponseAccount } from 'api/accounts/accounts.types'
 import { institutionLogoMap } from 'containers/accounts/accounts.static'
+import { HeaderButtons } from 'components/headerButtons'
 
 export default function CreditCards() {
   const { records, isLoading, addEditModal, handleCloseEditModal, handleOpenEditModal } =
@@ -26,9 +27,9 @@ export default function CreditCards() {
         <Header.Title>Credit cards</Header.Title>
         <Header.Subtitle>Buy now, pay later. Manage your credit cards easily</Header.Subtitle>
         <Header.RightSection>
-          <Button leftIcon={<IconPlus size={16} />} onClick={() => handleOpenEditModal()}>
-            Add Credit Card
-          </Button>
+          <HeaderButtons.Root>
+            <HeaderButtons.Button label="Add Credit Card" onClick={handleOpenEditModal} />
+          </HeaderButtons.Root>
         </Header.RightSection>
       </Header>
       <Datatable

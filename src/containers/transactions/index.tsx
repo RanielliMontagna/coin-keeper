@@ -1,8 +1,8 @@
 import dayjs from 'dayjs'
 
-import { Badge, Button, Flex, Image } from '@mantine/core'
+import { Badge, Flex, Image } from '@mantine/core'
 import { EmptyState, Header } from '@quantun/core'
-import { IconInnerShadowLeftFilled, IconPlus, IconTrash } from '@tabler/icons-react'
+import { IconInnerShadowLeftFilled, IconTrash } from '@tabler/icons-react'
 
 import { Datatable } from 'components/datatable'
 import { PrivateContainer } from 'components/privateContainer'
@@ -18,6 +18,7 @@ import { DescriptionRowRender } from 'components/descriptionRowRender/descriptio
 
 import EmptyImage from 'assets/transactions/empty-image.svg'
 import { institutionLogoMap } from 'containers/accounts/accounts.static'
+import { HeaderButtons } from 'components/headerButtons'
 
 export default function Transactions() {
   const {
@@ -37,12 +38,10 @@ export default function Transactions() {
         <Header.Title>Transactions</Header.Title>
         <Header.Subtitle>Pay your bills, transfer money and more</Header.Subtitle>
         <Header.RightSection>
-          <Button leftIcon={<IconPlus size={16} />} onClick={handleAddExpense}>
-            Add Expense
-          </Button>
-          <Button leftIcon={<IconPlus size={16} />} onClick={handleAddIncome}>
-            Add Income
-          </Button>
+          <HeaderButtons.Root>
+            <HeaderButtons.Button label="Add Expense" onClick={handleAddExpense} />
+            <HeaderButtons.Button label="Add Income" onClick={handleAddIncome} />
+          </HeaderButtons.Root>
         </Header.RightSection>
       </Header>
       <Datatable

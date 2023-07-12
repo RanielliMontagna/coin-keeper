@@ -42,7 +42,6 @@ export function PrivateLayout() {
       {!isMobile && <SideBar />}
       {loading && <Loading />}
       {isMobile && <BottomBar />}
-
       <OutletContainer>
         <Outlet />
       </OutletContainer>
