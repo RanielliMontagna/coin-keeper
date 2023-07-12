@@ -7,6 +7,7 @@
     "accounts",
     "transactions",
     "dashboard",
-    "credit-card"
+    "credit-card",
+    "categories"
   ]
 }
