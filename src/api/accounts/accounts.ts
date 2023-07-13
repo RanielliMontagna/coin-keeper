@@ -37,7 +37,7 @@ export async function createAccount(payload: CreateAccountPayload) {
 export async function updateAccount(id: string, payload: Partial<CreateAccountPayload>) {
   return await axiosInstance.put(`${urls.accounts}/${id}`, {
     ...payload,
-    balance: payload.balance ? realToCents(payload.balance) : undefined,
+    balance: payload.balance ? realToCents(payload.balance) : 0,
   })
 }
 

@@ -23,7 +23,7 @@ export function SelectFlag({ form }: ISelectFlagProps) {
       icon={
         form.values.flag && (
           <Center>
-            <img src={flagLogoMap[Number(form.values.flag) as FlagEnum]} width={35} />
+            <Image src={flagLogoMap[Number(form.values.flag) as FlagEnum]} width={35} />
           </Center>
         )
       }
