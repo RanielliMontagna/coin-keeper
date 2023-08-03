@@ -6,7 +6,6 @@ import {
   getTransactionGraphicsMonth,
   getTransactionGraphicsYear,
 } from 'api/transactions/transactions'
-import { ResponseBalance } from 'api/transactions/transactions.types'
 
 export enum SelectPeriod {
   WEEK = 'week',
@@ -22,15 +21,15 @@ export function useGraph() {
     queryFn: async () => {
       if (period === SelectPeriod.WEEK) {
         const res = await getTransactionGraphicsWeek()
-        return res.data
+        return res.data?.week
       }
       if (period === SelectPeriod.MONTH) {
         const res = await getTransactionGraphicsMonth()
-        return res.data
+        return res.data?.month
       }
       if (period === SelectPeriod.YEAR) {
         const res = await getTransactionGraphicsYear()
-        return res.data
+        return res.data?.year
       }
     },
     staleTime: 1000 * 60 * 5, // 2 minutos
@@ -40,14 +39,11 @@ export function useGraph() {
     setPeriod(period)
   }
 
-  const treatedData = useMemo(
-    () =>
-      periodData?.data?.[period]?.map((period: ResponseBalance, index: number) => ({
-        ...period,
-        index,
-      })),
-    [periodData],
-  )
+  const treatedData = useMemo(() => {
+    if (!periodData) return []
+
+    return periodData?.map((item, index) => ({ ...item, index }))
+  }, [periodData])
 
   return { period, treatedData, isLoading, handlePeriodChange }
 }

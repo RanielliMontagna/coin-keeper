@@ -21,9 +21,16 @@ axiosInstance.interceptors.request.use(
     }
     return config
   },
-  (error) => {
-    return Promise.reject(error)
-  },
+  (error) => Promise.reject(error),
+)
+
+axiosInstance.interceptors.response.use(
+  (response) => ({
+    ...response,
+    data: response?.data?.data || response?.data,
+    meta: response?.data?.meta,
+  }),
+  (error) => Promise.reject(error),
 )
 
 export { axiosPublicInstance, axiosInstance }

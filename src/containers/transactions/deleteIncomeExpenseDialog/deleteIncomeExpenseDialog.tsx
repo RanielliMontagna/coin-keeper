@@ -4,7 +4,7 @@ import { useAppStore } from 'store/app/app'
 import { useApiCall } from 'hooks/useApiCall'
 import { queryClient } from 'libs/react-query'
 import { deleteTransaction } from 'api/transactions/transactions'
-import { ResponseTransaction } from 'api/transactions/transactions.types'
+import { ResponseTransaction, TransactionTypeEnum } from 'api/transactions/transactions.types'
 import { capitalize } from 'utils/capitalize'
 import { toLowerCase } from 'utils/toLowerCase'
 
@@ -13,6 +13,8 @@ export function useDeleteIncomeExpenseModal() {
   const { call } = useApiCall()
 
   function handleSubmit(transaction: ResponseTransaction) {
+    const transactionType = TransactionTypeEnum?.[transaction?.type]
+
     call(
       () => deleteTransaction(transaction.id),
       () => {
@@ -22,23 +24,25 @@ export function useDeleteIncomeExpenseModal() {
         queryClient.invalidateQueries('month')
         queryClient.invalidateQueries('year')
         addNotification({
-          title: `${capitalize(transaction.type)} deleted`,
-          message: `${capitalize(transaction.type)} ${transaction.title} was deleted successfully`,
+          title: `${capitalize(transactionType)} deleted`,
+          message: `${capitalize(transactionType)} ${transaction.title} was deleted successfully`,
         })
       },
     )
   }
 
   function openDeleteModal(transaction: ResponseTransaction) {
+    const transactionType = TransactionTypeEnum?.[transaction?.type]
+
     useDeleteModal({
-      title: `Delete ${toLowerCase(transaction.type)}?`,
+      title: `Delete ${toLowerCase(transactionType)}?`,
       text: (
         <>
           Are you sure you want to delete the <strong>{transaction.title}</strong>{' '}
-          {toLowerCase(transaction.type)}?
+          {toLowerCase(transactionType)}?
         </>
       ),
-      labels: { confirm: `Delete ${toLowerCase(transaction.type)}` },
+      labels: { confirm: `Delete ${toLowerCase(transactionType)}` },
       onConfirm: () => handleSubmit(transaction),
     }).openDeleteModal()
   }

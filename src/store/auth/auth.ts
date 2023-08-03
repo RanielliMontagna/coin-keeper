@@ -7,6 +7,7 @@ import { deleteCookie, getCookie, setCookie } from 'helpers/cookies'
 import { useAppStore } from 'store/app/app'
 import { login, refreshToken, register } from 'api/auth/auth'
 import { setLocal } from 'helpers/localStorage'
+import { queryClient } from 'libs/react-query'
 
 const tokenCookieName = 'token'
 
@@ -33,6 +34,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
   },
   logout: async () => {
     try {
+      queryClient.clear()
       deleteCookie(tokenCookieName)
       set({ token: null, user: null })
     } catch (err) {

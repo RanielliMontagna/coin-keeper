@@ -3,6 +3,7 @@ import { AxiosError } from 'axios'
 import { uuid } from 'short-uuid'
 
 import type { AppState, AppStore, ErrorBackendResponse } from './types'
+import { useAuthStore } from 'store/auth/auth'
 
 const initialState: AppState = {
   loading: false,
@@ -27,6 +28,16 @@ export const useAppStore = create<AppStore>((set, get) => ({
         issues: Record<string, { _errors: string[] }>
       }>
 
+      if (axiosError?.code === 'ERR_NETWORK') {
+        get().addNotification({
+          color: 'red',
+          title: 'Network error',
+          message: window.navigator.onLine ? 'Server is not responding' : 'No internet connection',
+        })
+
+        return
+      }
+
       const issues = axiosError?.response?.data?.issues
 
       if (issues) {
@@ -35,12 +46,16 @@ export const useAppStore = create<AppStore>((set, get) => ({
         get().addNotification({
           color: 'red',
           title: axiosError?.response?.data?.message || 'An error occurred',
-          message: firstIssue?._errors[0],
+          message: firstIssue?._errors?.[0],
         })
       } else {
         const data = axiosError?.response?.data as ErrorBackendResponse
 
-        if (data.message && data.title) {
+        if (data?.message === 'User not found') {
+          useAuthStore.getState().logout()
+        }
+
+        if (data?.message && data?.title) {
           get().addNotification({
             color: 'red',
             title: data.title,

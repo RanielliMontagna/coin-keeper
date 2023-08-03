@@ -1,28 +1,35 @@
-import { IconDashboard, IconCategory, IconTransferIn, IconBuildingBank } from '@tabler/icons-react'
+import {
+  IconDashboard,
+  IconCategory,
+  IconTransferIn,
+  IconBuildingBank,
+  IconCreditCard,
+} from '@tabler/icons-react'
 
-export const rotas = [
+export const routes = [
   {
     icon: IconDashboard,
     label: 'Dashboard',
-    description: 'Home page of the application',
-    path: '/',
+    path: '/dashboard',
   },
   {
     icon: IconBuildingBank,
     label: 'Accounts',
-    description: 'Overview of your accounts',
     path: '/accounts',
   },
   {
     icon: IconTransferIn,
     label: 'Transactions',
-    description: 'Register your transactions',
     path: '/transactions',
   },
   {
     icon: IconCategory,
     label: 'Categories',
-    description: 'Organize your transactions by categories',
     path: '/categories',
+  },
+  {
+    icon: IconCreditCard,
+    label: 'Credit Cards',
+    path: '/credit-cards',
   },
 ]

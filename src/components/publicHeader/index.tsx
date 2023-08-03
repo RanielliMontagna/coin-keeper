@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
-import { Group, Button, Divider, Box } from '@mantine/core'
+import { Group, Button, Divider, Box, Image } from '@mantine/core'
 import { AppBar, useAppBarStyles, LinkAppBar } from '@quantun/core'
 import { IconLogout } from '@tabler/icons-react'
 
@@ -20,7 +20,7 @@ export function PublicHeader() {
     <Box>
       <AppBar
         logo={
-          <img
+          <Image
             src={theme.colorScheme !== 'dark' ? LogoDark : Logo}
             alt="Coinkeeper's Logo"
             style={{ width: 135 }}

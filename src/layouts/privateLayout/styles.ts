@@ -5,8 +5,10 @@ interface IPrivateLayoutProps {
   mobile: boolean
 }
 
+const bottomBarHeight = 74
 const mobileCss = css`
   flex-direction: column;
+  height: calc(100vh - ${bottomBarHeight}px);
 `
 
 export const PrivateLayoutContainer = styled.div<IPrivateLayoutProps>`

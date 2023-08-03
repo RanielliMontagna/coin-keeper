@@ -5,14 +5,14 @@ import { fetchCategories } from 'api/categories/categories'
 import { useQuery } from 'hooks/useQuery'
 import { ResponseCategory } from 'api/categories/categories.types'
 
-interface AddEditModal {
+interface AddEditCategoryModal {
   opened: boolean
   row?: ResponseCategory
 }
 
 export function useCategories() {
   const [search, setSearch] = useDebouncedState('', 500)
-  const [addEditModal, setAddEdit] = useState<AddEditModal>({ opened: false })
+  const [addEditModal, setAddEdit] = useState<AddEditCategoryModal>({ opened: false })
 
   const { data, isLoading } = useQuery({
     queryKey: ['categories', search],
@@ -36,7 +36,7 @@ export function useCategories() {
   }
 
   return {
-    records: data?.data?.categories || [],
+    records: data?.categories || [],
     isLoading,
     search,
     addEditModal,

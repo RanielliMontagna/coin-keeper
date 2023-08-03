@@ -10,10 +10,5 @@ export function useCards() {
     },
   })
 
-  return {
-    balance: data?.data?.balance,
-    incomes: data?.data?.incomes,
-    expenses: data?.data?.expenses,
-    isLoading,
-  }
+  return { balance: data?.balance, incomes: data?.incomes, expenses: data?.expenses, isLoading }
 }

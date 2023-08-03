@@ -36,7 +36,7 @@ export function SelectCategory({ form, categories }: ISelectCategoryProps) {
         { label, ...rest }: SelectItemProps,
         ref: React.Ref<HTMLDivElement>,
       ) {
-        const color = rest.color as CategoryColorsEnum
+        const color = Number(rest.color) as CategoryColorsEnum
 
         return (
           <Flex

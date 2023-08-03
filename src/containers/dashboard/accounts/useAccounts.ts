@@ -7,13 +7,14 @@ export function useAccounts() {
     queryKey: ['accounts'],
     queryFn: async () => {
       const res = await fetchAccounts()
+
       return res.data
     },
     staleTime: 1000 * 60 * 5, // 5 minutos
   })
 
   return {
-    accounts: data?.data?.accounts.slice(0, 3) as ResponseAccount[],
+    accounts: data?.accounts.slice(0, 3) as ResponseAccount[],
     isLoading,
   }
 }

@@ -4,7 +4,7 @@ import { Sidebar } from '@quantun/core'
 import { Image, useMantineTheme } from '@mantine/core'
 import { IconLogout, IconMoonStars, IconSun } from '@tabler/icons-react'
 
-import { rotas } from './static'
+import { routes } from './static'
 
 import { useAuthStore } from 'store/auth/auth'
 import { useNavigate } from 'react-router-dom'
@@ -35,13 +35,13 @@ export function SideBar() {
           style={{ width: 120 }}
         />
       </Sidebar.Header>
-      {rotas.map((rota) => (
+      {routes.map(({ label, path, icon }) => (
         <Sidebar.Item
-          key={rota.path}
-          icon={rota.icon}
-          label={rota.label}
-          onClick={() => navigate(rota.path)}
-          path={rota.path}
+          key={path}
+          icon={icon}
+          label={label}
+          onClick={() => navigate(path)}
+          path={path}
           activecolor={theme === 'dark' ? colors.green[5] : colors.green[6]}
         />
       ))}

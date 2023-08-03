@@ -11,11 +11,7 @@ describe('@components/loading', () => {
 
   it('should render dark mode without crashing', () => {
     const { container } = render(
-      <QuantunProvider
-        theme={{
-          colorScheme: 'dark',
-        }}
-      >
+      <QuantunProvider theme={{ colorScheme: 'dark' }}>
         <Loading />
       </QuantunProvider>,
     )

@@ -5,11 +5,13 @@ import { OutletContainer, PrivateLayoutContainer } from './styles'
 
 import { useAppStore } from 'store/app/app'
 import { useAuthStore } from 'store/auth/auth'
-import { SideBar } from 'components/sidebar'
-import { Loading } from 'components/loading'
-import { PrivateHeader } from 'components/privateHeader'
+
 import { useNotification } from 'hooks/useNotification'
 import { useIsMobile } from 'hooks/useIsMobile'
+
+import { SideBar } from 'components/sidebar'
+import { Loading } from 'components/loading'
+import { BottomBar } from 'components/bottomBar'
 
 export function PrivateLayout() {
   const { refreshToken } = useAuthStore()
@@ -37,8 +39,9 @@ export function PrivateLayout() {
 
   return (
     <PrivateLayoutContainer mobile={isMobile}>
-      {isMobile ? <PrivateHeader /> : <SideBar />}
+      {!isMobile && <SideBar />}
       {loading && <Loading />}
+      {isMobile && <BottomBar />}
       <OutletContainer>
         <Outlet />
       </OutletContainer>

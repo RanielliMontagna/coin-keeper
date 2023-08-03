@@ -2,7 +2,6 @@ import type { IAddEditCategoryDialogProps } from './addEditCategoryDialog'
 import type { AddEditCategorySchema } from './addEditCategoryDialog.schema'
 
 import { createCategory, updateCategory } from 'api/categories/categories'
-import { CategoryColorsEnum } from 'api/categories/categories.types'
 
 import { useApiCall } from 'hooks/useApiCall'
 import { queryClient } from 'libs/react-query'
@@ -19,7 +18,7 @@ export function useAddEditCategoryDialog({ id, onClose }: IAddEditCategoryDialog
           updateCategory(id, {
             name: values.name,
             description: values.description,
-            color: values.color as CategoryColorsEnum,
+            color: values.color ? Number(values.color) : undefined,
           }),
         () => {
           queryClient.invalidateQueries('categories')
@@ -37,7 +36,7 @@ export function useAddEditCategoryDialog({ id, onClose }: IAddEditCategoryDialog
           createCategory({
             name: values.name,
             description: values.description,
-            color: values.color as CategoryColorsEnum,
+            color: Number(values.color),
           }),
         () => {
           queryClient.invalidateQueries('categories')

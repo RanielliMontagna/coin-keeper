@@ -1,8 +1,6 @@
 import { fetchCategories } from 'api/categories/categories'
 import { fetchAccounts } from 'api/accounts/accounts'
 
-import type { ResponseCategory } from 'api/categories/categories.types'
-import type { ResponseAccount } from 'api/accounts/accounts.types'
 import type { IAddIncomeExpenseDialogProps } from './addIncomeExpenseDialog'
 import type { AddIncomeExpenseSchema } from './addIncomeExpenseDialog.schema'
 
@@ -66,13 +64,13 @@ export function useAddIncomeExpenseDialog({ type, onClose }: IAddIncomeExpenseDi
 
   return {
     categories:
-      dataCategories?.data?.categories?.map((category: ResponseCategory) => ({
+      dataCategories?.categories?.map((category) => ({
         value: category.id,
         label: category.name,
         color: category.color,
       })) ?? [],
     accounts:
-      dataAccounts?.data?.accounts?.map((account: ResponseAccount) => ({
+      dataAccounts?.accounts?.map((account) => ({
         value: account.id,
         label: account.name,
         institution: account.institution,

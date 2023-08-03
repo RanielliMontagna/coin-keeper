@@ -23,7 +23,7 @@ export function AddEditCategoryDialog(props: IAddEditCategoryDialogProps) {
     initialValues: {
       name: props.name || '',
       description: props.description || '',
-      color: props.color ? props.color : undefined,
+      color: typeof props.color === 'number' ? props.color.toString() : undefined,
     },
     validate: zodResolver(addEditCategorySchema),
   })
@@ -57,7 +57,7 @@ export function AddEditCategoryDialog(props: IAddEditCategoryDialogProps) {
                   <IconInnerShadowLeftFilled
                     style={{
                       marginLeft: 4,
-                      color: categoryColors[form.values.color as CategoryColorsEnum],
+                      color: categoryColors[Number(form.values.color) as CategoryColorsEnum],
                     }}
                   />
                 )
@@ -67,7 +67,7 @@ export function AddEditCategoryDialog(props: IAddEditCategoryDialogProps) {
                 { value, label, ...rest }: SelectItemProps,
                 ref: React.Ref<HTMLDivElement>,
               ) {
-                const color = value as CategoryColorsEnum
+                const color = Number(value) as CategoryColorsEnum
 
                 return (
                   <Flex
@@ -93,9 +93,9 @@ export function AddEditCategoryDialog(props: IAddEditCategoryDialogProps) {
                   </Flex>
                 )
               })}
-              data={Object.keys(CategoryColorsEnum).map((color) => ({
-                value: color,
-                label: capitalizeAllAndRemoveUnderscore(color),
+              data={new Array(Object.keys(categoryColors)?.length).fill(0).map((_, index) => ({
+                value: index.toString(),
+                label: capitalizeAllAndRemoveUnderscore(CategoryColorsEnum[index]),
               }))}
               {...form.getInputProps('color')}
             />

@@ -1,8 +1,9 @@
+import { InstitutionTypeEnum } from 'api/accounts/accounts.types'
 import { CategoryColorsEnum } from 'api/categories/categories.types'
 
 export enum TransactionTypeEnum {
-  INCOME = 'INCOME',
-  EXPENSE = 'EXPENSE',
+  INCOME = 0,
+  EXPENSE = 1,
 }
 
 export interface CreateTransactionPayload {
@@ -18,6 +19,7 @@ export interface ResponseTransaction {
   account: {
     id: string
     name: string
+    institution: InstitutionTypeEnum
   }
   amount: number
   category: {

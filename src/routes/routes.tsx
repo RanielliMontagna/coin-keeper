@@ -11,11 +11,12 @@ import Login from 'containers/login'
 import Register from 'containers/register'
 import Terms from 'containers/terms'
 import Privacy from 'containers/privacy'
-import Erro500 from 'containers/erro500'
 import Dashboard from 'containers/dashboard'
 import Accounts from 'containers/accounts'
 import Transactions from 'containers/transactions'
 import Categories from 'containers/categories'
+import CreditCards from 'containers/creditCards'
+import Erro500 from 'containers/erro500'
 import Erro404 from 'containers/erro404'
 
 export function Router() {
@@ -40,10 +41,12 @@ export function Router() {
           </>
         ) : (
           <Route path="/" element={<PrivateLayout />}>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/" element={<Navigate to="/dashboard" />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/accounts" element={<Accounts />} />
             <Route path="/transactions" element={<Transactions />} />
             <Route path="/categories" element={<Categories />} />
+            <Route path="/credit-cards" element={<CreditCards />} />
 
             <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />
