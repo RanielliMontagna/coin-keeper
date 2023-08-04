@@ -32,7 +32,7 @@
     "@tabler/icons-react": "^2.15.0",
     "axios": "^1.4.0",
     "dayjs": "^1.11.9",
-    "framer-motion": "^10.9.1",
+    "framer-motion": "^10.12.20",
     "js-cookie": "^3.0.1",
     "jwt-decode": "^3.1.2",
     "mantine-datatable": "^2.7.2",
