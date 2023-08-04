@@ -8,6 +8,7 @@
     "transactions",
     "dashboard",
     "credit-card",
-    "categories"
+    "categories",
+    "pkg"
   ]
 }
