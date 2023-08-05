@@ -24,7 +24,7 @@
     "@mantine/hooks": "^6.0.7",
     "@mantine/modals": "^6.0.16",
     "@mantine/notifications": "^6.0.7",
-    "@quantun/core": "^1.5.1",
+    "@quantun/core": "^1.5.3",
     "@quantun/hooks": "^1.1.1",
     "@quantun/login-screen": "^2.1.0",
     "@quantun/register-screen": "^2.1.0",
