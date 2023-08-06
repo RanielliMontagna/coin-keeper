@@ -1,6 +1,7 @@
 import { expect, afterEach, vi } from 'vitest'
 import { cleanup } from '@testing-library/react'
 import matchers from '@testing-library/jest-dom/matchers'
+import '@testing-library/jest-dom'
 
 // Extende o expect do jest com os matchers do jest-dom
 expect.extend(matchers)
