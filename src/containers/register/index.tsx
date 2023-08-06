@@ -6,27 +6,14 @@ import { RegisterScreen } from '@quantun/register-screen'
 import Illustration from 'assets/login/illustration.svg'
 import Logo from 'assets/logo/logo.svg'
 import { useAuthStore } from 'store/auth/auth'
-import { RegisterPayload } from 'api/auth/auth.types'
-import { useAppStore } from 'store/app/app'
 
 export default function Register() {
   const { register } = useAuthStore()
-  const { handleErrors } = useAppStore()
   const _navigate = useNavigate()
-
-  async function _handleRegister(data: RegisterPayload) {
-    try {
-      await register(data)
-    } catch (err) {
-      handleErrors(err)
-    } finally {
-      _navigate('/login')
-    }
-  }
 
   return (
     <RegisterScreen
-      onRegister={_handleRegister}
+      onRegister={register}
       onLogin={() => _navigate('/login')}
       welcomeContent={
         <>

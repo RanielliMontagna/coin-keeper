@@ -7,8 +7,7 @@ export function useApiCall() {
     try {
       setLoading(true)
       const result = await fn()
-
-      if (callback) callback(result)
+      callback?.(result)
 
       return result
     } catch (error) {
@@ -25,8 +24,7 @@ export function useApiCall() {
   ): Promise<T> {
     try {
       const result = await fn()
-
-      if (callback) callback(result)
+      callback?.(result)
 
       return result
     } catch (error) {
