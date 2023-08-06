@@ -3,7 +3,7 @@ import { login } from '../../utils/login.cy'
 context('Create Category', () => {
   beforeEach(() => login())
 
-  it('should create a category', () => {
+  it('should be able to create a category', () => {
     cy.visit('http://localhost:5173/categories')
 
     cy.get("button[type='button']").contains('Add Category').click()
