@@ -1,3 +1,3 @@
-const config = require('@quantun/eslint')
-
-module.exports = config
+module.exports = {
+  extends: ['quantun'],
+}

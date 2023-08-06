@@ -78,12 +78,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
     useAppStore.getState().setLoading(true)
 
     try {
-      await register({
-        name,
-        email,
-        password,
-        confirmPassword,
-      })
+      await register({ name, email, password, confirmPassword })
 
       useAppStore.getState().addNotification({
         title: 'Registration successful',
@@ -91,6 +86,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
       })
 
       setLocal('email', email)
+      window.location.href = '/'
     } catch (err) {
       useAppStore.getState().handleErrors(err)
     } finally {
