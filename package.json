@@ -47,7 +47,7 @@
     "recharts": "^2.7.2",
     "short-uuid": "^4.2.2",
     "vite-tsconfig-paths": "^4.0.7",
-    "zod": "^3.21.4",
+    "zod": "^3.22.3",
     "zustand": "^4.3.9"
   },
   "devDependencies": {
