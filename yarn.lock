@@ -4761,10 +4761,10 @@ make-dir@^4.0.0:
   dependencies:
     semver "^7.5.3"
 
-mantine-datatable@^2.7.2:
-  version "2.9.6"
-  resolved "https://registry.yarnpkg.com/mantine-datatable/-/mantine-datatable-2.9.6.tgz#71900154557fd150ce5eccef4a2eb9ecdd7d6cc3"
-  integrity sha512-MVNEFkqXevjXNAXLBKf3BnZqJr8DUuhNNjYmEn/JrNIT8SL8trXNdZ1gJKYp+xFJrLIQE1boEuBfs7r37Uu1eQ==
+mantine-datatable@^2.9.14:
+  version "2.9.14"
+  resolved "https://registry.yarnpkg.com/mantine-datatable/-/mantine-datatable-2.9.14.tgz#a71bc83f4e8006251d98a8c913c5972a29bd05c7"
+  integrity sha512-ujYUwNTqsr7ngKICoMjTIolqGm40jNiD0du+y4lY2Faqt7/3iksUdAAzPrYRM+QlHyyznsX3aHKLEjw19/VASA==
 
 match-sorter@^6.0.2:
   version "6.3.1"
