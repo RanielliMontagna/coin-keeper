@@ -48,7 +48,7 @@
     "short-uuid": "^4.2.2",
     "vite-tsconfig-paths": "^4.0.7",
     "zod": "^3.22.3",
-    "zustand": "^4.3.9"
+    "zustand": "^4.4.6"
   },
   "devDependencies": {
     "@quantun/prettier": "^1.1.0",
