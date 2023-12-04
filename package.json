@@ -33,7 +33,7 @@
     "@quantun/login-screen": "^2.1.0",
     "@quantun/register-screen": "^2.1.0",
     "@quantun/utils": "^1.1.0",
-    "@tabler/icons-react": "^2.25.0",
+    "@tabler/icons-react": "^2.40.0",
     "axios": "^1.4.0",
     "dayjs": "^1.11.9",
     "framer-motion": "^10.12.20",
