@@ -24,7 +24,7 @@ describe('@containers/erro404', () => {
 
   it('should redirect to home on click to button "Voltar para a página inicial"', () => {
     const { getByText } = render(<Erro404 />)
-    const button = getByText('Voltar para a página inicial')
+    const button = getByText('Go back to home page')
 
     fireEvent.click(button)
 
