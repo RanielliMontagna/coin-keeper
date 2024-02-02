@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  coinkeeper-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    environment:
+      - VITE_API_URL=http://localhost:3333
