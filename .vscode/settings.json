@@ -9,6 +9,7 @@
     "dashboard",
     "credit-card",
     "categories",
-    "pkg"
+    "pkg",
+    "e2e"
   ]
 }

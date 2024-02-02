@@ -29,9 +29,9 @@ const pwaOptions: Partial<VitePWAOptions> = {
 export default defineConfig({
   plugins: [react(), tsconfigPaths(), VitePWA(pwaOptions)],
   server: {
-    watch: {
-      usePolling: true,
-    },
+    host: true,
+    port: 8080,
+    watch: { usePolling: true },
   },
   define: {
     __APP_ENV__: JSON.stringify(process.env.VITE_VERCEL_ENV),
