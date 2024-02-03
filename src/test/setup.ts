@@ -28,7 +28,18 @@ Object.defineProperty(window, 'matchMedia', {
 
 //Mock do useNavigate do react-router-dom
 const mockedNavigate = vi.fn()
-vi.mock('react-router-dom', () => ({
-  ...vi.importActual('react-router-dom'),
-  useNavigate: () => mockedNavigate,
+vi.mock('react-router-dom', async () => {
+  const actual: any = await vi.importActual('react-router-dom')
+
+  return { ...actual, useNavigate: () => mockedNavigate }
+})
+
+// Mock the ResizeObserver
+const ResizeObserverMock = vi.fn(() => ({
+  observe: vi.fn(),
+  unobserve: vi.fn(),
+  disconnect: vi.fn(),
 }))
+
+// Stub the global ResizeObserver
+vi.stubGlobal('ResizeObserver', ResizeObserverMock)
