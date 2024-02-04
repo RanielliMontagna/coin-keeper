@@ -10,6 +10,7 @@
     "credit-card",
     "categories",
     "pkg",
-    "e2e"
+    "e2e",
+    "unit"
   ]
 }

@@ -16,17 +16,20 @@ describe('@store/auth', () => {
     expect(state.user).toBeDefined()
   })
 
-  it('should be able to logout', async () => {
-    await useAuthStore.getState().logout()
+  it('should be able to logout', () => {
+    useAuthStore.getState().logout()
     const state = useAuthStore.getState()
 
     expect(state.user).toBeNull()
   })
 
   it('should be able to set the token', () => {
-    useAuthStore.getState().setToken('token')
+    const fakeToken =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+
+    useAuthStore.getState().setToken(fakeToken)
     const state = useAuthStore.getState()
-    expect(state.token).toBe('token')
+    expect(state.token).toBe(fakeToken)
   })
 
   it('should be able to set the user', () => {
