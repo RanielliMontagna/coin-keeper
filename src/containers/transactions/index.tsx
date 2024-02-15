@@ -19,12 +19,15 @@ import { DescriptionRowRender } from 'components/descriptionRowRender/descriptio
 import EmptyImage from 'assets/transactions/empty-image.svg'
 import { institutionLogoMap } from 'containers/accounts/accounts.static'
 import { HeaderButtons } from 'components/headerButtons'
+import { DataTableHeader } from './dataTableHeader/dataTableHeader'
 
 export default function Transactions() {
   const {
     transactions,
     isLoading,
     addIncomeExpense,
+    selectedMonth,
+    setSelectedMonth,
     handleFetchNextPage,
     handleAddExpense,
     handleAddIncome,
@@ -45,6 +48,9 @@ export default function Transactions() {
         </Header.RightSection>
       </Header>
       <Datatable
+        header={
+          <DataTableHeader selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />
+        }
         columns={[
           {
             accessor: 'title',
