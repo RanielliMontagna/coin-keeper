@@ -142,7 +142,9 @@ export default function Transactions() {
           <EmptyState>
             <EmptyState.Image src={EmptyImage} />
             <EmptyState.Title>No transactions found</EmptyState.Title>
-            <EmptyState.Text>Create your first transaction to get started</EmptyState.Text>
+            <EmptyState.Text>
+              You don&apos;t have any transactions for this month. Try adding one!
+            </EmptyState.Text>
           </EmptyState>
         }
         onScrollToBottom={handleFetchNextPage}
