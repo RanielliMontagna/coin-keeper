@@ -31,9 +31,9 @@ export function DataTableHeader({ selectedMonth, setSelectedMonth }: DataTableHe
         onChange={(date) => setSelectedMonth(date as Date)}
         styles={{
           input: {
-            borderRadius: 16,
             border: `1px solid ${colors.gray[5]}`,
             textAlign: 'center',
+            fontSize: 14,
             fontWeight: 500,
           },
         }}

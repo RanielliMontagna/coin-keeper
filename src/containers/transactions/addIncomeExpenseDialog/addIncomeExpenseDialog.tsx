@@ -1,5 +1,5 @@
 import { useForm, zodResolver } from '@mantine/form'
-import { Button, Group, Stack, TextInput } from '@mantine/core'
+import { Button, Group, Stack, Switch, TextInput } from '@mantine/core'
 
 import { Modal } from 'components/modal'
 import { CurrencyInput } from 'components/currencyInput/currencyInput'
@@ -10,6 +10,7 @@ import { useAddIncomeExpenseDialog } from './useAddIncomeExpenseDialog'
 import { TransactionTypeEnum } from 'api/transactions/transactions.types'
 import { SelectCategory } from './selectCategory/selectCategory'
 import { SelectAccount } from './selectAccount/selectAccount'
+import { FrequencyEnum, RecurringFields } from './recurringFields/recurringFields'
 
 export interface IAddIncomeExpenseDialogProps {
   type: TransactionTypeEnum
@@ -27,6 +28,8 @@ export function AddIncomeExpenseDialog(props: IAddIncomeExpenseDialogProps) {
       category: '',
       account: '',
       date: new Date(),
+      isRecurring: false,
+      frequency: FrequencyEnum.MONTHLY,
     },
     validate: zodResolver(addIncomeExpenseSchema),
   })
@@ -59,7 +62,16 @@ export function AddIncomeExpenseDialog(props: IAddIncomeExpenseDialogProps) {
             />
             <SelectCategory form={form} categories={categories} />
             <SelectAccount form={form} accounts={accounts} />
-            <DateInput label="Date" placeholder="Select date" {...form.getInputProps('date')} />
+            {!form.values.isRecurring && (
+              <DateInput
+                label="Date"
+                placeholder="Select date"
+                {...form.getInputProps('date')}
+                withAsterisk
+              />
+            )}
+            <Switch label="Recurring" {...form.getInputProps('isRecurring')} />
+            {form.values.isRecurring && <RecurringFields form={form} />}
           </Stack>
           <Group position="right">
             <Button type="button" variant="default" color="gray" onClick={props.onClose}>
