@@ -47,108 +47,110 @@ export default function Transactions() {
           </HeaderButtons.Root>
         </Header.RightSection>
       </Header>
-      <Datatable
-        header={
-          <DataTableHeader selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />
-        }
-        columns={[
-          {
-            accessor: 'title',
-            title: 'Title',
-          },
-          {
-            accessor: 'description',
-            title: 'Description',
-            width: 350,
-            render: ({ description }: ResponseTransaction) => {
-              return <DescriptionRowRender description={description} />
+      <Flex direction="column" w="100%" h="calc(100% - 138px)">
+        <Datatable
+          header={
+            <DataTableHeader selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />
+          }
+          columns={[
+            {
+              accessor: 'title',
+              title: 'Title',
             },
-          },
-          {
-            accessor: 'amount',
-            title: 'Amount',
-            render: ({ amount }: ResponseTransaction) => currencyFormat(amount),
-          },
+            {
+              accessor: 'description',
+              title: 'Description',
+              width: 350,
+              render: ({ description }: ResponseTransaction) => {
+                return <DescriptionRowRender description={description} />
+              },
+            },
+            {
+              accessor: 'amount',
+              title: 'Amount',
+              render: ({ amount }: ResponseTransaction) => currencyFormat(amount),
+            },
 
-          {
-            accessor: 'date',
-            title: 'Date',
-            render: ({ date }: ResponseTransaction) => dayjs(date).format('DD/MM/YYYY'),
-          },
+            {
+              accessor: 'date',
+              title: 'Date',
+              render: ({ date }: ResponseTransaction) => dayjs(date).format('DD/MM/YYYY'),
+            },
 
-          {
-            accessor: 'account',
-            title: 'Account',
-            render: ({ account }: ResponseTransaction) => {
-              return (
-                <Flex gap={2}>
-                  <Flex align="center" justify="center">
-                    <Image src={institutionLogoMap[account.institution]} width={24} height={24} />
+            {
+              accessor: 'account',
+              title: 'Account',
+              render: ({ account }: ResponseTransaction) => {
+                return (
+                  <Flex gap={2}>
+                    <Flex align="center" justify="center">
+                      <Image src={institutionLogoMap[account.institution]} width={24} height={24} />
+                    </Flex>
+                    <Flex ml={4} align="center" justify="center">
+                      {account.name}
+                    </Flex>
                   </Flex>
-                  <Flex ml={4} align="center" justify="center">
-                    {account.name}
-                  </Flex>
-                </Flex>
-              )
+                )
+              },
             },
-          },
-          {
-            accessor: 'category',
-            title: 'Category',
-            render: ({ category }: ResponseTransaction) => {
-              return (
-                <Flex>
-                  <Flex align="center" justify="center">
-                    <IconInnerShadowLeftFilled
-                      style={{ color: categoryColors[category.color] }}
-                      size={28}
-                    />
+            {
+              accessor: 'category',
+              title: 'Category',
+              render: ({ category }: ResponseTransaction) => {
+                return (
+                  <Flex>
+                    <Flex align="center" justify="center">
+                      <IconInnerShadowLeftFilled
+                        style={{ color: categoryColors[category.color] }}
+                        size={28}
+                      />
+                    </Flex>
+                    <Flex ml={4} align="center" justify="center">
+                      {category.name}
+                    </Flex>
                   </Flex>
-                  <Flex ml={4} align="center" justify="center">
-                    {category.name}
-                  </Flex>
-                </Flex>
-              )
+                )
+              },
             },
-          },
-          {
-            accessor: 'type',
-            title: 'Type',
-            width: 100,
-            render: ({ type }: ResponseTransaction) => {
-              return (
-                <Badge
-                  w={75}
-                  variant="filled"
-                  style={{ textTransform: 'capitalize' }}
-                  color={type === TransactionTypeEnum.INCOME ? 'green.6' : 'red.6'}
-                >
-                  {capitalizeAllAndRemoveUnderscore(TransactionTypeEnum[type])}
-                </Badge>
-              )
+            {
+              accessor: 'type',
+              title: 'Type',
+              width: 100,
+              render: ({ type }: ResponseTransaction) => {
+                return (
+                  <Badge
+                    w={75}
+                    variant="filled"
+                    style={{ textTransform: 'capitalize' }}
+                    color={type === TransactionTypeEnum.INCOME ? 'green.6' : 'red.6'}
+                  >
+                    {capitalizeAllAndRemoveUnderscore(TransactionTypeEnum[type])}
+                  </Badge>
+                )
+              },
             },
-          },
-        ]}
-        actions={[
-          {
-            icon: <IconTrash size={16} />,
-            label: 'Delete',
-            onClick: openDeleteModal,
-          },
-        ]}
-        records={transactions}
-        fetching={isLoading}
-        emptyState={
-          <EmptyState>
-            <EmptyState.Image src={EmptyImage} />
-            <EmptyState.Title>No transactions found</EmptyState.Title>
-            <EmptyState.Text>
-              You don&apos;t have any transactions for this month. Try adding one!
-            </EmptyState.Text>
-          </EmptyState>
-        }
-        onScrollToBottom={handleFetchNextPage}
-      />
+          ]}
+          actions={[
+            {
+              icon: <IconTrash size={16} />,
+              label: 'Delete',
+              onClick: openDeleteModal,
+            },
+          ]}
+          records={transactions}
+          fetching={isLoading}
+          emptyState={
+            <EmptyState>
+              <EmptyState.Image src={EmptyImage} />
+              <EmptyState.Title>No transactions found</EmptyState.Title>
+              <EmptyState.Text>
+                You don&apos;t have any transactions for this month. Try adding one!
+              </EmptyState.Text>
+            </EmptyState>
+          }
+          onScrollToBottom={handleFetchNextPage}
+        />
+      </Flex>
       {addIncomeExpense.opened && addIncomeExpense.type != null && (
         <AddIncomeExpenseDialog
           type={addIncomeExpense.type}
