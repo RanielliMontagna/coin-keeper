@@ -1,3 +1,5 @@
+import dayjs from 'dayjs'
+
 import { useForm, zodResolver } from '@mantine/form'
 import { Button, Group, Stack, Switch, TextInput } from '@mantine/core'
 
@@ -30,6 +32,7 @@ export function AddIncomeExpenseDialog(props: IAddIncomeExpenseDialogProps) {
       date: new Date(),
       isRecurring: false,
       frequency: FrequencyEnum.MONTHLY,
+      repetition: 2,
     },
     validate: zodResolver(addIncomeExpenseSchema),
   })
@@ -68,6 +71,7 @@ export function AddIncomeExpenseDialog(props: IAddIncomeExpenseDialogProps) {
                 placeholder="Select date"
                 {...form.getInputProps('date')}
                 withAsterisk
+                minDate={dayjs().toDate()}
               />
             )}
             <Switch label="Recurring" {...form.getInputProps('isRecurring')} />

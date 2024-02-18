@@ -10,7 +10,7 @@ export const addIncomeExpenseSchema = z.object({
   date: z.date().optional(),
   isRecurring: z.boolean().optional(),
   frequency: z.nativeEnum(FrequencyEnum).optional(),
-  endDate: z.date().optional(),
+  repetition: z.number().min(2, 'Repetition must be 2 or more').optional(),
 })
 
 export type AddIncomeExpenseSchema = z.infer<typeof addIncomeExpenseSchema>
