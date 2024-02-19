@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { FrequencyEnum } from './recurringFields/recurringFields'
+import { FrequencyEnum } from 'api/recurringTransactions/recurringTransactions.types'
 
 export const addIncomeExpenseSchema = z.object({
   title: z.string().min(1, 'Title is required'),
@@ -9,7 +9,7 @@ export const addIncomeExpenseSchema = z.object({
   account: z.string().min(1, 'Account is required'),
   date: z.date().optional(),
   isRecurring: z.boolean().optional(),
-  frequency: z.nativeEnum(FrequencyEnum).optional(),
+  frequency: z.nativeEnum(FrequencyEnum),
   repetition: z.number().min(2, 'Repetition must be 2 or more').optional(),
 })
 

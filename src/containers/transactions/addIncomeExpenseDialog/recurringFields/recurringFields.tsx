@@ -1,20 +1,15 @@
-import { NumberInput, Select } from '@mantine/core'
+import { Flex, NumberInput, Select } from '@mantine/core'
 import { UseFormReturnType } from '@mantine/form'
 
 import { DateInput } from 'components/dateInput/dateInput'
 
 import { AddIncomeExpenseSchema } from '../addIncomeExpenseDialog.schema'
-
-export enum FrequencyEnum {
-  WEEKLY = '0',
-  MONTHLY = '1',
-  YEARLY = '2',
-}
+import { FrequencyEnum } from 'api/recurringTransactions/recurringTransactions.types'
 
 export const FrequencyOptions = [
-  { value: FrequencyEnum.WEEKLY, label: 'Weekly' },
-  { value: FrequencyEnum.MONTHLY, label: 'Monthly' },
-  { value: FrequencyEnum.YEARLY, label: 'Yearly' },
+  { value: FrequencyEnum.WEEKLY.toString(), label: 'Weekly' },
+  { value: FrequencyEnum.MONTHLY.toString(), label: 'Monthly' },
+  { value: FrequencyEnum.YEARLY.toString(), label: 'Yearly' },
 ]
 
 interface IRecurringFieldsProps {
@@ -24,19 +19,23 @@ interface IRecurringFieldsProps {
 export function RecurringFields({ form }: IRecurringFieldsProps) {
   return (
     <>
-      <NumberInput
-        label="Repetition"
-        placeholder="Enter number of repetitions"
-        min={1}
-        max={99}
-        {...form.getInputProps('repetition')}
-      />
-      <Select
-        label="Frequency"
-        placeholder="Select frequency"
-        data={FrequencyOptions}
-        {...form.getInputProps('frequency')}
-      />
+      <Flex gap={8}>
+        <NumberInput
+          label="Repetition"
+          placeholder="Enter number of repetitions"
+          min={1}
+          max={99}
+          maw={80}
+          {...form.getInputProps('repetition')}
+        />
+        <Select
+          label="Frequency"
+          placeholder="Select frequency"
+          data={FrequencyOptions}
+          w="100%"
+          {...form.getInputProps('frequency')}
+        />
+      </Flex>
       <DateInput
         label="Start date"
         placeholder="Select date"

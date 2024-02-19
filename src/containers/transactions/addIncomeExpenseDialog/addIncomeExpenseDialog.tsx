@@ -12,7 +12,8 @@ import { useAddIncomeExpenseDialog } from './useAddIncomeExpenseDialog'
 import { TransactionTypeEnum } from 'api/transactions/transactions.types'
 import { SelectCategory } from './selectCategory/selectCategory'
 import { SelectAccount } from './selectAccount/selectAccount'
-import { FrequencyEnum, RecurringFields } from './recurringFields/recurringFields'
+import { RecurringFields } from './recurringFields/recurringFields'
+import { FrequencyEnum } from 'api/recurringTransactions/recurringTransactions.types'
 
 export interface IAddIncomeExpenseDialogProps {
   type: TransactionTypeEnum

@@ -5,6 +5,7 @@ export const urls = {
   accounts: '/accounts',
   categories: '/categories',
   transactions: '/transactions',
+  recurringTransactions: '/recurring-transactions',
   creditCards: '/credit-cards',
   quotes: '/services/quotes',
 }
