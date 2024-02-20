@@ -36,7 +36,7 @@
     "@tabler/icons-react": "^2.45.0",
     "axios": "^1.6.4",
     "dayjs": "^1.11.9",
-    "framer-motion": "^10.12.20",
+    "framer-motion": "^10.18.0",
     "js-cookie": "^3.0.1",
     "jwt-decode": "^3.1.2",
     "mantine-datatable": "^2.7.2",
