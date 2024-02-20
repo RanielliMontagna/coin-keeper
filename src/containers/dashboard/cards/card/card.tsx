@@ -1,11 +1,11 @@
 import { useMemo } from 'react'
 
-import { Flex, Skeleton, Text, Title, useMantineTheme } from '@mantine/core'
-import { IconTrendingUp } from '@tabler/icons-react'
+import { Avatar, Flex, Skeleton, Text, Title, useMantineTheme } from '@mantine/core'
 
 import SectionPaper from 'containers/dashboard/sectionPaper/sectionPaper'
 import { currencyFormat } from 'utils/currencyFormat'
-import { percentageFormat } from 'utils/percentageFormat'
+
+import { IconArrowDown, IconArrowUp, IconBuildingBank, IconCreditCard } from '@tabler/icons-react'
 
 export enum CardTypeEnum {
   BALANCE = 0,
@@ -17,12 +17,11 @@ export enum CardTypeEnum {
 interface ICardProps {
   type: CardTypeEnum
   amount: number
-  percentage: number
 
   isLoading?: boolean
 }
 
-export function Card({ type, amount, percentage, isLoading = false }: ICardProps) {
+export function Card({ type, amount, isLoading = false }: ICardProps) {
   const { colors } = useMantineTheme()
 
   const title = useMemo(() => {
@@ -39,34 +38,43 @@ export function Card({ type, amount, percentage, isLoading = false }: ICardProps
     }
   }, [])
 
-  const color = useMemo(() => {
+  const icon = useMemo(() => {
+    const wrapper = (children: React.ReactNode) => (
+      <Avatar size={40} style={{ marginRight: 10 }}>
+        {children}
+      </Avatar>
+    )
+
     switch (type) {
-      case CardTypeEnum.CREDIT:
-      case CardTypeEnum.EXPENSES:
-        return percentage > 0 ? colors.red[6] : colors.green[6]
       default:
-        return percentage > 0 ? colors.green[6] : colors.red[6]
+      case CardTypeEnum.BALANCE:
+        return wrapper(<IconBuildingBank size={24} color={colors.indigo[6]} />)
+      case CardTypeEnum.INCOMES:
+        return wrapper(<IconArrowUp size={24} color={colors.green[6]} />)
+      case CardTypeEnum.EXPENSES:
+        return wrapper(<IconArrowDown size={24} color={colors.red[6]} />)
+      case CardTypeEnum.CREDIT:
+        return wrapper(<IconCreditCard size={24} color={colors.blue[6]} />)
     }
-  }, [])
+  }, [colors, type])
 
   return (
     <SectionPaper style={{ flex: 1 }}>
-      <div>
-        <Text size="sm" color="gray.6">
-          {title}
-        </Text>
-      </div>
-      {isLoading ? (
-        <Skeleton style={{ marginTop: 6, height: 25 }} />
-      ) : (
-        <Flex align="center" gap="xs">
-          <Title order={3}>{currencyFormat(amount || 0)}</Title>
-          <Flex align="center" style={{ color, gap: 4 }}>
-            <IconTrendingUp size={16} />
-            <Text size="sm">{percentageFormat(percentage)}</Text>
-          </Flex>
+      <Flex justify="space-between" align="center" gap={4}>
+        <Flex direction="column">
+          <Text size="sm" color="gray.6">
+            {title}
+          </Text>
+          {isLoading ? (
+            <Skeleton style={{ marginTop: 6, height: 25 }} />
+          ) : (
+            <Flex>
+              <Title order={3}>{currencyFormat(amount || 0)}</Title>
+            </Flex>
+          )}
         </Flex>
-      )}
+        {icon}
+      </Flex>
     </SectionPaper>
   )
 }
