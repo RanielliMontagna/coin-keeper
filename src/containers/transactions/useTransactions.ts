@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 
 import { fetchTransactions } from 'api/transactions/transactions'
-import { TransactionTypeEnum } from 'api/transactions/transactions.types'
+import { ResponseTransaction, TransactionTypeEnum } from 'api/transactions/transactions.types'
 import { useInfiniteQuery } from 'hooks/useInfiniteQuery'
 
 interface AddIncomeExpense {
@@ -40,7 +40,7 @@ export function useTransactions() {
   }, [selectedMonth])
 
   return {
-    transactions: data,
+    transactions: data as ResponseTransaction[],
     isLoading,
     addIncomeExpense,
     selectedMonth,

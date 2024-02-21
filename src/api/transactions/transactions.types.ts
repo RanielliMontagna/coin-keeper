@@ -7,6 +7,7 @@ export enum TransactionTypeEnum {
 }
 
 export interface CreateTransactionPayload {
+  isPaid?: boolean
   title: string
   description?: string
   amount: number
@@ -32,6 +33,7 @@ export interface ResponseTransaction {
   id: string
   title: string
   type: TransactionTypeEnum
+  isPaid: boolean
 }
 
 export interface ResponseBalance {

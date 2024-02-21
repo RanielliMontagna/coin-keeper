@@ -1,8 +1,13 @@
 import dayjs from 'dayjs'
 
-import { Badge, Flex, Image } from '@mantine/core'
+import { Badge, Flex, Image, Tooltip } from '@mantine/core'
 import { EmptyState, Header } from '@quantun/core'
-import { IconInnerShadowLeftFilled, IconTrash } from '@tabler/icons-react'
+import {
+  IconCheck,
+  IconExclamationMark,
+  IconInnerShadowLeftFilled,
+  IconTrash,
+} from '@tabler/icons-react'
 
 import { Datatable } from 'components/datatable'
 import { PrivateContainer } from 'components/privateContainer'
@@ -54,9 +59,35 @@ export default function Transactions() {
           }
           columns={[
             {
-              accessor: 'title',
-              title: 'Title',
+              accessor: 'isPaid',
+              title: 'Status',
+              width: 65,
+              render: ({ isPaid }: ResponseTransaction) => {
+                const icon = isPaid ? (
+                  <IconCheck size={18} color="white" stroke={3} />
+                ) : (
+                  <IconExclamationMark size={18} color="white" stroke={3} />
+                )
+
+                return (
+                  <Flex justify="center">
+                    <Tooltip label={isPaid ? 'Paid' : 'Pending'} position="left" withArrow>
+                      <Flex
+                        justify="center"
+                        align="center"
+                        h={28}
+                        w={28}
+                        bg={isPaid ? 'green.6' : 'yellow.6'}
+                        style={{ borderRadius: '50%' }}
+                      >
+                        {icon}
+                      </Flex>
+                    </Tooltip>
+                  </Flex>
+                )
+              },
             },
+            { accessor: 'title', title: 'Title' },
             {
               accessor: 'description',
               title: 'Description',
