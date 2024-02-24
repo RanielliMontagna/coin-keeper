@@ -1,4 +1,4 @@
-import { Flex, Menu, createStyles, useMantineTheme } from '@mantine/core'
+import { Flex, Menu, Paper, createStyles, useMantineTheme } from '@mantine/core'
 import { DataTable as MantineDataTable, DataTableProps, DataTableColumn } from 'mantine-datatable'
 import { IActionProps } from './actions/actions'
 
@@ -8,6 +8,7 @@ type IDataTableProps<T = any> = Omit<DataTableProps<T>, 'columns' | 'records'> &
   records: any[]
   actions?: IActionProps[]
   columns?: DataTableColumn<any>[]
+  header?: React.ReactNode
 }
 
 const useStyles = createStyles((theme) => ({
@@ -22,6 +23,7 @@ const useStyles = createStyles((theme) => ({
 export function Datatable<T extends Record<string, unknown>>({
   columns,
   actions,
+  header,
   ...rest
 }: IDataTableProps<T>) {
   const { colorScheme, colors, white } = useMantineTheme()
@@ -71,16 +73,19 @@ export function Datatable<T extends Record<string, unknown>>({
   ] as DataTableColumn<T>[]
 
   return (
-    // @ts-expect-error - MantineDataTable ignore types error for now
-    <MantineDataTable
-      striped
-      {...rest}
-      className={`${classes.table} ${rest.className}`}
-      columns={actions ? columnsWithActions : newColumns}
-      style={{
-        backgroundColor: colorScheme === 'dark' ? colors.dark[8] : white,
-        ...rest.style,
-      }}
-    />
+    <Paper h="100%">
+      {header}
+      {/* @ts-expect-error - MantineDataTable ignore types error for now */}
+      <MantineDataTable
+        striped
+        {...rest}
+        className={`${classes.table} ${rest.className}`}
+        columns={actions ? columnsWithActions : newColumns}
+        style={{
+          backgroundColor: colorScheme === 'dark' ? colors.dark[8] : white,
+          ...rest.style,
+        }}
+      />
+    </Paper>
   )
 }

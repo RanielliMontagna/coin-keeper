@@ -16,9 +16,10 @@ export function useInfiniteQuery(props: IUseInfiniteQueryProps) {
   const {
     data: dataRQ,
     error,
-    hasNextPage,
-    fetchNextPage,
     isLoading,
+    hasNextPage,
+    refetch,
+    fetchNextPage,
   } = useInfiniteQueryRQ({
     getNextPageParam: (lastPage: Page) => {
       const countItems = lastPage?.data?.[Object.keys(lastPage?.data)[0]]?.length
@@ -64,5 +65,5 @@ export function useInfiniteQuery(props: IUseInfiniteQueryProps) {
     }
   }, [error, handleErrors])
 
-  return { data: data, meta, hasNextPage, isLoading, handleFetchNextPage }
+  return { data: data, meta, hasNextPage, isLoading, refetch, handleFetchNextPage }
 }
