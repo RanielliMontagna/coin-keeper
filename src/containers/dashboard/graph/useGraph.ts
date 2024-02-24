@@ -6,6 +6,7 @@ import {
   getTransactionGraphicsMonth,
   getTransactionGraphicsYear,
 } from 'api/transactions/transactions'
+import { centsToReal } from 'utils/centsToReal'
 
 export enum SelectPeriod {
   WEEK = 'week',
@@ -42,7 +43,12 @@ export function useGraph() {
   const treatedData = useMemo(() => {
     if (!periodData) return []
 
-    return periodData?.map((item, index) => ({ ...item, index }))
+    return periodData?.map((item, index) => ({
+      balance: centsToReal(item.balance),
+      incomes: centsToReal(item.incomes),
+      expenses: centsToReal(item.expenses),
+      index,
+    }))
   }, [periodData])
 
   return { period, treatedData, isLoading, handlePeriodChange }

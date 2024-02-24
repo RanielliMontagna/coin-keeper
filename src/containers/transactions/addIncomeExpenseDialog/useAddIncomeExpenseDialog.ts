@@ -10,6 +10,7 @@ import { useAppStore } from 'store/app/app'
 import { useApiCall } from 'hooks/useApiCall'
 import { TransactionTypeEnum } from 'api/transactions/transactions.types'
 import { createTransaction } from 'api/transactions/transactions'
+import { createRecurringTransaction } from 'api/recurringTransactions/recurringTransactions'
 
 export function useAddIncomeExpenseDialog({ type, onClose }: IAddIncomeExpenseDialogProps) {
   const { addNotification } = useAppStore()
@@ -34,9 +35,21 @@ export function useAddIncomeExpenseDialog({ type, onClose }: IAddIncomeExpenseDi
   })
 
   const handleSubmit = (values: AddIncomeExpenseSchema) => {
-    call(
-      () =>
-        createTransaction({
+    async function submit() {
+      if (values.isRecurring) {
+        await createRecurringTransaction({
+          title: values.title,
+          description: values.description,
+          amount: Number(values.amount),
+          accountId: values.account,
+          categoryId: values.category,
+          frequency: Number(values.frequency),
+          repeatAmount: Number(values.repetition),
+          startDate: values.date?.toISOString() ?? new Date().toISOString(),
+          type: type,
+        })
+      } else {
+        await createTransaction({
           title: values.title,
           description: values.description,
           amount: Number(values.amount),
@@ -44,22 +57,24 @@ export function useAddIncomeExpenseDialog({ type, onClose }: IAddIncomeExpenseDi
           categoryId: values.category,
           date: values.date?.toISOString() ?? new Date().toISOString(),
           type: type,
-        }),
-      () => {
-        queryClient.invalidateQueries('transactions')
-        queryClient.invalidateQueries('accounts')
-        queryClient.invalidateQueries('week')
-        queryClient.invalidateQueries('month')
-        queryClient.invalidateQueries('year')
-        addNotification({
-          title: 'Success',
-          message: `Transaction ${
-            type === TransactionTypeEnum.INCOME ? 'income' : 'expense'
-          } created successfully`,
         })
-        onClose()
-      },
-    )
+      }
+    }
+
+    call(submit, () => {
+      queryClient.invalidateQueries('transactions')
+      queryClient.invalidateQueries('accounts')
+      queryClient.invalidateQueries('week')
+      queryClient.invalidateQueries('month')
+      queryClient.invalidateQueries('year')
+      addNotification({
+        title: 'Success',
+        message: `Transaction ${
+          type === TransactionTypeEnum.INCOME ? 'income' : 'expense'
+        } created successfully`,
+      })
+      onClose()
+    })
   }
 
   return {

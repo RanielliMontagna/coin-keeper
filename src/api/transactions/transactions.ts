@@ -27,7 +27,7 @@ function treatBalance(balance: ResponseBalance) {
 }
 
 export async function fetchTransactions(
-  options?: Pick<Options, 'page'>,
+  options?: Pick<Options, 'page' | 'date'>,
 ): BackendResponse<{ transactions: ResponseTransaction[] }> {
   const response = await axiosInstance.get(urls.transactions, { params: options })
   const transactions = response.data.transactions.map(treatTransaction)
