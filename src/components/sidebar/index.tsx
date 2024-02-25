@@ -2,7 +2,7 @@ import { useAppStore } from 'store/app/app'
 import { Sidebar } from '@quantun/core'
 
 import { Image, useMantineTheme } from '@mantine/core'
-import { IconLogout, IconMoonStars, IconSun } from '@tabler/icons-react'
+import { IconLogout, IconMoonStars, IconSettings, IconSun } from '@tabler/icons-react'
 
 import { routes } from './static'
 
@@ -49,6 +49,11 @@ export function SideBar() {
         icon={theme === 'dark' ? IconSun : IconMoonStars}
         label={theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
         onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      />
+      <Sidebar.FooterItem
+        icon={IconSettings}
+        label="Configurations"
+        onClick={() => navigate('/configurations')}
       />
       <Sidebar.FooterItem icon={IconLogout} label="Logout" onClick={logout} />
     </Sidebar.Root>
