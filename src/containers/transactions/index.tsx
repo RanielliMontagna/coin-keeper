@@ -48,7 +48,16 @@ export default function Transactions() {
         <Header.Subtitle>Pay your bills, transfer money and more</Header.Subtitle>
         <Header.RightSection>
           <HeaderButtons.Root>
-            <HeaderButtons.Button label="Add Expense" onClick={handleAddExpense} />
+            <HeaderButtons.Button
+              label="Add Expense"
+              onClick={() => {
+                handleAddExpense(
+                  dayjs(selectedMonth).month() === dayjs().month()
+                    ? dayjs().toDate()
+                    : dayjs(selectedMonth).toDate(),
+                )
+              }}
+            />
             <HeaderButtons.Button label="Add Income" onClick={handleAddIncome} />
           </HeaderButtons.Root>
         </Header.RightSection>
@@ -192,6 +201,7 @@ export default function Transactions() {
         <AddIncomeExpenseDialog
           type={addIncomeExpense.type}
           onClose={handleCloseAddIncomeExpense}
+          defaultDate={addIncomeExpense.defaultDate}
         />
       )}
     </PrivateContainer>

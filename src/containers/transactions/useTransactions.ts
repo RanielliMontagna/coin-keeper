@@ -8,6 +8,7 @@ import { useInfiniteQuery } from 'hooks/useInfiniteQuery'
 interface AddIncomeExpense {
   opened: boolean
   type: TransactionTypeEnum | null
+  defaultDate?: Date
 }
 
 export function useTransactions() {
@@ -15,6 +16,7 @@ export function useTransactions() {
   const [addIncomeExpense, setAddIncomeExpense] = useState<AddIncomeExpense>({
     opened: false,
     type: null,
+    defaultDate: dayjs().toDate(),
   })
 
   const { data, isLoading, handleFetchNextPage, refetch } = useInfiniteQuery({
@@ -27,8 +29,8 @@ export function useTransactions() {
     setAddIncomeExpense({ opened: true, type: TransactionTypeEnum.INCOME })
   }
 
-  const handleAddExpense = () => {
-    setAddIncomeExpense({ opened: true, type: TransactionTypeEnum.EXPENSE })
+  const handleAddExpense = (date?: Date) => {
+    setAddIncomeExpense({ opened: true, type: TransactionTypeEnum.EXPENSE, defaultDate: date })
   }
 
   const handleCloseAddIncomeExpense = () => {

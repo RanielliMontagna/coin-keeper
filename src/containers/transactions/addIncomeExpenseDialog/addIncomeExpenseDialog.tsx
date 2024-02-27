@@ -17,6 +17,7 @@ import { FrequencyEnum } from 'api/recurringTransactions/recurringTransactions.t
 
 export interface IAddIncomeExpenseDialogProps {
   type: TransactionTypeEnum
+  defaultDate?: Date
   onClose: () => void
 }
 
@@ -30,7 +31,7 @@ export function AddIncomeExpenseDialog(props: IAddIncomeExpenseDialogProps) {
       amount: 0,
       category: '',
       account: '',
-      date: new Date(),
+      date: props.defaultDate || dayjs().toDate(),
       isRecurring: false,
       frequency: FrequencyEnum.MONTHLY,
       repetition: 2,
