@@ -30,6 +30,7 @@ import { TransactionCards } from './transactionsCards/transactionsCards'
 export default function Transactions() {
   const {
     transactions,
+    meta,
     isLoading,
     addIncomeExpense,
     selectedMonth,
@@ -64,7 +65,7 @@ export default function Transactions() {
       </Header>
       <Flex direction="column" gap={16} h="100%">
         <DataTableHeader selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} />
-        <TransactionCards />
+        <TransactionCards meta={meta} isLoading={isLoading} />
         <Flex direction="column" w="100%" h="calc(100% - 138px)">
           <Datatable
             columns={[

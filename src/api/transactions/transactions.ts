@@ -26,13 +26,23 @@ function treatBalance(balance: ResponseBalance) {
   }
 }
 
+function treatTransactionMeta(meta: ResponseBalance) {
+  return {
+    ...meta,
+    balance: centsToReal(meta.balance),
+    incomes: centsToReal(meta.incomes),
+    expenses: centsToReal(meta.expenses),
+  }
+}
+
 export async function fetchTransactions(
   options?: Pick<Options, 'page' | 'date'>,
 ): BackendResponse<{ transactions: ResponseTransaction[] }> {
   const response = await axiosInstance.get(urls.transactions, { params: options })
   const transactions = response.data.transactions.map(treatTransaction)
+  const meta = treatTransactionMeta(response.meta)
 
-  return { ...response, data: { transactions } }
+  return { ...response, data: { transactions }, meta }
 }
 
 export async function latestTransactions(): BackendResponse<{

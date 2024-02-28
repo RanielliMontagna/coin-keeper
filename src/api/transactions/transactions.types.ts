@@ -36,6 +36,13 @@ export interface ResponseTransaction {
   isPaid: boolean
 }
 
+export interface MetaTransaction {
+  balance: number
+  date: string
+  expenses: number
+  incomes: number
+}
+
 export interface ResponseBalance {
   balance: number
   incomes: number

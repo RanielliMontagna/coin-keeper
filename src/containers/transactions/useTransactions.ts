@@ -2,7 +2,11 @@ import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 
 import { fetchTransactions } from 'api/transactions/transactions'
-import { ResponseTransaction, TransactionTypeEnum } from 'api/transactions/transactions.types'
+import {
+  MetaTransaction,
+  ResponseTransaction,
+  TransactionTypeEnum,
+} from 'api/transactions/transactions.types'
 import { useInfiniteQuery } from 'hooks/useInfiniteQuery'
 
 interface AddIncomeExpense {
@@ -19,7 +23,7 @@ export function useTransactions() {
     defaultDate: dayjs().toDate(),
   })
 
-  const { data, isLoading, handleFetchNextPage, refetch } = useInfiniteQuery({
+  const { data, meta, isLoading, handleFetchNextPage, refetch } = useInfiniteQuery({
     queryKey: ['transactions'],
     queryFn: async ({ pageParam }) =>
       await fetchTransactions({ page: pageParam, date: selectedMonth.toISOString() }),
@@ -43,6 +47,7 @@ export function useTransactions() {
 
   return {
     transactions: data as ResponseTransaction[],
+    meta: meta as MetaTransaction,
     isLoading,
     addIncomeExpense,
     selectedMonth,
