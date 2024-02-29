@@ -1,6 +1,7 @@
 import type {
   CreateTransactionPayload,
   ResponseBalance,
+  ResponseMarkAsPaid,
   ResponseTransaction,
 } from './transactions.types'
 import type { BackendResponse } from 'shared/types'
@@ -91,4 +92,8 @@ export async function getTransactionGraphicsYear() {
   const year = response.data.year.map(treatTransaction) as ResponseBalance[]
 
   return { ...response, data: { year } }
+}
+
+export async function markTransactionAsPaid(id: string): BackendResponse<ResponseMarkAsPaid> {
+  return await axiosInstance.patch(`${urls.transactions}/${id}/paid`)
 }

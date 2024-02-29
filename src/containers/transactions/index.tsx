@@ -4,6 +4,7 @@ import { Badge, Flex, Image, Tooltip } from '@mantine/core'
 import { EmptyState, Header } from '@quantun/core'
 import {
   IconCheck,
+  IconChecks,
   IconExclamationMark,
   IconInnerShadowLeftFilled,
   IconTrash,
@@ -38,6 +39,7 @@ export default function Transactions() {
     handleFetchNextPage,
     handleAddExpense,
     handleAddIncome,
+    handleMarkAsPaid,
     handleCloseAddIncomeExpense,
   } = useTransactions()
   const { openDeleteModal } = useDeleteIncomeExpenseModal()
@@ -177,6 +179,12 @@ export default function Transactions() {
               },
             ]}
             actions={[
+              {
+                icon: <IconChecks size={16} />,
+                label: 'Mark as paid',
+                onClick: handleMarkAsPaid,
+                visible: ({ isPaid }: ResponseTransaction) => !isPaid,
+              },
               {
                 icon: <IconTrash size={16} />,
                 label: 'Delete',

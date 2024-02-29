@@ -60,3 +60,8 @@ export interface ResponseTransactionGraphicsMonth {
 export interface ResponseTransactionGraphicsYear {
   year: ResponseBalance[]
 }
+
+export interface ResponseMarkAsPaid {
+  isPaid: boolean
+  id: string
+}

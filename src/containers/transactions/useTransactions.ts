@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 
-import { fetchTransactions } from 'api/transactions/transactions'
+import { fetchTransactions, markTransactionAsPaid } from 'api/transactions/transactions'
 import {
   MetaTransaction,
   ResponseTransaction,
   TransactionTypeEnum,
 } from 'api/transactions/transactions.types'
 import { useInfiniteQuery } from 'hooks/useInfiniteQuery'
+import { useApiCall } from 'hooks/useApiCall'
 
 interface AddIncomeExpense {
   opened: boolean
@@ -16,6 +17,8 @@ interface AddIncomeExpense {
 }
 
 export function useTransactions() {
+  const { call } = useApiCall()
+
   const [selectedMonth, setSelectedMonth] = useState<Date>(dayjs().startOf('month').toDate())
   const [addIncomeExpense, setAddIncomeExpense] = useState<AddIncomeExpense>({
     opened: false,
@@ -41,6 +44,13 @@ export function useTransactions() {
     setAddIncomeExpense({ opened: false, type: null })
   }
 
+  function handleMarkAsPaid(transaction: ResponseTransaction) {
+    call(
+      () => markTransactionAsPaid(transaction.id),
+      () => refetch(),
+    )
+  }
+
   useEffect(() => {
     refetch()
   }, [selectedMonth])
@@ -55,6 +65,7 @@ export function useTransactions() {
     handleFetchNextPage,
     handleAddIncome,
     handleAddExpense,
+    handleMarkAsPaid,
     handleCloseAddIncomeExpense,
   }
 }
