@@ -1,3 +1,5 @@
+import type { IActionProps } from 'components/datatable/actions/actions'
+
 type Data = any
 
 export interface IListContextProps {
@@ -13,12 +15,6 @@ export interface IListProviderProps {
 export interface IListRoot {
   children: React.ReactNode
   data: Data[]
-}
-
-export interface IActionProps {
-  label: string
-  icon?: React.ReactNode
-  onClick: (row: Data) => void
 }
 
 export interface IListRowProps {

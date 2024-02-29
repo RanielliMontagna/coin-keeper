@@ -8,4 +8,5 @@ export const urls = {
   recurringTransactions: '/recurring-transactions',
   creditCards: '/credit-cards',
   quotes: '/services/quotes',
+  configs: '/configs',
 }

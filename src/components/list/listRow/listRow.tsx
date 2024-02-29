@@ -26,6 +26,7 @@ export function ListRow({ children, actions }: IListRowProps) {
                           key={action.label}
                           onClick={() => action.onClick(row)}
                           icon={action.icon}
+                          disabled={action.visible && !action.visible(row)}
                         >
                           {action.label}
                         </Menu.Item>

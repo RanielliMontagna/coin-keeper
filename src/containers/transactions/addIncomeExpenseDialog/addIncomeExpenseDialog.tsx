@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 
 import { useForm, zodResolver } from '@mantine/form'
-import { Button, Group, Stack, Switch, TextInput } from '@mantine/core'
+import { Button, Checkbox, Group, Stack, Switch, TextInput } from '@mantine/core'
 
 import { Modal } from 'components/modal'
 import { CurrencyInput } from 'components/currencyInput/currencyInput'
@@ -17,6 +17,7 @@ import { FrequencyEnum } from 'api/recurringTransactions/recurringTransactions.t
 
 export interface IAddIncomeExpenseDialogProps {
   type: TransactionTypeEnum
+  defaultDate?: Date
   onClose: () => void
 }
 
@@ -30,10 +31,11 @@ export function AddIncomeExpenseDialog(props: IAddIncomeExpenseDialogProps) {
       amount: 0,
       category: '',
       account: '',
-      date: new Date(),
+      date: props.defaultDate || dayjs().toDate(),
       isRecurring: false,
       frequency: FrequencyEnum.MONTHLY,
       repetition: 2,
+      isPaid: true,
     },
     validate: zodResolver(addIncomeExpenseSchema),
   })
@@ -64,6 +66,7 @@ export function AddIncomeExpenseDialog(props: IAddIncomeExpenseDialogProps) {
               withAsterisk
               {...form.getInputProps('amount')}
             />
+            <Checkbox label="Paid" defaultChecked {...form.getInputProps('isPaid')} />
             <SelectCategory form={form} categories={categories} />
             <SelectAccount form={form} accounts={accounts} />
             {!form.values.isRecurring && (

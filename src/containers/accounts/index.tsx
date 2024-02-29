@@ -52,12 +52,14 @@ export default function Accounts() {
         <Header.Title>Accounts</Header.Title>
         <Header.Subtitle>Manage your accounts easily</Header.Subtitle>
         <Header.RightSection>
-          <Input
-            icon={<IconSearch size={16} />}
-            placeholder="Search"
-            defaultValue={search}
-            onChange={onChange}
-          />
+          <div>
+            <Input
+              icon={<IconSearch size={16} />}
+              placeholder="Search"
+              defaultValue={search}
+              onChange={onChange}
+            />
+          </div>
           <HeaderButtons.Root>
             <HeaderButtons.Button label="Add Account" onClick={handleOpenEditModal} />
           </HeaderButtons.Root>

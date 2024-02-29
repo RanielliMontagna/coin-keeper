@@ -4,6 +4,7 @@ export interface IActionProps {
   label: string
   icon?: React.ReactNode
   onClick: (row: any) => void
+  visible?: (row: any) => boolean
 }
 
 export function Actions({ label, icon, onClick }: IActionProps) {

@@ -55,6 +55,7 @@ export function useAddIncomeExpenseDialog({ type, onClose }: IAddIncomeExpenseDi
           amount: Number(values.amount),
           accountId: values.account,
           categoryId: values.category,
+          isPaid: values.isPaid,
           date: values.date?.toISOString() ?? new Date().toISOString(),
           type: type,
         })

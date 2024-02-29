@@ -1,23 +1,32 @@
 import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 
-import { fetchTransactions } from 'api/transactions/transactions'
-import { ResponseTransaction, TransactionTypeEnum } from 'api/transactions/transactions.types'
+import { fetchTransactions, markTransactionAsPaid } from 'api/transactions/transactions'
+import {
+  MetaTransaction,
+  ResponseTransaction,
+  TransactionTypeEnum,
+} from 'api/transactions/transactions.types'
 import { useInfiniteQuery } from 'hooks/useInfiniteQuery'
+import { useApiCall } from 'hooks/useApiCall'
 
 interface AddIncomeExpense {
   opened: boolean
   type: TransactionTypeEnum | null
+  defaultDate?: Date
 }
 
 export function useTransactions() {
+  const { call } = useApiCall()
+
   const [selectedMonth, setSelectedMonth] = useState<Date>(dayjs().startOf('month').toDate())
   const [addIncomeExpense, setAddIncomeExpense] = useState<AddIncomeExpense>({
     opened: false,
     type: null,
+    defaultDate: dayjs().toDate(),
   })
 
-  const { data, isLoading, handleFetchNextPage, refetch } = useInfiniteQuery({
+  const { data, meta, isLoading, handleFetchNextPage, refetch } = useInfiniteQuery({
     queryKey: ['transactions'],
     queryFn: async ({ pageParam }) =>
       await fetchTransactions({ page: pageParam, date: selectedMonth.toISOString() }),
@@ -27,12 +36,19 @@ export function useTransactions() {
     setAddIncomeExpense({ opened: true, type: TransactionTypeEnum.INCOME })
   }
 
-  const handleAddExpense = () => {
-    setAddIncomeExpense({ opened: true, type: TransactionTypeEnum.EXPENSE })
+  const handleAddExpense = (date?: Date) => {
+    setAddIncomeExpense({ opened: true, type: TransactionTypeEnum.EXPENSE, defaultDate: date })
   }
 
   const handleCloseAddIncomeExpense = () => {
     setAddIncomeExpense({ opened: false, type: null })
+  }
+
+  function handleMarkAsPaid(transaction: ResponseTransaction) {
+    call(
+      () => markTransactionAsPaid(transaction.id),
+      () => refetch(),
+    )
   }
 
   useEffect(() => {
@@ -41,6 +57,7 @@ export function useTransactions() {
 
   return {
     transactions: data as ResponseTransaction[],
+    meta: meta as MetaTransaction,
     isLoading,
     addIncomeExpense,
     selectedMonth,
@@ -48,6 +65,7 @@ export function useTransactions() {
     handleFetchNextPage,
     handleAddIncome,
     handleAddExpense,
+    handleMarkAsPaid,
     handleCloseAddIncomeExpense,
   }
 }

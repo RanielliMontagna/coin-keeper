@@ -52,12 +52,14 @@ export default function Categories() {
         <Header.Title>Categories</Header.Title>
         <Header.Subtitle>Organize your transactions with zero effort</Header.Subtitle>
         <Header.RightSection>
-          <Input
-            icon={<IconSearch size={16} />}
-            placeholder="Search"
-            defaultValue={search}
-            onChange={onChange}
-          />
+          <div>
+            <Input
+              icon={<IconSearch size={16} />}
+              placeholder="Search"
+              defaultValue={search}
+              onChange={onChange}
+            />
+          </div>
           <HeaderButtons.Root>
             <HeaderButtons.Button label="Add Category" onClick={handleOpenEditModal} />
           </HeaderButtons.Root>

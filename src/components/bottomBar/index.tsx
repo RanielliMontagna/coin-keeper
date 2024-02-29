@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 
 import { BottomBar as BottomBarQuantun } from '@quantun/core'
-import { IconLogout, IconMoonStars, IconSun } from '@tabler/icons-react'
+import { IconLogout, IconMoonStars, IconSettings, IconSun } from '@tabler/icons-react'
 import { Flex, Image, useMantineTheme } from '@mantine/core'
 
 import { routes } from 'components/sidebar/static'
@@ -38,6 +38,9 @@ export function BottomBar() {
         onPress={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       >
         {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+      </BottomBarQuantun.Item>
+      <BottomBarQuantun.Item icon={IconSettings} onPress={() => _navigate('/configurations')}>
+        Configurations
       </BottomBarQuantun.Item>
       <BottomBarQuantun.Item icon={IconLogout} onPress={logout}>
         Logout
