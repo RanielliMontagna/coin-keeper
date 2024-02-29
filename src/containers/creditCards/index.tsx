@@ -18,7 +18,7 @@ import { AddEditCreditCardDialog } from './addEditCreditCardDialog/addEditCredit
 import { useDeleteCreditCardModal } from './deleteCreditCardDialog/deleteCreditCardDialog'
 import { ResponseAccount } from 'api/accounts/accounts.types'
 import { currencyFormat } from 'utils/currencyFormat'
-import { IActionProps } from 'components/list/list.types'
+import type { IActionProps } from 'components/datatable/actions/actions'
 
 export default function CreditCards() {
   const { records, isLoading, addEditModal, handleCloseEditModal, handleOpenEditModal } =
