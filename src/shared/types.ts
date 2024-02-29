@@ -1,3 +1,7 @@
 import { AxiosResponse } from 'axios'
 
-export type BackendResponse<T> = Promise<AxiosResponse<T>>
+interface AxiosResponseWithMeta<T> extends AxiosResponse<T> {
+  meta?: any
+}
+
+export type BackendResponse<T> = Promise<AxiosResponseWithMeta<T>>

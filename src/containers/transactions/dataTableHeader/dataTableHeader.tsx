@@ -15,7 +15,7 @@ export function DataTableHeader({ selectedMonth, setSelectedMonth }: DataTableHe
   const { colors } = useMantineTheme()
 
   return (
-    <Flex justify="center" align="center" p={16}>
+    <Flex justify="center" align="center">
       <Button
         p={8}
         mr={8}

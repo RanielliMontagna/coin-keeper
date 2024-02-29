@@ -10,6 +10,7 @@ export const addIncomeExpenseSchema = z.object({
   isRecurring: z.boolean().optional(),
   frequency: z.coerce.number(),
   repetition: z.number().min(2, 'Repetition must be 2 or more').optional(),
+  isPaid: z.boolean().default(true),
 })
 
 export type AddIncomeExpenseSchema = z.infer<typeof addIncomeExpenseSchema>

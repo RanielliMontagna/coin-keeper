@@ -18,6 +18,7 @@ import Categories from 'containers/categories'
 import CreditCards from 'containers/creditCards'
 import Erro500 from 'containers/erro500'
 import Erro404 from 'containers/erro404'
+import Configs from 'containers/configs'
 
 export function Router() {
   const { token } = useAuthStore()
@@ -47,6 +48,7 @@ export function Router() {
             <Route path="/transactions" element={<Transactions />} />
             <Route path="/categories" element={<Categories />} />
             <Route path="/credit-cards" element={<CreditCards />} />
+            <Route path="/configurations" element={<Configs />} />
 
             <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />
