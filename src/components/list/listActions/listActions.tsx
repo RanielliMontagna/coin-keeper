@@ -1,10 +1,5 @@
 import { Button } from '@mantine/core'
-
-export interface IActionProps {
-  label: string
-  icon?: React.ReactNode
-  onClick: (row: any) => void
-}
+import type { IActionProps } from 'components/datatable/actions/actions'
 
 export function ListActions({ label, icon, onClick }: IActionProps) {
   return (
