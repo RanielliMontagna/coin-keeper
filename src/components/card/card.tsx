@@ -28,7 +28,9 @@ export function Card({ title, icon, amount, isLoading = false }: ICardProps) {
             <Skeleton style={{ marginTop: 6, height: 25 }} />
           ) : (
             <Flex>
-              <Title order={3}>{currencyFormat(amount || 0)}</Title>
+              <Title order={3} style={{ whiteSpace: 'nowrap' }}>
+                {currencyFormat(amount || 0)}
+              </Title>
             </Flex>
           )}
         </Flex>
