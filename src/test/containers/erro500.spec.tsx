@@ -2,8 +2,15 @@ import { QuantunProvider } from '@quantun/core'
 import { fireEvent, render } from '@testing-library/react'
 
 import Erro500 from 'containers/erro500'
+import { useIsMobile } from 'hooks/useIsMobile'
+
+vi.mock('hooks/useIsMobile')
 
 describe('@containers/erro500', () => {
+  beforeAll(() => {
+    vi.mocked(useIsMobile).mockReturnValue({ isMobile: false })
+  })
+
   it('should render without crashing', () => {
     const { container } = render(<Erro500 />)
     expect(container).toBeTruthy()
@@ -25,5 +32,12 @@ describe('@containers/erro500', () => {
     fireEvent.click(button)
 
     expect(window.location.pathname).toBe('/')
+  })
+
+  it('should container on mobile', () => {
+    vi.mocked(useIsMobile).mockReturnValue({ isMobile: true })
+
+    const { container } = render(<Erro500 />)
+    expect(container).toBeInTheDocument()
   })
 })

@@ -12,12 +12,21 @@ export function DateInput(props: IDateInputProps) {
       ref={ref}
       valueFormat="DD/MM/YYYY"
       rightSection={
-        <IconCalendar
-          size={18}
+        <button
+          style={{
+            border: 'none',
+            background: 'none',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+          }}
+          data-testid="calendar-icon"
           onClick={() => {
             ref.current?.focus()
           }}
-        />
+        >
+          <IconCalendar size={18} />
+        </button>
       }
       {...props}
     />

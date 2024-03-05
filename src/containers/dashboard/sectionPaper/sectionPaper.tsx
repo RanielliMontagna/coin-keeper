@@ -16,12 +16,7 @@ const SectionPaper = ({ children, flexProps, ...rest }: ISectionPaperProps) => {
         bg={colorScheme === 'dark' ? 'dark.8' : white}
         p={16}
         {...flexProps}
-        style={{
-          borderRadius: 8,
-          flex: 1,
-          boxShadow: shadows.xs,
-          ...flexProps?.style,
-        }}
+        style={{ borderRadius: 8, flex: 1, boxShadow: shadows.xs, ...flexProps?.style }}
       >
         {children}
       </Flex>
