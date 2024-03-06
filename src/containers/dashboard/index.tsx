@@ -7,6 +7,7 @@ import { Accounts } from './accounts/accounts'
 import { Transactions } from './transactions/transactions'
 import { Graph } from './graph/graph'
 import { Quotes } from './quotes/quotes'
+import { HeaderTransactions } from 'shared/headerTransactions/headerTransactions'
 
 export default function Dashboard() {
   return (
@@ -14,6 +15,9 @@ export default function Dashboard() {
       <Header>
         <Header.Title>Dashboard</Header.Title>
         <Header.Subtitle>Control your money, see your balance and summary</Header.Subtitle>
+        <Header.RightSection>
+          <HeaderTransactions />
+        </Header.RightSection>
       </Header>
       <Grid>
         <Grid.Col

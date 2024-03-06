@@ -8,6 +8,7 @@ import { theme } from 'styles/theme'
 import { useAppStore } from 'store/app/app'
 import { queryClient } from 'libs/react-query'
 import { useIsMobile } from 'hooks/useIsMobile'
+import { TransactionsProvider } from 'contexts/transactions/transactions.context'
 
 function App() {
   const { isMobile } = useIsMobile()
@@ -19,9 +20,11 @@ function App() {
         theme={{ ...theme, colorScheme }}
         notificationsProps={{ position: isMobile ? 'bottom-center' : 'bottom-right' }}
       >
-        <BrowserRouter>
-          <Router />
-        </BrowserRouter>
+        <TransactionsProvider>
+          <BrowserRouter>
+            <Router />
+          </BrowserRouter>
+        </TransactionsProvider>
       </QuantunProvider>
     </QueryClientProvider>
   )
