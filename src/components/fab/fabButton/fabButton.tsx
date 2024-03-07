@@ -13,8 +13,6 @@ export function FabButton({ onPress, icon: Icon, label, ...rest }: IFabButtonPro
     handleToggleIsOpen()
   }
 
-  console.log(rest.highlightColor)
-
   return (
     <FabSecondaryButton
       onClick={onPressWrapper}

@@ -13,7 +13,9 @@ export function HeaderButton({
   onClick,
   icon: Icon,
   style,
+  color = 'green',
   highlightColor,
+  ...rest
 }: IHeaderButtonProps) {
   const { isMobile } = useIsMobile()
 
@@ -31,8 +33,10 @@ export function HeaderButton({
   return (
     <Button
       onClick={onClick}
-      style={{ backgroundColor: highlightColor ? highlightColor : undefined, ...style }}
+      style={{ ...style }}
+      color={color}
       leftIcon={Icon ? <Icon size={16} /> : <IconPlus size={16} />}
+      {...rest}
     >
       {label}
     </Button>

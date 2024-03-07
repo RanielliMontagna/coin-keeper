@@ -1,10 +1,10 @@
+import { ButtonProps } from '@mantine/core'
 import { TablerIconsProps } from '@tabler/icons-react'
 
-export interface IHeaderButtonProps {
+export interface IHeaderButtonProps extends ButtonProps {
   label: string
   onClick: () => void
   icon?: (props: TablerIconsProps) => JSX.Element
-  style?: React.CSSProperties
   highlightColor?: string
 }
 

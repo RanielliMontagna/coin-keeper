@@ -1,24 +1,32 @@
-import { useTheme } from '@emotion/react'
 import { Header } from '@quantun/core'
 import dayjs from 'dayjs'
 
 import { HeaderButtons } from 'components/headerButtons'
 import { useTransactionsContext } from 'contexts/transactions/transactions.context'
-import { IconTrendingDown, IconTrendingUp } from '@tabler/icons-react'
+import { IconCreditCardPay, IconTrendingDown, IconTrendingUp } from '@tabler/icons-react'
+import { useMantineTheme } from '@mantine/core'
 
 interface IHeaderTransactionsProps {
   selectedMonth?: Date
 }
 
 export function HeaderTransactions({ selectedMonth }: IHeaderTransactionsProps) {
-  const { colors } = useTheme()
   const { handleAddExpense, handleAddIncome } = useTransactionsContext()
+  const { colors } = useMantineTheme()
 
   return (
     <Header.RightSection>
       <HeaderButtons.Root>
         <HeaderButtons.Button
+          label="Add Credit Expense"
+          color="blue"
+          highlightColor={colors.blue[6]}
+          icon={IconCreditCardPay}
+          onClick={() => {}}
+        />
+        <HeaderButtons.Button
           label="Add Expense"
+          color="red"
           highlightColor={colors.red[6]}
           icon={IconTrendingDown}
           onClick={() => {
