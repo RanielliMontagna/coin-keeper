@@ -68,6 +68,9 @@ export function useAddIncomeExpenseDialog({ type, onClose }: IAddIncomeExpenseDi
       queryClient.invalidateQueries('week')
       queryClient.invalidateQueries('month')
       queryClient.invalidateQueries('year')
+      queryClient.invalidateQueries('transactionsBalance')
+      queryClient.invalidateQueries('latestTransactions')
+
       addNotification({
         title: 'Success',
         message: `Transaction ${
