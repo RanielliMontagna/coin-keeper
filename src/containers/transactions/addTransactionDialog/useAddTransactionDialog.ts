@@ -21,8 +21,6 @@ export function useAddTransactionDialog({ type, onClose }: IAddTransactionDialog
   const { data: dataCategories } = useQuery({
     queryKey: ['categories'],
     queryFn: async () => {
-      console.log('fetching categories')
-
       const res = await fetchCategories()
       return res.data
     },
@@ -32,8 +30,6 @@ export function useAddTransactionDialog({ type, onClose }: IAddTransactionDialog
   const { data: dataAccounts } = useQuery({
     queryKey: ['accounts'],
     queryFn: async () => {
-      console.log('fetching accounts')
-
       if (type === AddTransactionTypeEnum.CREDIT) {
         return null
       }
@@ -48,8 +44,6 @@ export function useAddTransactionDialog({ type, onClose }: IAddTransactionDialog
   const { data: creditCards } = useQuery({
     queryKey: ['creditCards'],
     queryFn: async () => {
-      console.log('fetching credit cards')
-
       if (type === AddTransactionTypeEnum.CREDIT) {
         const res = await fetchCreditCards()
         return res.data
