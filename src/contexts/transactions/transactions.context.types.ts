@@ -1,12 +1,17 @@
-import type { TransactionTypeEnum } from 'api/transactions/transactions.types'
+export enum AddTransactionTypeEnum {
+  INCOME = 0,
+  EXPENSE = 1,
+  CREDIT = 2,
+}
 
-export interface AddIncomeExpense {
+export interface AddTransaction {
   opened: boolean
-  type: TransactionTypeEnum | null
+  type: AddTransactionTypeEnum | null
   defaultDate?: Date
 }
 
 export interface ITransactionsContext {
   handleAddIncome: () => void
   handleAddExpense: (date?: Date) => void
+  handleAddCreditExpense: () => void
 }

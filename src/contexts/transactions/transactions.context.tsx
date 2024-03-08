@@ -1,42 +1,50 @@
-import React, { PropsWithChildren, useCallback, useState } from 'react'
 import dayjs from 'dayjs'
-
+import { PropsWithChildren, useCallback, useState } from 'react'
 import { createContext, useContextSelector } from 'use-context-selector'
 
-import type { AddIncomeExpense, ITransactionsContext } from './transactions.context.types'
-import { TransactionTypeEnum } from 'api/transactions/transactions.types'
+import {
+  AddTransactionTypeEnum,
+  type AddTransaction,
+  type ITransactionsContext,
+} from './transactions.context.types'
 
-import { AddIncomeExpenseDialog } from 'containers/transactions/addIncomeExpenseDialog/addIncomeExpenseDialog'
+import { AddTransactionDialog } from 'containers/transactions/addTransactionDialog/addTransactionDialog'
 
 export const TransactionsContext = createContext({} as ITransactionsContext)
 
 export const TransactionsProvider = ({ children }: PropsWithChildren) => {
-  const [addIncomeExpense, setAddIncomeExpense] = useState<AddIncomeExpense>({
+  const [addTransaction, setAddTransaction] = useState<AddTransaction>({
     opened: false,
     type: null,
     defaultDate: dayjs().toDate(),
   })
 
   const handleAddIncome = useCallback(() => {
-    setAddIncomeExpense({ opened: true, type: TransactionTypeEnum.INCOME })
+    setAddTransaction({ opened: true, type: AddTransactionTypeEnum.INCOME })
   }, [])
 
   const handleAddExpense = useCallback((date?: Date) => {
-    setAddIncomeExpense({ opened: true, type: TransactionTypeEnum.EXPENSE, defaultDate: date })
+    setAddTransaction({ opened: true, type: AddTransactionTypeEnum.EXPENSE, defaultDate: date })
   }, [])
 
-  const handleCloseAddIncomeExpense = useCallback(() => {
-    setAddIncomeExpense({ opened: false, type: null })
+  const handleAddCreditExpense = useCallback(() => {
+    setAddTransaction({ opened: true, type: AddTransactionTypeEnum.CREDIT })
+  }, [])
+
+  const handleCloseAddTransaction = useCallback(() => {
+    setAddTransaction({ opened: false, type: null })
   }, [])
 
   return (
-    <TransactionsContext.Provider value={{ handleAddIncome, handleAddExpense }}>
+    <TransactionsContext.Provider
+      value={{ handleAddIncome, handleAddExpense, handleAddCreditExpense }}
+    >
       {children}
-      {addIncomeExpense.opened && addIncomeExpense.type != null && (
-        <AddIncomeExpenseDialog
-          type={addIncomeExpense.type}
-          onClose={handleCloseAddIncomeExpense}
-          defaultDate={addIncomeExpense.defaultDate}
+      {addTransaction.opened && addTransaction.type != null && (
+        <AddTransactionDialog
+          type={addTransaction.type}
+          onClose={handleCloseAddTransaction}
+          defaultDate={addTransaction.defaultDate}
         />
       )}
     </TransactionsContext.Provider>

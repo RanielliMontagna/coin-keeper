@@ -3,7 +3,7 @@ import { UseFormReturnType } from '@mantine/form'
 
 import { DateInput } from 'components/dateInput/dateInput'
 
-import { AddIncomeExpenseSchema } from '../addIncomeExpenseDialog.schema'
+import { AddTransactionSchema } from '../addTransactionDialog.schema'
 import { FrequencyEnum } from 'api/recurringTransactions/recurringTransactions.types'
 
 export const FrequencyOptions = [
@@ -13,7 +13,7 @@ export const FrequencyOptions = [
 ]
 
 interface IRecurringFieldsProps {
-  form: UseFormReturnType<AddIncomeExpenseSchema>
+  form: UseFormReturnType<AddTransactionSchema>
 }
 
 export function RecurringFields({ form }: IRecurringFieldsProps) {

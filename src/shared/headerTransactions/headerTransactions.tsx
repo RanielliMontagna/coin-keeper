@@ -11,7 +11,7 @@ interface IHeaderTransactionsProps {
 }
 
 export function HeaderTransactions({ selectedMonth }: IHeaderTransactionsProps) {
-  const { handleAddExpense, handleAddIncome } = useTransactionsContext()
+  const { handleAddExpense, handleAddIncome, handleAddCreditExpense } = useTransactionsContext()
   const { colors } = useMantineTheme()
 
   return (
@@ -22,7 +22,7 @@ export function HeaderTransactions({ selectedMonth }: IHeaderTransactionsProps) 
           color="blue"
           highlightColor={colors.blue[6]}
           icon={IconCreditCardPay}
-          onClick={() => {}}
+          onClick={handleAddCreditExpense}
         />
         <HeaderButtons.Button
           label="Add Expense"

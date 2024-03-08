@@ -1,4 +1,4 @@
-import { TransactionTypeEnum } from 'api/transactions/transactions.types'
+import { AddTransactionTypeEnum } from 'contexts/transactions/transactions.context.types'
 
 export enum FrequencyEnum {
   WEEKLY = 0,
@@ -10,7 +10,7 @@ export interface CreateRecurringTransactionPayload {
   title: string
   description?: string
   amount: number
-  type: TransactionTypeEnum
+  type: AddTransactionTypeEnum
   frequency: FrequencyEnum
   repeatAmount: number
   startDate: string
