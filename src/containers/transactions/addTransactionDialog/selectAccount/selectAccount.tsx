@@ -6,7 +6,7 @@ import { UseFormReturnType } from '@mantine/form'
 import { institutionLogoMap } from 'containers/accounts/accounts.static'
 import { InstitutionTypeEnum } from 'api/accounts/accounts.types'
 
-import { AddIncomeExpenseSchema } from '../addIncomeExpenseDialog.schema'
+import { AddTransactionSchema } from '../addTransactionDialog.schema'
 
 interface Account {
   value: string
@@ -15,7 +15,7 @@ interface Account {
 }
 
 interface ISelectAccountProps {
-  form: UseFormReturnType<AddIncomeExpenseSchema>
+  form: UseFormReturnType<AddTransactionSchema>
   accounts: Account[]
 }
 

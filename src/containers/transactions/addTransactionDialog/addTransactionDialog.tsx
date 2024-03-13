@@ -7,45 +7,75 @@ import { Modal } from 'components/modal'
 import { CurrencyInput } from 'components/currencyInput/currencyInput'
 import { DateInput } from 'components/dateInput/dateInput'
 
-import { AddIncomeExpenseSchema, addIncomeExpenseSchema } from './addIncomeExpenseDialog.schema'
-import { useAddIncomeExpenseDialog } from './useAddIncomeExpenseDialog'
-import { TransactionTypeEnum } from 'api/transactions/transactions.types'
+import {
+  AddTransactionSchema,
+  addTransactionSchemaCredit,
+  addTransactionSchemaIncomeOrExpense,
+} from './addTransactionDialog.schema'
+import { useAddTransactionDialog } from './useAddTransactionDialog'
+import { AddTransactionTypeEnum } from 'contexts/transactions/transactions.context.types'
 import { SelectCategory } from './selectCategory/selectCategory'
 import { SelectAccount } from './selectAccount/selectAccount'
 import { RecurringFields } from './recurringFields/recurringFields'
 import { FrequencyEnum } from 'api/recurringTransactions/recurringTransactions.types'
+import { useMemo } from 'react'
+import { SelectCreditCard } from './selectCreditCard/selectCreditCard'
 
-export interface IAddIncomeExpenseDialogProps {
-  type: TransactionTypeEnum
+export interface IAddTransactionDialogProps {
+  type: AddTransactionTypeEnum
   defaultDate?: Date
   onClose: () => void
 }
 
-export function AddIncomeExpenseDialog(props: IAddIncomeExpenseDialogProps) {
-  const { accounts, categories, handleSubmit } = useAddIncomeExpenseDialog(props)
+export function AddTransactionDialog(props: IAddTransactionDialogProps) {
+  const { accounts, categories, creditCards, handleSubmit } = useAddTransactionDialog(props)
 
-  const form = useForm<AddIncomeExpenseSchema>({
+  const form = useForm<AddTransactionSchema>({
     initialValues: {
       title: '',
       description: '',
       amount: 0,
       category: '',
       account: '',
+      creditCard: '',
       date: props.defaultDate || dayjs().toDate(),
       isRecurring: false,
       frequency: FrequencyEnum.MONTHLY,
       repetition: 2,
       isPaid: true,
     },
-    validate: zodResolver(addIncomeExpenseSchema),
+    validate: zodResolver(
+      props.type === AddTransactionTypeEnum.CREDIT
+        ? addTransactionSchemaCredit
+        : addTransactionSchemaIncomeOrExpense,
+    ),
   })
 
+  const title = useMemo(() => {
+    switch (props.type) {
+      case AddTransactionTypeEnum.INCOME:
+        return 'Add new income'
+      case AddTransactionTypeEnum.EXPENSE:
+        return 'Add new expense'
+      case AddTransactionTypeEnum.CREDIT:
+        return 'Add new credit expense'
+    }
+  }, [props.type])
+
+  const submitLabel = useMemo(() => {
+    switch (props.type) {
+      case AddTransactionTypeEnum.INCOME:
+        return 'Add income'
+      case AddTransactionTypeEnum.EXPENSE:
+        return 'Add expense'
+      case AddTransactionTypeEnum.CREDIT:
+        return 'Add credit expense'
+    }
+  }, [props.type])
+
   return (
-    <Modal
-      title={`Add new ${props.type === TransactionTypeEnum.INCOME ? 'income' : 'expense'}`}
-      onClose={props.onClose}
-    >
-      <form onSubmit={form.onSubmit(handleSubmit as () => void)}>
+    <Modal title={title} onClose={props.onClose}>
+      <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack spacing="md">
           <Stack spacing={8}>
             <TextInput
@@ -66,9 +96,15 @@ export function AddIncomeExpenseDialog(props: IAddIncomeExpenseDialogProps) {
               withAsterisk
               {...form.getInputProps('amount')}
             />
-            <Checkbox label="Paid" defaultChecked {...form.getInputProps('isPaid')} />
+            {props.type != AddTransactionTypeEnum.CREDIT && (
+              <Checkbox label="Paid" defaultChecked {...form.getInputProps('isPaid')} />
+            )}
             <SelectCategory form={form} categories={categories} />
-            <SelectAccount form={form} accounts={accounts} />
+            {props.type != AddTransactionTypeEnum.CREDIT ? (
+              <SelectAccount form={form} accounts={accounts} />
+            ) : (
+              <SelectCreditCard form={form} creditCards={creditCards} />
+            )}
             {!form.values.isRecurring && (
               <DateInput
                 label="Date"
@@ -85,9 +121,7 @@ export function AddIncomeExpenseDialog(props: IAddIncomeExpenseDialogProps) {
             <Button type="button" variant="default" color="gray" onClick={props.onClose}>
               Cancel
             </Button>
-            <Button type="submit">
-              {props.type === TransactionTypeEnum.INCOME ? 'Add income' : 'Add expense'}
-            </Button>
+            <Button type="submit">{submitLabel}</Button>
           </Group>
         </Stack>
       </form>

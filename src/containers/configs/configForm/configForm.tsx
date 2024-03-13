@@ -1,3 +1,4 @@
+import { useCallback, useMemo } from 'react'
 import { Box, Button, Checkbox, Flex, Text, Title } from '@mantine/core'
 import { Form, useForm, zodResolver } from '@mantine/form'
 
@@ -5,7 +6,6 @@ import { ConfigBox } from '../styles'
 import { useIsMobile } from 'hooks/useIsMobile'
 import { ConfigsSchema, configsSchema } from '../configs.schema'
 import type { Config } from 'api/configs/config.types'
-import { useCallback, useMemo } from 'react'
 
 interface ConfigFormProps {
   configs: Config[]

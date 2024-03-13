@@ -1,20 +1,43 @@
 import React from 'react'
 
+import { IconPlus } from '@tabler/icons-react'
 import { Button, useMantineTheme } from '@mantine/core'
+import { Fab } from 'components/fab'
 
 import { useIsMobile } from 'hooks/useIsMobile'
 
 import type { IHeaderButtonProps, IHeaderButtonsRoot } from './headerButtons.types'
-import { Fab } from '@quantun/core'
-import { IconPlus } from '@tabler/icons-react'
 
-export function HeaderButton({ label, onClick, icon: Icon }: IHeaderButtonProps) {
+export function HeaderButton({
+  label,
+  onClick,
+  icon: Icon,
+  style,
+  color = 'green',
+  highlightColor,
+  ...rest
+}: IHeaderButtonProps) {
   const { isMobile } = useIsMobile()
 
-  if (isMobile) return <Fab.Button onPress={onClick} label={label} icon={Icon ? Icon : IconPlus} />
+  if (isMobile)
+    return (
+      <Fab.Button
+        onPress={onClick}
+        label={label}
+        icon={Icon ? Icon : IconPlus}
+        style={style}
+        highlightColor={highlightColor}
+      />
+    )
 
   return (
-    <Button onClick={onClick} leftIcon={Icon ? <Icon size={16} /> : <IconPlus size={16} />}>
+    <Button
+      onClick={onClick}
+      style={{ ...style }}
+      color={color}
+      leftIcon={Icon ? <Icon size={16} /> : <IconPlus size={16} />}
+      {...rest}
+    >
       {label}
     </Button>
   )
@@ -40,6 +63,7 @@ export function HeaderButtonsRoot({ children }: IHeaderButtonsRoot) {
             onPress={props.onClick}
             label={props.label}
             icon={props.icon}
+            highlightColor={props.highlightColor}
           />
         ))}
       </Fab.Root>
