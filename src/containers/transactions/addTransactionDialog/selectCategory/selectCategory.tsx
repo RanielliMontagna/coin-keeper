@@ -6,10 +6,10 @@ import { IconInnerShadowLeftFilled } from '@tabler/icons-react'
 
 import { categoryColors } from 'containers/categories/categories.static'
 import { CategoryColorsEnum } from 'api/categories/categories.types'
-import { AddIncomeExpenseSchema } from '../addIncomeExpenseDialog.schema'
+import { AddTransactionSchema } from '../addTransactionDialog.schema'
 
 interface ISelectCategoryProps {
-  form: UseFormReturnType<AddIncomeExpenseSchema>
+  form: UseFormReturnType<AddTransactionSchema>
   categories: { value: string; label: string; color?: CategoryColorsEnum }[]
 }
 

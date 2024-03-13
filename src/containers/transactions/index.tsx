@@ -17,19 +17,18 @@ import { currencyFormat } from 'utils/currencyFormat'
 import { capitalizeAllAndRemoveUnderscore } from 'utils/capitalize'
 
 import { useTransactions } from './useTransactions'
-import { AddIncomeExpenseDialog } from './addIncomeExpenseDialog/addIncomeExpenseDialog'
 import { ResponseTransaction, TransactionTypeEnum } from 'api/transactions/transactions.types'
 import { useDeleteIncomeExpenseModal } from './deleteIncomeExpenseDialog/deleteIncomeExpenseDialog'
 import { DescriptionRowRender } from 'components/descriptionRowRender/descriptionRowRender'
 
 import EmptyImage from 'assets/transactions/empty-image.svg'
 import { institutionLogoMap } from 'containers/accounts/accounts.static'
-import { HeaderButtons } from 'components/headerButtons'
 import { DataTableHeader } from './dataTableHeader/dataTableHeader'
 import { TransactionCards } from './transactionsCards/transactionsCards'
 import { useIsMobile } from 'hooks/useIsMobile'
 import { List } from 'components/list'
 import type { IActionProps } from 'components/datatable/actions/actions'
+import { HeaderTransactions } from 'shared/headerTransactions/headerTransactions'
 
 export default function Transactions() {
   const { isMobile } = useIsMobile()
@@ -38,14 +37,10 @@ export default function Transactions() {
     transactions,
     meta,
     isLoading,
-    addIncomeExpense,
     selectedMonth,
     setSelectedMonth,
     handleFetchNextPage,
-    handleAddExpense,
-    handleAddIncome,
     handleMarkAsPaid,
-    handleCloseAddIncomeExpense,
   } = useTransactions()
   const { openDeleteModal } = useDeleteIncomeExpenseModal()
 
@@ -69,19 +64,7 @@ export default function Transactions() {
         <Header.Title>Transactions</Header.Title>
         <Header.Subtitle>Pay your bills, transfer money and more</Header.Subtitle>
         <Header.RightSection>
-          <HeaderButtons.Root>
-            <HeaderButtons.Button
-              label="Add Expense"
-              onClick={() => {
-                handleAddExpense(
-                  dayjs(selectedMonth).month() === dayjs().month()
-                    ? dayjs().toDate()
-                    : dayjs(selectedMonth).toDate(),
-                )
-              }}
-            />
-            <HeaderButtons.Button label="Add Income" onClick={handleAddIncome} />
-          </HeaderButtons.Root>
+          <HeaderTransactions selectedMonth={selectedMonth} />
         </Header.RightSection>
       </Header>
       <Flex direction="column" gap={16} h="100%">
@@ -254,13 +237,6 @@ export default function Transactions() {
           )}
         </Flex>
       </Flex>
-      {addIncomeExpense.opened && addIncomeExpense.type != null && (
-        <AddIncomeExpenseDialog
-          type={addIncomeExpense.type}
-          onClose={handleCloseAddIncomeExpense}
-          defaultDate={addIncomeExpense.defaultDate}
-        />
-      )}
     </PrivateContainer>
   )
 }
