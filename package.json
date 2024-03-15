@@ -20,7 +20,7 @@
     "clean": "rm -rf dist && rm -rf coverage && rm -rf node_modules && rm -rf yarn.lock"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.6",
+    "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.10.6",
     "@mantine/core": "^6.0.21",
     "@mantine/dates": "^6.0.21",
