@@ -13,6 +13,7 @@ import { createTransaction } from 'api/transactions/transactions'
 import { fetchCategories } from 'api/categories/categories'
 import { fetchAccounts } from 'api/accounts/accounts'
 import { fetchCreditCards } from 'api/creditCards/creditCards'
+import { createInvoiceExpense } from 'api/invoices/invoices'
 
 export function useAddTransactionDialog({ type, onClose }: IAddTransactionDialogProps) {
   const { addNotification } = useAppStore()
@@ -57,7 +58,18 @@ export function useAddTransactionDialog({ type, onClose }: IAddTransactionDialog
   const handleSubmit = (values: AddTransactionSchema) => {
     async function submit() {
       if (type === AddTransactionTypeEnum.CREDIT) {
-        //TODO: create credit transaction here
+        if (values.isRecurring) {
+          //TODO: implementar recurring credit transaction
+        } else {
+          await createInvoiceExpense({
+            title: values.title,
+            description: values.description,
+            amount: Number(values.amount),
+            date: values.date?.toISOString() ?? new Date().toISOString(),
+            categoryId: values.category,
+            creditCardId: values.creditCard,
+          })
+        }
       } else {
         if (values.isRecurring) {
           await createRecurringTransaction({
@@ -87,6 +99,7 @@ export function useAddTransactionDialog({ type, onClose }: IAddTransactionDialog
     }
 
     call(submit, () => {
+      queryClient.invalidateQueries('creditCards')
       queryClient.invalidateQueries('transactions')
       queryClient.invalidateQueries('accounts')
       queryClient.invalidateQueries('week')
@@ -94,7 +107,6 @@ export function useAddTransactionDialog({ type, onClose }: IAddTransactionDialog
       queryClient.invalidateQueries('year')
       queryClient.invalidateQueries('transactionsBalance')
       queryClient.invalidateQueries('latestTransactions')
-
       const message = () => {
         switch (type) {
           case AddTransactionTypeEnum.INCOME:
@@ -105,7 +117,6 @@ export function useAddTransactionDialog({ type, onClose }: IAddTransactionDialog
             return 'credit expense'
         }
       }
-
       addNotification({
         title: 'Success',
         message: `New ${message()} added successfully`,
