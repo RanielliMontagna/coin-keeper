@@ -5,6 +5,7 @@ import { DateInput } from 'components/dateInput/dateInput'
 
 import { AddTransactionSchema } from '../addTransactionDialog.schema'
 import { FrequencyEnum } from 'api/recurringTransactions/recurringTransactions.types'
+import { AddTransactionTypeEnum } from 'contexts/transactions/transactions.context.types'
 
 export const FrequencyOptions = [
   { value: FrequencyEnum.WEEKLY.toString(), label: 'Weekly' },
@@ -14,9 +15,10 @@ export const FrequencyOptions = [
 
 interface IRecurringFieldsProps {
   form: UseFormReturnType<AddTransactionSchema>
+  type: AddTransactionTypeEnum
 }
 
-export function RecurringFields({ form }: IRecurringFieldsProps) {
+export function RecurringFields({ form, type }: IRecurringFieldsProps) {
   return (
     <>
       <Flex gap={8}>
@@ -33,6 +35,7 @@ export function RecurringFields({ form }: IRecurringFieldsProps) {
           placeholder="Select frequency"
           data={FrequencyOptions}
           w="100%"
+          disabled={type === AddTransactionTypeEnum.CREDIT}
           {...form.getInputProps('frequency')}
         />
       </Flex>

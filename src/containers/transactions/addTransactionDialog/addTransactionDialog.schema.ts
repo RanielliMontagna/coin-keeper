@@ -9,7 +9,7 @@ export const addTransactionSchema = z.object({
   creditCard: z.string().min(1, 'Credit card is required'),
   date: z.date().optional(),
   isRecurring: z.boolean().optional(),
-  frequency: z.coerce.number(),
+  frequency: z.coerce.string(),
   repetition: z.number().min(2, 'Repetition must be 2 or more').optional(),
   isPaid: z.boolean().default(true),
 })

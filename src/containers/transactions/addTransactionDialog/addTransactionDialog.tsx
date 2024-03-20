@@ -40,7 +40,7 @@ export function AddTransactionDialog(props: IAddTransactionDialogProps) {
       creditCard: '',
       date: props.defaultDate || dayjs().toDate(),
       isRecurring: false,
-      frequency: FrequencyEnum.MONTHLY,
+      frequency: String(FrequencyEnum.MONTHLY),
       repetition: 2,
       isPaid: true,
     },
@@ -115,7 +115,7 @@ export function AddTransactionDialog(props: IAddTransactionDialogProps) {
               />
             )}
             <Switch label="Recurring" {...form.getInputProps('isRecurring')} />
-            {form.values.isRecurring && <RecurringFields form={form} />}
+            {form.values.isRecurring && <RecurringFields form={form} type={props.type} />}
           </Stack>
           <Group position="right">
             <Button type="button" variant="default" color="gray" onClick={props.onClose}>
