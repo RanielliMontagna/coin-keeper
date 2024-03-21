@@ -44,7 +44,7 @@
     "react-dom": "^18.2.0",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.21.1",
-    "recharts": "^2.11.0",
+    "recharts": "^2.12.1",
     "short-uuid": "^4.2.2",
     "use-context-selector": "^1.4.3",
     "vite-tsconfig-paths": "^4.3.1",
