@@ -13,6 +13,7 @@ export enum FlagEnum {
 
 export interface CreateCreditCardPayload {
   name: string
+  currentAmount: number
   limit: number
   flag: FlagEnum
   closingDay: number

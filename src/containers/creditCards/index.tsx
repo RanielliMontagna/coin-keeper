@@ -55,9 +55,7 @@ export default function CreditCards() {
           <List.Row actions={actions}>
             {(row) => {
               const limitNumber = Number(row.limit)
-              const randomValue = Math.floor(Math.random() * limitNumber)
-
-              const randomValuePercentage = Math.floor((randomValue / limitNumber) * 100)
+              const amountUsage = Number(row.currentAmount || 0)
 
               return (
                 <Stack key={row.id} spacing={8} style={{ flex: 1 }}>
@@ -77,13 +75,7 @@ export default function CreditCards() {
                     <Progress
                       style={{ width: '100%' }}
                       size="lg"
-                      sections={[
-                        {
-                          value: randomValuePercentage,
-                          color: 'gray',
-                          label: `${randomValuePercentage}%`,
-                        },
-                      ]}
+                      sections={[{ value: amountUsage, color: 'gray', label: `${amountUsage}%` }]}
                     />
                     <Text size="sm">{currencyFormat(limitNumber)}</Text>
                   </Flex>
@@ -117,24 +109,16 @@ export default function CreditCards() {
               title: 'Limit',
               render: ({ limit }) => {
                 const limitNumber = Number(limit)
-                const randomValue = Math.floor(Math.random() * limitNumber)
-
-                const randomValuePercentage = Math.floor((randomValue / limitNumber) * 100)
+                const amountUsage = Number(limit.currentAmount || 0)
 
                 return (
-                  <Flex align="center" gap={8} pr={8}>
-                    <Progress
-                      style={{ width: 250 }}
-                      size="lg"
-                      sections={[
-                        {
-                          value: randomValuePercentage,
-                          color: 'gray',
-                          label: `${randomValuePercentage}%`,
-                        },
-                      ]}
-                    />
+                  <Flex direction="column">
                     <Text size="sm">{currencyFormat(limitNumber)}</Text>
+                    <Progress
+                      style={{ width: 200 }}
+                      size="lg"
+                      sections={[{ value: amountUsage, color: 'gray', label: `${amountUsage}%` }]}
+                    />
                   </Flex>
                 )
               },
